@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client FAQs | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+
+  <!-- CUSTOM LUXURY FAQ STYLES -->
+  <style>
+    /* --- Category Pills --- */
+    .categories-wrapper {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .categories-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 6px 4px;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+    }
+    .categories-scroll::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+    .category-pill {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.88rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+    .category-pill:hover, .category-pill.active {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-2px);
+      background: var(--color-gold-light);
+    }
+    .category-pill.active {
+      background: var(--color-gold) !important;
+      color: #FFFFFF !important;
+      box-shadow: var(--shadow-md);
+    }
+    .category-pill .count-badge {
+      font-size: 0.72rem;
+      background: rgba(197, 168, 128, 0.15);
+      color: var(--color-gold);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    .category-pill.active .count-badge {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* --- Search Section --- */
+    .search-container {
+      max-width: 800px;
+      margin: -50px auto 50px auto;
+      position: relative;
+      z-index: 10;
+      padding: 0 15px;
+    }
+    .search-box-wrap {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 8px 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+    .search-box-wrap:focus-within {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 4px var(--color-gold-light);
+    }
+    .search-input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+    }
+    .search-input:focus {
+      outline: none;
+    }
+    .search-icon {
+      color: var(--color-gold);
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .search-clear-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 8px;
+      transition: var(--transition-fast);
+      display: none;
+      flex-shrink: 0;
+    }
+    .search-clear-btn:hover {
+      color: var(--color-gold);
+      transform: scale(1.1);
+    }
+    .popular-tags-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .popular-tag-btn {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border-radius: 30px;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+    .popular-tag-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      background: var(--color-gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* --- Popular Questions --- */
+    .popular-section-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .popular-section-title::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--color-gold);
+      margin: 12px auto 0 auto;
+    }
+    .popular-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 24px;
+      height: 100%;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .popular-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .popular-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--color-gold);
+      transition: var(--transition-smooth);
+    }
+    .popular-card:hover::before {
+      height: 100%;
+    }
+    .popular-card-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .popular-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+    .popular-card-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    /* --- Accordion FAQ Container --- */
+    .faq-accordion-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .faq-item-luxury {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .faq-item-luxury:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .faq-item-luxury.active {
+      border-color: var(--color-gold);
+      box-shadow: var(--shadow-lg);
+    }
+    .faq-header-luxury {
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      transition: var(--transition-fast);
+    }
+    .faq-header-luxury:hover {
+      background: var(--color-gold-light);
+    }
+    .faq-header-content {
+      flex: 1;
+    }
+    .faq-category-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      background: rgba(197, 168, 128, 0.08);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .faq-question-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin: 0;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .faq-icon-indicator {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+    .faq-item-luxury.active .faq-icon-indicator {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+    .faq-collapse-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .faq-body-content {
+      padding: 0 28px 28px 28px;
+      font-family: var(--font-sans);
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .faq-body-content ul {
+      margin: 12px 0 0 0;
+      padding-left: 20px;
+    }
+    .faq-body-content li {
+      margin-bottom: 8px;
+    }
+    .faq-body-content strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* --- Dynamic Highlighting --- */
+    mark.gold-highlight {
+      background-color: rgba(197, 168, 128, 0.22);
+      color: var(--text-main);
+      padding: 1px 4px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* --- Glowing Pulse on Popular Jump --- */
+    .glowing-pulse {
+      animation: pulseGoldGlow 2.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    @keyframes pulseGoldGlow {
+      0% {
+        box-shadow: 0 0 0 0px rgba(197, 168, 128, 0.7);
+        border-color: var(--color-gold);
+      }
+      50% {
+        box-shadow: 0 0 0 20px rgba(197, 168, 128, 0);
+        border-color: var(--color-gold);
+      }
+      100% {
+        box-shadow: 0 0 0 0px rgba(197, 168, 128, 0);
+      }
+    }
+
+    /* --- No Results Display --- */
+    .no-results-box {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 50px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      margin-top: 30px;
+    }
+    .no-results-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+    }
+
+    /* --- Help & CTA Grid Cards --- */
+    .help-section-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .help-section-subtitle {
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 50px auto;
+      font-size: 1rem;
+    }
+    .luxe-help-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+    .luxe-help-card:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+    .luxe-card-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(197, 168, 128, 0.08), transparent 80%);
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .luxe-help-card:hover .luxe-card-glow {
+      opacity: 1;
+    }
+    .help-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--border-radius-md);
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .help-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .help-card-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .help-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      font-size: 0.94rem;
+      color: var(--text-main);
+    }
+    .help-contact-icon {
+      color: var(--color-gold);
+      flex-shrink: 0;
+    }
+    .help-contact-text {
+      font-family: var(--font-sans);
+      font-weight: 400;
+    }
+
+    /* Form Styles */
+    .help-form-group {
+      margin-bottom: 16px;
+    }
+    .help-form-input {
+      background: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 12px 16px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      width: 100%;
+    }
+    .help-form-input:focus {
+      border-color: var(--color-gold);
+      outline: none;
+      background: var(--surface-clinic);
+      box-shadow: 0 0 0 3px var(--color-gold-light);
+    }
+    
+    /* Submit Toast */
+    .custom-toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      border-radius: 50px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Client FAQs</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">FAQs</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- LUXURY SEARCH BAR SECTION -->
+  <section class="search-container" data-aos="fade-up">
+    <div class="search-box-wrap">
+      <i data-lucide="search" class="search-icon"></i>
+      <input type="text" class="search-input" id="faqSearchInput" placeholder="Search our clinical knowledge base, treatments, recovery times..." aria-label="Search FAQs">
+      <button class="search-clear-btn" id="faqSearchClear" aria-label="Clear Search">
+        <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+      </button>
+    </div>
+    <div class="popular-tags-row">
+      <span class="text-muted d-none d-sm-inline-block align-self-center me-2" style="font-size: 0.8rem;">Try searching:</span>
+      <button class="popular-tag-btn" onclick="setSearchQuery('Morpheus8')">Morpheus8</button>
+      <button class="popular-tag-btn" onclick="setSearchQuery('Downtime')">Downtime</button>
+      <button class="popular-tag-btn" onclick="setSearchQuery('Retinol')">Retinol</button>
+      <button class="popular-tag-btn" onclick="setSearchQuery('Sensitive')">Sensitive Skin</button>
+      <button class="popular-tag-btn" onclick="setSearchQuery('Sunscreen')">Sunscreen</button>
+    </div>
+  </section>
+
+  <main class="container mb-5 pb-5">
+    
+    <!-- POPULAR QUESTIONS (HIGHLY REQUESTED JUMPS) -->
+    <section class="mb-5 pb-4" data-aos="fade-up">
+      <h3 class="popular-section-title">Most Requested Queries</h3>
+      <div class="row g-4 justify-content-center">
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="popular-card" onclick="scrollToFaq('q1')">
+            <div>
+              <span class="popular-card-category">Skin Consultations</span>
+              <h4 class="popular-card-title">How do I choose the correct treatment for my skin?</h4>
+            </div>
+            <span class="popular-card-link">View Diagnosis <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="popular-card" onclick="scrollToFaq('q11')">
+            <div>
+              <span class="popular-card-category">Laser & RF Science</span>
+              <h4 class="popular-card-title">What is Morpheus8 and what makes it a gold standard?</h4>
+            </div>
+            <span class="popular-card-link">View Science <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="popular-card" onclick="scrollToFaq('q19')">
+            <div>
+              <span class="popular-card-category">Post-Care Recovery</span>
+              <h4 class="popular-card-title">What ingredients must I avoid during laser recovery?</h4>
+            </div>
+            <span class="popular-card-link">View Checklist <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="popular-card" onclick="scrollToFaq('q10')">
+            <div>
+              <span class="popular-card-category">Dermal Treatments</span>
+              <h4 class="popular-card-title">Can I combine multiple treatments in one visit?</h4>
+            </div>
+            <span class="popular-card-link">View Protocol <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ CATEGORY FILTER PILLS -->
+    <section class="categories-wrapper" data-aos="fade-up">
+      <div class="categories-scroll" id="categoriesPillContainer">
+        <div class="category-pill active" onclick="filterCategory('all', this)">
+          <i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i>
+          <span>All Questions</span>
+          <span class="count-badge" id="count-all">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('general', this)">
+          <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+          <span>Skin Consultations</span>
+          <span class="count-badge" id="count-general">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('treatments', this)">
+          <i data-lucide="activity" style="width: 16px; height: 16px;"></i>
+          <span>Dermal Treatments</span>
+          <span class="count-badge" id="count-treatments">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('laser-rf', this)">
+          <i data-lucide="zap" style="width: 16px; height: 16px;"></i>
+          <span>Laser & RF Science</span>
+          <span class="count-badge" id="count-laser-rf">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('recovery', this)">
+          <i data-lucide="heart" style="width: 16px; height: 16px;"></i>
+          <span>Post-Care Recovery</span>
+          <span class="count-badge" id="count-recovery">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('products', this)">
+          <i data-lucide="droplet" style="width: 16px; height: 16px;"></i>
+          <span>Active Ingredients</span>
+          <span class="count-badge" id="count-products">0</span>
+        </div>
+        <div class="category-pill" onclick="filterCategory('appointments', this)">
+          <i data-lucide="calendar" style="width: 16px; height: 16px;"></i>
+          <span>Clinic Policies</span>
+          <span class="count-badge" id="count-appointments">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE INTERACTIVE ACCORDION CONTAINER -->
+    <section class="faq-accordion-container" id="faqAccordionContainer">
+      <!-- Generated Dynamically by JS Engine -->
+    </section>
+
+    <!-- INTERACTIVE ASSISTANCE PANEL (STILL NEED HELP & BOOK CTA) -->
+    <section class="mt-5 pt-5 border-top border-clinic" data-aos="fade-up">
+      <h3 class="help-section-title">Still Need Assistance?</h3>
+      <p class="help-section-subtitle">If you have highly specialized inquiries or wish to reserve a digital dermis mapping session, connect with our Beverly Hills team directly.</p>
+      
+      <div class="row g-4 mt-2">
+        <!-- Contact Concierge / Support Card -->
+        <div class="col-lg-6">
+          <div class="luxe-help-card luxe-hover-effect">
+            <div class="luxe-card-glow"></div>
+            <div class="position-relative" style="z-index: 2;">
+              <div class="help-card-icon">
+                <i data-lucide="message-square" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h4 class="help-card-title">Inquire with Concierge</h4>
+              <p class="help-card-text">Send a private clinical inquiry directly to our concierge team. We prioritize replies within 2 business hours.</p>
+              
+              <form id="conciergeFaqForm" onsubmit="handleConciergeSubmit(event)">
+                <div class="help-form-group">
+                  <input type="text" class="help-form-input" id="conciergeName" placeholder="Your Name" required>
+                </div>
+                <div class="help-form-group">
+                  <input type="email" class="help-form-input" id="conciergeEmail" placeholder="Your Email Address" required>
+                </div>
+                <div class="help-form-group">
+                  <textarea class="help-form-input" id="conciergeInquiry" rows="3" placeholder="Describe your skin concerns or specific treatment questions..." required></textarea>
+                </div>
+                <button type="submit" class="btn-gold btn-ripple w-100 py-3 mt-1">Submit Clinical Inquiry</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call & Book Card (Book Appointment CTA + Contact CTA) -->
+        <div class="col-lg-6">
+          <div class="luxe-help-card luxe-hover-effect">
+            <div class="luxe-card-glow"></div>
+            <div class="position-relative" style="z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="help-card-icon">
+                  <i data-lucide="phone-call" style="width: 24px; height: 24px;"></i>
+                </div>
+                <h4 class="help-card-title">Direct Clinic Operations</h4>
+                <p class="help-card-text">Connect instantly during operation hours. Our reception coordinates board-certified specialists and immediate treatment slot assessments.</p>
+                
+                <div class="help-contact-item">
+                  <i data-lucide="phone" class="help-contact-icon" style="width: 18px; height: 18px;"></i>
+                  <span class="help-contact-text">+1 (310) 555-0198</span>
+                </div>
+                <div class="help-contact-item">
+                  <i data-lucide="mail" class="help-contact-icon" style="width: 18px; height: 18px;"></i>
+                  <span class="help-contact-text">concierge@auracareclinic.com</span>
+                </div>
+                <div class="help-contact-item">
+                  <i data-lucide="map-pin" class="help-contact-icon" style="width: 18px; height: 18px;"></i>
+                  <span class="help-contact-text">742 Atelier Luxury Blvd, Beverly Hills, CA</span>
+                </div>
+              </div>
+
+              <div class="pt-4 border-top border-clinic mt-4">
+                <span class="d-block text-muted mb-3" style="font-size: 0.88rem;">Ready to embark on premium skin renewal?</span>
+                <a href="appointment.html" class="btn-gold btn-ripple d-block text-center py-3">Book Priority Appointment</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- BOOTSTRAP, GSAP, AOS, LUCIDE SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- LUXURY FAQ INTERACTIVE ENGINE -->
+  <script>
+    // 1. COMPREHENSIVE CLINICAL FAQ DATABASE (30 Items, 6 Categories)
+    const faqDatabase = [
+      // Category: general
+      {
+        id: "q1",
+        category: "general",
+        categoryName: "Skin Consultations",
+        question: "How do I choose the correct treatment for my skin type?",
+        answer: "Every journey at AuraCare begins with an advanced, multi-spectral Dermal Analysis using digital mapping technology. Our certified specialists evaluate your sebum level, hydration index, depth of fine lines, and sun damage before curating a customized treatment protocol tailored specifically to your skin profile."
+      },
+      {
+        id: "q2",
+        category: "general",
+        categoryName: "Skin Consultations",
+        question: "What is the difference between aesthetic and medical dermatology?",
+        answer: "Aesthetic dermatology concentrates on non-invasive or minimally invasive procedures to restore and enhance skin tone, texture, and structural volume (e.g., dermal fillers, chemical peels, lasers). Medical dermatology addresses pathological conditions of the skin barrier, such as chronic acne, dermatitis, rosacea, or suspicious lesions requiring therapeutic prescriptions."
+      },
+      {
+        id: "q3",
+        category: "general",
+        categoryName: "Skin Consultations",
+        question: "Are your skincare treatments safe for sensitive skin?",
+        answer: "Yes. Our clinical suite is equipped with specialized calming treatments and low-intensity energy systems specifically calibrated for reactive skin. We conduct a spot patch test prior to introducing strong acids, retinoids, or high-energy device settings."
+      },
+      {
+        id: "q4",
+        category: "general",
+        categoryName: "Skin Consultations",
+        question: "How long does a typical clinical facial treatment take?",
+        answer: "Most restorative and maintenance facials run between 60 and 75 minutes. Specialized clinical energy treatments, including laser resurfacing and radiofrequency microneedling, may require up to 90 minutes, which includes time for deep surface cleansing and topical numbing preparation."
+      },
+      {
+        id: "q5",
+        category: "general",
+        categoryName: "Skin Consultations",
+        question: "How soon can I expect to see visible results?",
+        answer: "Surface hydration and glow are immediately noticeable after advanced hydra-infusions or chemical peels. True dermal remodeling, such as the neocollagenesis triggered by RF microneedling or fractional lasers, develops progressively over 4 to 12 weeks as new collagen structures mature."
+      },
+
+      // Category: treatments
+      {
+        id: "q6",
+        category: "treatments",
+        categoryName: "Dermal Treatments",
+        question: "What is Microneedling and how does it remodel the skin?",
+        answer: "Microneedling, or collagen induction therapy, uses medical-grade micro-fine needles to create controlled, vertical microscopic punctures in the skin. This triggers the body's natural healing cascade, generating fresh collagen and elastin fibers to reduce acne scars, large pores, and fine lines."
+      },
+      {
+        id: "q7",
+        category: "treatments",
+        categoryName: "Dermal Treatments",
+        question: "Is chemical peeling painful, and what is the peeling timeline?",
+        answer: "Our clinical peels use buffered chemical agents to maximize comfort. You will experience a warm, tingling sensation for 3 to 5 minutes, followed by a cooling neutralizer. Visible peeling typically begins around day 3 and finishes by day 7, revealing fresh, luminous skin underneath."
+      },
+      {
+        id: "q8",
+        category: "treatments",
+        categoryName: "Dermal Treatments",
+        question: "What are the benefits of Hydradermabrasion?",
+        answer: "Hydradermabrasion is a three-in-one non-invasive procedure that simultaneously exfoliates dead skin cells, extracts impurities using vortex-suction, and deeply infuses targeted clinical serums rich in hyaluronic acid, peptides, and botanical antioxidants."
+      },
+      {
+        id: "q9",
+        category: "treatments",
+        categoryName: "Dermal Treatments",
+        question: "How do professional peels differ from over-the-counter exfoliants?",
+        answer: "Over-the-counter exfoliants work solely on the outermost layer of dead skin cells (stratum corneum). Professional chemical peels use a much higher concentration of active acids (such as glycolic, lactic, or trichloroacetic acid) with a lower, clinical pH level, allowing deeper penetration and accelerated cellular turnover."
+      },
+      {
+        id: "q10",
+        category: "treatments",
+        categoryName: "Dermal Treatments",
+        question: "Can I receive multiple treatments in a single clinical session?",
+        answer: "Absolutely. Our practitioners regularly combine synergistic treatments, such as an advanced Hydra-Infusion followed by non-ablative laser stimulation or professional LED phototherapy. These combination therapies are carefully structured to avoid over-taxing the skin barrier."
+      },
+
+      // Category: laser-rf
+      {
+        id: "q11",
+        category: "laser-rf",
+        categoryName: "Laser & RF Science",
+        question: "What is Morpheus8 and what makes it a gold-standard treatment?",
+        answer: "Morpheus8 is a fractional radiofrequency (RF) microneedling device designed to target the deepest subdermal layers of the skin. By delivering thermal RF energy at precise needle depths (up to 4mm), it coagulates fat cells, contracts connective tissue, and intensely triggers new collagen for significant lifting and contouring."
+      },
+      {
+        id: "q12",
+        category: "laser-rf",
+        categoryName: "Laser & RF Science",
+        question: "What does Intense Pulsed Light (IPL) treat?",
+        answer: "IPL Photorejuvenation uses broad-spectrum light waves to target specific pigments in the skin. It safely heats and breaks down excess melanin (reducing age spots and sun damage) and coagulates tiny capillary walls (clearing visible redness, rosacea, and broken veins) to achieve an even skin tone."
+      },
+      {
+        id: "q13",
+        category: "laser-rf",
+        categoryName: "Laser & RF Science",
+        question: "What is the difference between Ablative and Non-Ablative lasers?",
+        answer: "Ablative lasers (such as CO2 and Erbium:YAG) remove the outer layer of skin, requiring 7 to 10 days of downtime, but offer dramatic results for deep wrinkles and severe scarring. Non-ablative lasers (like Er:Glass or Nd:YAG) heat the deeper dermis while leaving the surface layer intact, requiring zero downtime but requiring a series of sessions for optimal results."
+      },
+      {
+        id: "q14",
+        category: "laser-rf",
+        categoryName: "Laser & RF Science",
+        question: "How many sessions of laser treatment will I need?",
+        answer: "For targeted concerns like deep pigment lesions, active vascular redness, or mild skin laxity, we recommend a series of 3 to 5 sessions spaced 4 weeks apart. Single corrective procedures are available for minor surface rejuvenation."
+      },
+      {
+        id: "q15",
+        category: "laser-rf",
+        categoryName: "Laser & RF Science",
+        question: "Does fractional laser treatment hurt?",
+        answer: "To ensure a comfortable experience, we apply a high-potency topical numbing cream 45 minutes prior to any laser procedure. During the treatment, you will feel a warm snapping sensation, which is minimized by our advanced integrated cooling air systems."
+      },
+
+      // Category: recovery
+      {
+        id: "q16",
+        category: "recovery",
+        categoryName: "Post-Care Recovery",
+        question: "What is the typical downtime after a Morpheus8 treatment?",
+        answer: "You can expect moderate redness and mild swelling resembling a sunburn for 24 to 72 hours. Tiny micro-crusts will form where the needles penetrated; these will naturally shed within 3 to 5 days. We recommend avoiding makeup for the first 48 hours to ensure a safe recovery."
+      },
+      {
+        id: "q17",
+        category: "recovery",
+        categoryName: "Post-Care Recovery",
+        question: "How should I protect my skin immediately after a laser session?",
+        answer: "The treated skin barrier will be highly sensitive to UV rays and environmental pollutants. You must apply a broad-spectrum, physical mineral sunscreen (SPF 50+) containing zinc oxide every morning, wear a wide-brimmed hat, and completely avoid direct sun exposure for at least 14 days post-procedure."
+      },
+      {
+        id: "q18",
+        category: "recovery",
+        categoryName: "Post-Care Recovery",
+        question: "Can I exercise or use saunas after an advanced skin treatment?",
+        answer: "We advise avoiding heavy workouts, hot yoga, steam rooms, and saunas for at least 48 hours. Internal heat and sweat can exacerbate post-procedure redness, increase swelling, and introduce bacteria into open micro-channels."
+      },
+      {
+        id: "q19",
+        category: "recovery",
+        categoryName: "Post-Care Recovery",
+        question: "What ingredients should I avoid during my post-treatment recovery?",
+        answer: "You must pause the use of all strong active ingredients—including retinol, glycolic acid, salicylic acid, benzoyl peroxide, and Vitamin C—for 5 to 7 days. Focus entirely on hydrating and barrier-repairing products like ceramides, hyaluronic acid, and gentle physical sunscreens."
+      },
+      {
+        id: "q20",
+        category: "recovery",
+        categoryName: "Post-Care Recovery",
+        question: "How should I wash my face during the recovery phase?",
+        answer: "Cleanse your skin gently twice a day using lukewarm water and a mild, sulfate-free, non-foaming cleanser. Pat your skin dry with a clean, soft towel—do not rub or scrub—and apply a rich, clinical-grade barrier cream immediately after to lock in moisture."
+      },
+
+      // Category: products
+      {
+        id: "q21",
+        category: "products",
+        categoryName: "Active Ingredients",
+        question: "Why is Vitamin C considered a crucial daily antioxidant?",
+        answer: "Vitamin C (especially in its pure L-ascorbic acid form) neutralizes free radicals caused by UV light and pollution, stimulates collagen synthesis, and inhibits melanin production to fade dark spots. Applying it every morning under your sunscreen significantly boosts your skin's daily defense."
+      },
+      {
+        id: "q22",
+        category: "products",
+        categoryName: "Active Ingredients",
+        question: "What are Ceramides and why does my skin barrier need them?",
+        answer: "Ceramides are essential lipid molecules that make up over 50% of your skin's natural moisture barrier. They act as the 'mortar' holding your skin cells together, preventing trans-epidermal water loss (TEWL) and keeping external irritants, allergens, and bacteria from entering."
+      },
+      {
+        id: "q23",
+        category: "products",
+        categoryName: "Active Ingredients",
+        question: "How does Retinol work and how should I start using it?",
+        answer: "Retinol is a Vitamin A derivative that speeds up cellular renewal and stimulates collagen production. Start by applying a pea-sized amount of a low-concentration formula (e.g., 0.25% to 0.5%) twice a week at night, gradually increasing frequency as your skin builds tolerance."
+      },
+      {
+        id: "q24",
+        category: "products",
+        categoryName: "Active Ingredients",
+        question: "What is the difference between AHA and BHA exfoliants?",
+        answer: "Alpha Hydroxy Acids (AHAs like glycolic or lactic acid) are water-soluble and work on the skin's surface to fade dark spots and smooth texture. Beta Hydroxy Acids (BHAs like salicylic acid) are oil-soluble, allowing them to penetrate deep into pores to clear sebum and prevent breakouts, making them ideal for oily and acne-prone skin."
+      },
+      {
+        id: "q25",
+        category: "products",
+        categoryName: "Active Ingredients",
+        question: "Are medical-grade skincare products better than retail cosmetics?",
+        answer: "Yes. Medical-grade (cosmeceutical) products contain higher concentrations of pure active ingredients, utilize advanced delivery systems for deeper dermal penetration, and are backed by rigorous, independent clinical trials to prove their efficacy."
+      },
+
+      // Category: appointments
+      {
+        id: "q26",
+        category: "appointments",
+        categoryName: "Clinic Policies",
+        question: "What is your appointment cancellation and rescheduling policy?",
+        answer: "We require a minimum of 24 hours' notice for any cancellation or rescheduling of standard consultations. For advanced treatments requiring dedicated clinical device setups, please provide 48 hours' notice to avoid a booking fee."
+      },
+      {
+        id: "q27",
+        category: "appointments",
+        categoryName: "Clinic Policies",
+        question: "Do you accept medical insurance for skin treatments?",
+        answer: "Because AuraCare specializes in elective aesthetic, cosmetic, and preventative dermatology, our treatments are not classified as medically necessary and are not covered by insurance. We do provide detailed receipts if you wish to verify eligibility with your HSA or FSA."
+      },
+      {
+        id: "q28",
+        category: "appointments",
+        categoryName: "Clinic Policies",
+        question: "How far in advance should I book my clinical session?",
+        answer: "To secure your preferred day, time, and specialist, we recommend booking your appointment 2 to 3 weeks in advance. Weekend and evening slots are highly popular and tend to fill up quickly."
+      },
+      {
+        id: "q29",
+        category: "appointments",
+        categoryName: "Clinic Policies",
+        question: "What should I do to prepare for my initial dermal consultation?",
+        answer: "Please arrive with a clean face free of makeup. Bring a list of your current skincare products (or take photos of their ingredient labels) and be prepared to discuss your medical history, current lifestyle factors, and main skin goals."
+      },
+      {
+        id: "q30",
+        category: "appointments",
+        categoryName: "Clinic Policies",
+        question: "Are gift certificates and corporate wellness packages available?",
+        answer: "Yes. We offer curated wellness certificates and premium corporate skincare packages. Please contact our concierge team at the reception desk or send an email to concierge@auracareclinic.com to customize a luxury gifting experience."
+      }
+    ];
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize FAQ categories count immediately
+      updateCountBadges();
+      // Render initial FAQs list
+      renderFAQs();
+
+      // Setup Search Listeners
+      const searchInput = document.getElementById('faqSearchInput');
+      const clearBtn = document.getElementById('faqSearchClear');
+
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim();
+        if (searchQuery.length > 0) {
+          clearBtn.style.display = 'block';
+        } else {
+          clearBtn.style.display = 'none';
+        }
+        renderFAQs();
+        updateCountBadges();
+      });
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearBtn.style.display = 'none';
+        searchInput.focus();
+        renderFAQs();
+        updateCountBadges();
+      });
+
+      // Mouse-move dynamic lighting effects on cards
+      setupLuxeCardEffects();
+    });
+
+    // 2. RENDER ENGINE WITH KEYWORD HIGHLIGHTING & STAGGER ANIMATIONS
+    function renderFAQs() {
+      const container = document.getElementById('faqAccordionContainer');
+      container.innerHTML = '';
+
+      // Filter Database
+      const filtered = faqDatabase.filter(item => {
+        const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
+        
+        let matchesSearch = true;
+        if (searchQuery.length > 0) {
+          const query = searchQuery.toLowerCase();
+          const questionText = item.question.toLowerCase();
+          const answerText = item.answer.toLowerCase();
+          matchesSearch = questionText.includes(query) || answerText.includes(query);
+        }
+
+        return matchesCategory && matchesSearch;
+      });
+
+      // Render Empty State if no matches
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="no-results-box" data-aos="fade-up">
+            <div class="no-results-icon">
+              <i data-lucide="help-circle" style="width: 32px; height: 32px;"></i>
+            </div>
+            <h4 class="font-serif">No Matching Inquiries Found</h4>
+            <p class="text-muted" style="max-width: 500px; margin: 8px auto 24px auto;">
+              We couldn't find any clinical documentation matching "${escapeHtml(searchQuery)}". Try modifying your keywords or submit a direct inquiry.
+            </p>
+            <button class="btn-gold btn-ripple px-4 py-2" onclick="resetSearch()">Clear Filters</button>
+          </div>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        return;
+      }
+
+      // Render matching FAQ items
+      filtered.forEach((item, index) => {
+        const faqItem = document.createElement('div');
+        faqItem.className = 'faq-item-luxury';
+        faqItem.id = `faq-item-${item.id}`;
+        faqItem.setAttribute('data-category', item.category);
+
+        let displayQuestion = item.question;
+        let displayAnswer = item.answer;
+
+        // Apply visual highlighting if search is active
+        if (searchQuery.length > 0) {
+          displayQuestion = highlightMatch(item.question, searchQuery);
+          displayAnswer = highlightMatch(item.answer, searchQuery);
+        }
+
+        faqItem.innerHTML = `
+          <div class="faq-header-luxury" onclick="toggleFaqItem(this.parentNode)">
+            <div class="faq-header-content">
+              <span class="faq-category-tag">${item.categoryName}</span>
+              <h3 class="faq-question-text">${displayQuestion}</h3>
+            </div>
+            <div class="faq-icon-indicator">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            </div>
+          </div>
+          <div class="faq-collapse-panel">
+            <div class="faq-body-content">
+              <p class="mb-0">${displayAnswer}</p>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(faqItem);
+      });
+
+      // Refresh icons inside rendered items
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Trigger high-end GSAP entrance animation for filtered entries
+      gsap.fromTo('.faq-item-luxury', 
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.04, ease: 'power2.out' }
+      );
+    }
+
+    // 3. COLLAPSIBLE ACCORDION LOGIC WITH ACCURATE SCROLLHEIGHT CALCULATIONS
+    function toggleFaqItem(itemEl) {
+      const panel = itemEl.querySelector('.faq-collapse-panel');
+      const isActive = itemEl.classList.contains('active');
+      
+      // Close all other active items
+      document.querySelectorAll('.faq-item-luxury').forEach(el => {
+        if (el !== itemEl && el.classList.contains('active')) {
+          el.classList.remove('active');
+          const siblingPanel = el.querySelector('.faq-collapse-panel');
+          siblingPanel.style.maxHeight = '0';
+        }
+      });
+      
+      if (isActive) {
+        itemEl.classList.remove('active');
+        panel.style.maxHeight = '0';
+      } else {
+        itemEl.classList.add('active');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    }
+
+    // 4. CATEGORY FILTER & RE-COUNT ENGINE
+    function filterCategory(category, pillEl) {
+      currentCategory = category;
+      
+      // Update Active Classes
+      document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+      pillEl.classList.add('active');
+
+      renderFAQs();
+      
+      // Smooth slide-up container update
+      gsap.fromTo('#faqAccordionContainer', 
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power1.out' }
+      );
+    }
+
+    // Update Counts Dynamically Based on Search Queries
+    function updateCountBadges() {
+      const counts = {
+        all: 0,
+        general: 0,
+        treatments: 0,
+        'laser-rf': 0,
+        recovery: 0,
+        products: 0,
+        appointments: 0
+      };
+
+      faqDatabase.forEach(item => {
+        let matchesSearch = true;
+        if (searchQuery.length > 0) {
+          const query = searchQuery.toLowerCase();
+          const qText = item.question.toLowerCase();
+          const aText = item.answer.toLowerCase();
+          matchesSearch = qText.includes(query) || aText.includes(query);
+        }
+
+        if (matchesSearch) {
+          counts.all++;
+          if (counts[item.category] !== undefined) {
+            counts[item.category]++;
+          }
+        }
+      });
+
+      // Write counts to DOM elements
+      Object.keys(counts).forEach(key => {
+        const el = document.getElementById(`count-${key}`);
+        if (el) {
+          el.innerText = counts[key];
+        }
+      });
+    }
+
+    // 5. SEARCH UTILITIES & HIGHLIGHT LOGIC
+    function setSearchQuery(val) {
+      const input = document.getElementById('faqSearchInput');
+      const clearBtn = document.getElementById('faqSearchClear');
+      input.value = val;
+      searchQuery = val;
+      clearBtn.style.display = 'block';
+      renderFAQs();
+      updateCountBadges();
+
+      // Smooth scroll back to FAQ filter region
+      document.querySelector('.categories-wrapper').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetSearch() {
+      const input = document.getElementById('faqSearchInput');
+      const clearBtn = document.getElementById('faqSearchClear');
+      input.value = '';
+      searchQuery = '';
+      clearBtn.style.display = 'none';
+      currentCategory = 'all';
+
+      // Reset Active Class to "All" Pill
+      document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
+      const allPill = document.querySelector('.category-pill[onclick*="all"]');
+      if (allPill) allPill.classList.add('active');
+
+      renderFAQs();
+      updateCountBadges();
+    }
+
+    function highlightMatch(text, query) {
+      if (!query) return text;
+      const cleanQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); // Escape regex chars
+      const regex = new RegExp(`(${cleanQuery})`, 'gi');
+      return text.replace(regex, '<mark class="gold-highlight">$1</mark>');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // 6. POPULAR QUICK-JUMP ANCHOR SCROLLER & FLASH GLOW
+    function scrollToFaq(faqId) {
+      // Step A: Reset filters to ensure the target item is rendered
+      resetSearch();
+
+      // Give a tiny timeout for rendering process to complete
+      setTimeout(() => {
+        const targetEl = document.getElementById(`faq-item-${faqId}`);
+        if (targetEl) {
+          // Scroll smoothly to target element
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Open the accordion panel
+          const panel = targetEl.querySelector('.faq-collapse-panel');
+          if (!targetEl.classList.contains('active')) {
+            targetEl.classList.add('active');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+
+          // Trigger high-end premium gold glowing effect
+          targetEl.classList.add('glowing-pulse');
+          
+          // Remove pulsing class after animation runs so it can be re-triggered
+          setTimeout(() => {
+            targetEl.classList.remove('glowing-pulse');
+          }, 2500);
+        }
+      }, 100);
+    }
+
+    // 7. LUXURY MOUSE-MOVE CARD INTERACTIVE SHEEN
+    function setupLuxeCardEffects() {
+      const cards = document.querySelectorAll('.luxe-hover-effect');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    // 8. CONCIERGE FORM SUBMISSION & SUCCESS TOAST CONFIRMATION
+    function handleConciergeSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('conciergeName').value.trim();
+      const email = document.getElementById('conciergeEmail').value.trim();
+      const inquiry = document.getElementById('conciergeInquiry').value.trim();
+
+      if (!name || !email || !inquiry) return;
+
+      // Simulate clinical assessment submission
+      const toast = document.createElement('div');
+      toast.className = 'custom-toast';
+      toast.style.opacity = '0';
+      toast.style.transform = 'translate(-50%, 20px)';
+      toast.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+      toast.innerHTML = `
+        <i data-lucide="check-circle-2" style="color: var(--color-gold); width: 18px; height: 18px; flex-shrink: 0;"></i>
+        <span>Thank you ${escapeHtml(name)}. Clinical inquiry received! Concierge will connect shortly.</span>
+      `;
+
+      document.body.appendChild(toast);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Trigger entrance
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translate(-50%, 0)';
+      });
+
+      // Clear Form Fields
+      document.getElementById('conciergeFaqForm').reset();
+
+      // Fade out and remove toast after 4.5 seconds
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translate(-50%, 20px)';
+        toast.addEventListener('transitionend', () => toast.remove());
+      }, 4500);
+    }
+  </script>
+</body>
+</html>

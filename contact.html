@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get In Touch | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+
+  <!-- CUSTOM LUXURY CONTACT STYLES -->
+  <style>
+    /* --- Contact Info Cards --- */
+    .contact-info-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 35px 24px;
+      height: 100%;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+    }
+    .contact-info-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold);
+      box-shadow: var(--shadow-md);
+    }
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--color-gold);
+      transform: scaleX(0);
+      transition: var(--transition-smooth);
+      transform-origin: center;
+    }
+    .contact-info-card:hover::before {
+      transform: scaleX(1);
+    }
+    .info-card-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      transition: var(--transition-smooth);
+    }
+    .contact-info-card:hover .info-card-icon {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: scale(1.08);
+    }
+    .info-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+    .info-card-value {
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      font-weight: 400;
+    }
+    .info-card-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .info-card-link i {
+      transition: transform 0.25s ease;
+    }
+    .contact-info-card:hover .info-card-link i {
+      transform: translateX(4px);
+    }
+
+    /* --- Contact Form & Map Row --- */
+    .contact-section-wrap {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 45px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      .contact-section-wrap {
+        padding: 30px 20px;
+      }
+    }
+    .contact-form-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+    .contact-form-subtitle {
+      font-family: var(--font-sans);
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+    }
+    
+    /* Elegant Form Inputs */
+    .luxe-form-group {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .luxe-input {
+      width: 100%;
+      background: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 16px 18px 16px 48px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      font-weight: 400;
+      transition: var(--transition-smooth);
+    }
+    .luxe-textarea {
+      padding: 16px 18px 16px 48px;
+      min-height: 150px;
+      resize: vertical;
+    }
+    .luxe-input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      background: var(--surface-clinic);
+      box-shadow: 0 0 0 4px var(--color-gold-light);
+    }
+    .luxe-input-icon {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      color: var(--color-gold);
+      pointer-events: none;
+      transition: var(--transition-fast);
+    }
+    .luxe-input:focus ~ .luxe-input-icon {
+      transform: scale(1.1);
+      color: var(--color-gold-hover);
+    }
+    .luxe-textarea ~ .luxe-input-icon {
+      top: 18px;
+    }
+    
+    /* Input visual validation helpers */
+    .validation-status {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      transition: var(--transition-fast);
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    .luxe-input.is-valid {
+      border-color: #2ec4b6 !important;
+    }
+    .luxe-input.is-invalid {
+      border-color: #e71d36 !important;
+    }
+    .luxe-input.is-valid ~ .validation-status.status-valid {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .luxe-input.is-invalid ~ .validation-status.status-invalid {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .feedback-message {
+      font-size: 0.78rem;
+      margin-top: 6px;
+      display: none;
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+    .feedback-message.error-text {
+      color: #e71d36;
+    }
+
+    /* --- Maps Embed Container --- */
+    .map-card-wrapper {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .map-frame-container {
+      position: relative;
+      flex-grow: 1;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      min-height: 380px;
+      border: 1px solid var(--border-clinic);
+    }
+    .map-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(0.65) contrast(1.15);
+      transition: var(--transition-smooth);
+    }
+    [data-bs-theme="dark"] .map-frame {
+      filter: grayscale(0.8) contrast(1.2) invert(0.9) hue-rotate(180deg);
+    }
+    .map-card-wrapper:hover .map-frame {
+      filter: grayscale(0) contrast(1);
+    }
+    .map-info-footer {
+      padding: 16px 8px 4px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    /* --- Emergency Alert Bar --- */
+    .emergency-alert-panel {
+      background: rgba(197, 168, 128, 0.05);
+      border: 1px dashed var(--color-gold);
+      border-radius: var(--border-radius-lg);
+      padding: 35px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .emergency-alert-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--color-gold);
+    }
+    .emergency-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: rgba(197, 168, 128, 0.12);
+      color: var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .emergency-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+    .emergency-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+    .emergency-phone-btn {
+      background: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold);
+      border-radius: 50px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+    .emergency-phone-btn:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* --- Social Grid --- */
+    .social-banner-section {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .social-section-header {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .social-section-header::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--color-gold);
+      margin: 12px auto 0 auto;
+    }
+    .social-grid-card {
+      background: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 24px;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 100%;
+      cursor: pointer;
+    }
+    .social-grid-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-gold);
+      background: var(--surface-clinic);
+      box-shadow: var(--shadow-md);
+    }
+    .social-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition-smooth);
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+    }
+    .social-grid-card:hover .social-card-icon {
+      transform: rotate(12deg) scale(1.1);
+      background: var(--color-gold);
+      color: #FFFFFF;
+    }
+    .social-card-info h5 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+    .social-card-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* --- Accordion FAQ Container --- */
+    .faq-accordion-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .faq-item-luxury {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .faq-item-luxury:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .faq-item-luxury.active {
+      border-color: var(--color-gold);
+      box-shadow: var(--shadow-lg);
+    }
+    .faq-header-luxury {
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      transition: var(--transition-fast);
+    }
+    .faq-header-luxury:hover {
+      background: var(--color-gold-light);
+    }
+    .faq-header-content {
+      flex: 1;
+    }
+    .faq-category-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      background: rgba(197, 168, 128, 0.08);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .faq-question-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin: 0;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .faq-icon-indicator {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+    .faq-item-luxury.active .faq-icon-indicator {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+    .faq-collapse-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .faq-body-content {
+      padding: 0 28px 28px 28px;
+      font-family: var(--font-sans);
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* --- Glowing Pulse on Card Mousemove --- */
+    .luxe-help-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+    .luxe-help-card:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+    .luxe-card-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(197, 168, 128, 0.08), transparent 80%);
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .luxe-help-card:hover .luxe-card-glow {
+      opacity: 1;
+    }
+
+    /* --- Custom Toaster --- */
+    .custom-toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      border-radius: 50px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* --- Book CTA Banner --- */
+    .appointment-cta-banner {
+      background: linear-gradient(135deg, rgba(197, 168, 128, 0.07) 0%, rgba(197, 168, 128, 0.02) 100%);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .appointment-cta-decor {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .decor-1 { top: -100px; left: -100px; }
+    .decor-2 { bottom: -100px; right: -100px; }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Contact Us</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTACT PAGE MODULES -->
+  <main class="container my-5 py-4">
+
+    <!-- SECTION 2: CONTACT INFORMATION CARDS -->
+    <section class="mb-5 pb-4">
+      <div class="row g-4 justify-content-center">
+        
+        <!-- Address Card -->
+        <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="contact-info-card" onclick="window.open('https://maps.google.com/?q=742+Atelier+Luxury+Blvd,+Suite+100,+Beverly+Hills,+CA+90210', '_blank')">
+            <div class="info-card-icon">
+              <i data-lucide="map-pin" style="width: 24px; height: 24px;"></i>
+            </div>
+            <h4 class="info-card-title">Our Sanctuary</h4>
+            <div class="info-card-value">
+              742 Atelier Luxury Blvd<br>Suite 100, Beverly Hills<br>CA 90210, USA
+            </div>
+            <span class="info-card-link">View Map <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <!-- Phone Card -->
+        <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-info-card" onclick="window.location.href='tel:+13105550198'">
+            <div class="info-card-icon">
+              <i data-lucide="phone" style="width: 24px; height: 24px;"></i>
+            </div>
+            <h4 class="info-card-title">Concierge Desk</h4>
+            <div class="info-card-value">
+              Main Line: +1 (310) 555-0198<br>Toll-Free: +1 (800) 555-0190<br>Fax: +1 (310) 555-0191
+            </div>
+            <span class="info-card-link">Call Now <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <!-- Email Card -->
+        <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="contact-info-card" onclick="window.location.href='mailto:concierge@auracareclinic.com'">
+            <div class="info-card-icon">
+              <i data-lucide="mail" style="width: 24px; height: 24px;"></i>
+            </div>
+            <h4 class="info-card-title">Digital Inquiries</h4>
+            <div class="info-card-value">
+              concierge@auracareclinic.com<br>support@auracareclinic.com<br>careers@auracareclinic.com
+            </div>
+            <span class="info-card-link">Send Email <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+        <!-- Working Hours Card -->
+        <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="contact-info-card">
+            <div class="info-card-icon">
+              <i data-lucide="clock" style="width: 24px; height: 24px;"></i>
+            </div>
+            <h4 class="info-card-title">Clinic Hours</h4>
+            <div class="info-card-value">
+              Monday - Saturday<br>9:00 AM - 7:00 PM<br>Sunday: By Appointment Only
+            </div>
+            <span class="info-card-link text-muted" style="cursor: default;">Open 6 Days <i data-lucide="calendar" style="width: 14px; height: 14px;"></i></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3 & 4: CONTACT FORM & GOOGLE MAPS EMBED -->
+    <section class="mb-5 pb-4">
+      <div class="row g-4 align-items-stretch">
+        
+        <!-- Contact Form Column -->
+        <div class="col-lg-7" data-aos="fade-right">
+          <div class="contact-section-wrap">
+            <h2 class="contact-form-title">Send a Message</h2>
+            <p class="contact-form-subtitle">Have a question about a treatment or need help choosing a package? Complete the form below and our skin care consultants will respond within 2 hours.</p>
+            
+            <form id="luxeContactForm" onsubmit="handleContactSubmit(event)" novalidate>
+              <div class="row">
+                <!-- Name Field -->
+                <div class="col-md-6">
+                  <div class="luxe-form-group">
+                    <input type="text" class="luxe-input" id="contactName" placeholder="Full Name" required>
+                    <i data-lucide="user" class="luxe-input-icon" style="width: 18px; height: 18px;"></i>
+                    <div class="validation-status status-valid">
+                      <i data-lucide="check" style="color: #2ec4b6; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="validation-status status-invalid">
+                      <i data-lucide="alert-circle" style="color: #e71d36; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="feedback-message error-text" id="nameError">Please enter your full name (minimum 3 characters).</div>
+                  </div>
+                </div>
+                
+                <!-- Email Field -->
+                <div class="col-md-6">
+                  <div class="luxe-form-group">
+                    <input type="email" class="luxe-input" id="contactEmail" placeholder="Email Address" required>
+                    <i data-lucide="mail" class="luxe-input-icon" style="width: 18px; height: 18px;"></i>
+                    <div class="validation-status status-valid">
+                      <i data-lucide="check" style="color: #2ec4b6; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="validation-status status-invalid">
+                      <i data-lucide="alert-circle" style="color: #e71d36; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="feedback-message error-text" id="emailError">Please enter a valid email address.</div>
+                  </div>
+                </div>
+
+                <!-- Phone Field -->
+                <div class="col-md-6">
+                  <div class="luxe-form-group">
+                    <input type="tel" class="luxe-input" id="contactPhone" placeholder="Phone Number" required>
+                    <i data-lucide="phone" class="luxe-input-icon" style="width: 18px; height: 18px;"></i>
+                    <div class="validation-status status-valid">
+                      <i data-lucide="check" style="color: #2ec4b6; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="validation-status status-invalid">
+                      <i data-lucide="alert-circle" style="color: #e71d36; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="feedback-message error-text" id="phoneError">Please enter a valid 10+ digit phone number.</div>
+                  </div>
+                </div>
+
+                <!-- Subject Field -->
+                <div class="col-md-6">
+                  <div class="luxe-form-group">
+                    <select class="luxe-input" id="contactSubject" required style="appearance: none; cursor: pointer;">
+                      <option value="" disabled selected hidden>Subject / Interest</option>
+                      <option value="skin-consultation">General Skin Consultation</option>
+                      <option value="morpheus8">Morpheus8 RF Therapy</option>
+                      <option value="laser-resurfacing">Laser Resurfacing Treatments</option>
+                      <option value="chemical-peel">Medical Chemical Peels</option>
+                      <option value="product-shop">Product & Shop Inquiries</option>
+                      <option value="other">Other Aesthetic Goals</option>
+                    </select>
+                    <i data-lucide="tag" class="luxe-input-icon" style="width: 18px; height: 18px;"></i>
+                    <div class="validation-status status-valid">
+                      <i data-lucide="check" style="color: #2ec4b6; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="validation-status status-invalid">
+                      <i data-lucide="alert-circle" style="color: #e71d36; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="feedback-message error-text" id="subjectError">Please select a subject of interest.</div>
+                  </div>
+                </div>
+
+                <!-- Message Field -->
+                <div class="col-12">
+                  <div class="luxe-form-group">
+                    <textarea class="luxe-input luxe-textarea" id="contactMessage" placeholder="Tell us about your skin concerns, medical background, or appointment requests..." required></textarea>
+                    <i data-lucide="message-square" class="luxe-input-icon" style="width: 18px; height: 18px;"></i>
+                    <div class="validation-status status-valid">
+                      <i data-lucide="check" style="color: #2ec4b6; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="validation-status status-invalid">
+                      <i data-lucide="alert-circle" style="color: #e71d36; width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="feedback-message error-text" id="messageError">Please share some context (minimum 15 characters).</div>
+                    
+                    <!-- Live Character Counter -->
+                    <div class="d-flex justify-content-end text-muted mt-2" style="font-size: 0.76rem; font-family: var(--font-sans);">
+                      <span id="charCount">0</span>/1000 characters
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-gold btn-ripple py-3 w-100 mt-2">Send Premium Message</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed Column -->
+        <div class="col-lg-5" data-aos="fade-left">
+          <div class="map-card-wrapper">
+            <div class="map-frame-container">
+              <!-- Grayscale map iframe -->
+              <iframe 
+                class="map-frame"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.7073238618037!2d-118.40292722343825!3d34.06419541697204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc0ecb2f9f1f%3A0xc39f280261be495f!2sRodeo%20Dr%2C%20Beverly%20Hills%2C%20CA!5e0!3m2!1sen!2sus!4v1704440000000!5m2!1sen!2sus"
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="AuraCare Beverly Hills Maps Sanctuary">
+              </iframe>
+            </div>
+            <div class="map-info-footer">
+              <div>
+                <span class="d-block text-muted" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; color: var(--color-gold) !important;">Gold Location</span>
+                <h4 class="font-serif m-0" style="font-size: 1.15rem; color: var(--text-main);">Beverly Hills Clinic</h4>
+              </div>
+              <a href="https://maps.google.com/?q=742+Atelier+Luxury+Blvd,+Suite+100,+Beverly+Hills,+CA+90210" target="_blank" rel="noopener noreferrer" class="btn-gold btn-ripple py-2 px-3" style="font-size: 0.8rem;">Get Directions</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: SOCIAL MEDIA SECTION -->
+    <section class="mb-5 pb-4" data-aos="fade-up">
+      <div class="social-banner-section">
+        <h3 class="social-section-header">Join Our Skin Community</h3>
+        <p class="text-muted text-center max-w-600 mx-auto mb-4 pb-2" style="font-size: 0.94rem;">Follow our active clinical profiles for live case study updates, pre-treatment preparations, skin health advice, and premium limited-edition collections.</p>
+        
+        <div class="row g-4">
+          <!-- Instagram -->
+          <div class="col-lg-3 col-sm-6">
+            <div class="social-grid-card" onclick="window.open('https://instagram.com', '_blank')">
+              <div class="social-card-icon">
+                <i data-lucide="instagram"></i>
+              </div>
+              <div class="social-card-info">
+                <h5>Instagram</h5>
+                <p>@auracare.clinic</p>
+              </div>
+            </div>
+          </div>
+          <!-- Facebook -->
+          <div class="col-lg-3 col-sm-6">
+            <div class="social-grid-card" onclick="window.open('https://facebook.com', '_blank')">
+              <div class="social-card-icon">
+                <i data-lucide="facebook"></i>
+              </div>
+              <div class="social-card-info">
+                <h5>Facebook</h5>
+                <p>AuraCare Aesthetic</p>
+              </div>
+            </div>
+          </div>
+          <!-- Twitter -->
+          <div class="col-lg-3 col-sm-6">
+            <div class="social-grid-card" onclick="window.open('https://twitter.com', '_blank')">
+              <div class="social-card-icon">
+                <i data-lucide="twitter"></i>
+              </div>
+              <div class="social-card-info">
+                <h5>Twitter / X</h5>
+                <p>@AuraCareClinic</p>
+              </div>
+            </div>
+          </div>
+          <!-- LinkedIn -->
+          <div class="col-lg-3 col-sm-6">
+            <div class="social-grid-card" onclick="window.open('https://linkedin.com', '_blank')">
+              <div class="social-card-icon">
+                <i data-lucide="linkedin"></i>
+              </div>
+              <div class="social-card-info">
+                <h5>LinkedIn</h5>
+                <p>AuraCare Clinical</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: EMERGENCY CONTACT SECTION -->
+    <section class="mb-5 pb-4" data-aos="fade-up">
+      <div class="emergency-alert-panel d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4">
+        <div class="d-flex align-items-start gap-3">
+          <div class="emergency-icon-wrap">
+            <i data-lucide="alert-triangle" style="width: 24px; height: 24px;"></i>
+          </div>
+          <div>
+            <h4 class="emergency-title">Post-Treatment Concerns?</h4>
+            <p class="emergency-text">
+              If you have recently undergone ablative laser treatment, dermal fillers, or Morpheus8, and are experiencing abnormal skin irritation, severe localized pain, or high fever, contact our 24/7 client advice line instantly.
+            </p>
+          </div>
+        </div>
+        <a href="tel:+13105550199" class="emergency-phone-btn align-self-start align-self-md-center">
+          <i data-lucide="phone-call" style="width: 18px; height: 18px;"></i>
+          <span>+1 (310) 555-0199</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 7: FAQ PREVIEW -->
+    <section class="mb-5 pb-5" data-aos="fade-up">
+      <h3 class="social-section-header">Common Inquiries</h3>
+      <p class="text-muted text-center max-w-600 mx-auto mb-5" style="font-size: 0.94rem;">Before calling, you may find instant answers regarding clinical consultations, parking setups, and cancellation criteria below.</p>
+      
+      <div class="faq-accordion-container">
+        
+        <!-- FAQ Item 1 -->
+        <div class="faq-item-luxury">
+          <div class="faq-header-luxury" onclick="toggleLocalFaqItem(this.parentNode)">
+            <div class="faq-header-content">
+              <span class="faq-category-tag">Skin Consultations</span>
+              <h3 class="faq-question-text">Do I need to clean my face before arriving for my consultation?</h3>
+            </div>
+            <div class="faq-icon-indicator">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            </div>
+          </div>
+          <div class="faq-collapse-panel">
+            <div class="faq-body-content">
+              To guarantee highly accurate diagnostic skin analysis, we suggest arriving with clean skin free of heavy makeup, sunscreen, or rich face oils. If you are coming directly from work, we provide gentle pre-cleansing luxury wipes and soothing cleansers in our dressing suites.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item-luxury">
+          <div class="faq-header-luxury" onclick="toggleLocalFaqItem(this.parentNode)">
+            <div class="faq-header-content">
+              <span class="faq-category-tag">Clinic Policies</span>
+              <h3 class="faq-question-text">Is valet parking available at the Beverly Hills clinic?</h3>
+            </div>
+            <div class="faq-icon-indicator">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            </div>
+          </div>
+          <div class="faq-collapse-panel">
+            <div class="faq-body-content">
+              Yes. Complimentary underground valet parking is provided for all clients receiving premium energy treatments (lasers, Morpheus8, chemical peels). Our secure, monitored parking entrance is located directly at the rear of the Atelier Luxury Blvd building on Atelier Court.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item-luxury">
+          <div class="faq-header-luxury" onclick="toggleLocalFaqItem(this.parentNode)">
+            <div class="faq-header-content">
+              <span class="faq-category-tag">Clinic Policies</span>
+              <h3 class="faq-question-text">What is your cancellation and rescheduling policy?</h3>
+            </div>
+            <div class="faq-icon-indicator">
+              <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+            </div>
+          </div>
+          <div class="faq-collapse-panel">
+            <div class="faq-body-content">
+              We require a minimum of 24 hours' notice for standard skin consults and 48 hours' notice for deep medical/energy treatments. Cancellations made outside of this period may incur a 50% treatment fee to compensate for pre-calibrated medical settings and therapist booking configurations.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-4 pt-1">
+        <a href="faq.html" class="btn-gold btn-ripple py-2.5 px-4" style="font-size: 0.88rem;">Read All 30+ FAQs</a>
+      </div>
+    </section>
+
+    <!-- SECTION 8: BOOK APPOINTMENT CTA -->
+    <section class="pb-3" data-aos="fade-up">
+      <div class="appointment-cta-banner luxe-help-card">
+        <div class="luxe-card-glow"></div>
+        <div class="appointment-cta-decor decor-1"></div>
+        <div class="appointment-cta-decor decor-2"></div>
+        
+        <div class="position-relative" style="z-index: 2;">
+          <h3 class="font-serif mb-3" style="font-size: 2.2rem; color: var(--text-main);">Begin Your Skincare Transformation</h3>
+          <p class="text-muted mx-auto mb-4 pb-2" style="max-width: 600px; font-size: 1rem;">
+            Whether you want to target stubborn hyperpigmentation, refine pore structures, or achieve deep contouring results with Morpheus8, lock in a priority slot with our specialists today.
+          </p>
+          <a href="appointment.html" class="btn-gold btn-ripple px-5 py-3" style="font-size: 0.95rem; font-weight: 600;">Reserve Your Dermal Session</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- BOOTSTRAP, GSAP, AOS, LUCIDE SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- LUXURY CONTACT INTERACTIVE ENGINE -->
+  <script>
+    // 1. COLLAPSIBLE ACCORDION FOR FAQ PREVIEW (Smooth max-height calculations)
+    function toggleLocalFaqItem(itemEl) {
+      const panel = itemEl.querySelector('.faq-collapse-panel');
+      const isActive = itemEl.classList.contains('active');
+      
+      // Close all other active items in this local context
+      document.querySelectorAll('.faq-item-luxury').forEach(el => {
+        if (el !== itemEl && el.classList.contains('active')) {
+          el.classList.remove('active');
+          const siblingPanel = el.querySelector('.faq-collapse-panel');
+          siblingPanel.style.maxHeight = '0';
+        }
+      });
+      
+      if (isActive) {
+        itemEl.classList.remove('active');
+        panel.style.maxHeight = '0';
+      } else {
+        itemEl.classList.add('active');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    }
+
+    // 2. LUXURY MOUSE-MOVE CARD INTERACTIVE SHEEN
+    function setupLuxeCardEffects() {
+      const cards = document.querySelectorAll('.luxe-help-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    // 3. CONTACT FORM VALIDATIONS & FEEDBACKS
+    document.addEventListener('DOMContentLoaded', () => {
+      setupLuxeCardEffects();
+
+      const nameInput = document.getElementById('contactName');
+      const emailInput = document.getElementById('contactEmail');
+      const phoneInput = document.getElementById('contactPhone');
+      const subjectInput = document.getElementById('contactSubject');
+      const messageInput = document.getElementById('contactMessage');
+      const charCounter = document.getElementById('charCount');
+
+      // Live character counter for Message
+      messageInput.addEventListener('input', () => {
+        const count = messageInput.value.length;
+        charCounter.innerText = count;
+        if (count > 1000) {
+          messageInput.value = messageInput.value.substring(0, 1000);
+          charCounter.innerText = 1000;
+        }
+        validateField(messageInput, count >= 15, 'messageError');
+      });
+
+      // Real-time input check listeners
+      nameInput.addEventListener('input', () => {
+        validateField(nameInput, nameInput.value.trim().length >= 3, 'nameError');
+      });
+
+      emailInput.addEventListener('input', () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        validateField(emailInput, emailRegex.test(emailInput.value.trim()), 'emailError');
+      });
+
+      phoneInput.addEventListener('input', () => {
+        // Simple validation to check that digits count is at least 10 and not purely alphabetic
+        const phoneDigits = phoneInput.value.replace(/\D/g, '');
+        validateField(phoneInput, phoneDigits.length >= 10, 'phoneError');
+      });
+
+      subjectInput.addEventListener('change', () => {
+        validateField(subjectInput, subjectInput.value !== "", 'subjectError');
+      });
+    });
+
+    // Helper function to validate fields visually and apply CSS classes
+    function validateField(inputEl, condition, errorElId) {
+      const errorMsg = document.getElementById(errorElId);
+      
+      if (inputEl.value.trim() === "") {
+        // Reset classes if empty to maintain elegant luxury states before user types
+        inputEl.classList.remove('is-valid', 'is-invalid');
+        errorMsg.style.display = 'none';
+        return false;
+      }
+
+      if (condition) {
+        inputEl.classList.remove('is-invalid');
+        inputEl.classList.add('is-valid');
+        errorMsg.style.display = 'none';
+        return true;
+      } else {
+        inputEl.classList.remove('is-valid');
+        inputEl.classList.add('is-invalid');
+        errorMsg.style.display = 'block';
+        return false;
+      }
+    }
+
+    // 4. PREVENT SUBMISSION AND TRIGGER PREMIUM TOAST SUCCESS
+    function handleContactSubmit(e) {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('contactName');
+      const emailInput = document.getElementById('contactEmail');
+      const phoneInput = document.getElementById('contactPhone');
+      const subjectInput = document.getElementById('contactSubject');
+      const messageInput = document.getElementById('contactMessage');
+
+      const nameVal = nameInput.value.trim();
+      const emailVal = emailInput.value.trim();
+      const phoneVal = phoneInput.value.trim();
+      const subjectVal = subjectInput.value;
+      const messageVal = messageInput.value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneDigits = phoneVal.replace(/\D/g, '');
+
+      // Check all conditions together
+      const isNameOk = validateField(nameInput, nameVal.length >= 3, 'nameError');
+      const isEmailOk = validateField(emailInput, emailRegex.test(emailVal), 'emailError');
+      const isPhoneOk = validateField(phoneInput, phoneDigits.length >= 10, 'phoneError');
+      const isSubjectOk = validateField(subjectInput, subjectVal !== "", 'subjectError');
+      const isMessageOk = validateField(messageInput, messageVal.length >= 15, 'messageError');
+
+      if (!isNameOk || !isEmailOk || !isPhoneOk || !isSubjectOk || !isMessageOk) {
+        // Focus on first invalid input
+        if (!isNameOk) nameInput.focus();
+        else if (!isEmailOk) emailInput.focus();
+        else if (!isPhoneOk) phoneInput.focus();
+        else if (!isSubjectOk) subjectInput.focus();
+        else if (!isMessageOk) messageInput.focus();
+        return;
+      }
+
+      // Generate visual luxury success toast
+      const toast = document.createElement('div');
+      toast.className = 'custom-toast';
+      toast.style.opacity = '0';
+      toast.style.transform = 'translate(-50%, 20px)';
+      toast.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+      toast.innerHTML = `
+        <i data-lucide="check-circle-2" style="color: var(--color-gold); width: 20px; height: 20px; flex-shrink: 0;"></i>
+        <span>Thank you, ${escapeHtml(nameVal)}. Your message is dispatched! Our concierge will reply within 2 hours.</span>
+      `;
+
+      document.body.appendChild(toast);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Trigger toast slide-in
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translate(-50%, 0)';
+      });
+
+      // Clear the Form Fields and validations
+      document.getElementById('luxeContactForm').reset();
+      document.getElementById('charCount').innerText = '0';
+      
+      const inputs = [nameInput, emailInput, phoneInput, subjectInput, messageInput];
+      inputs.forEach(input => {
+        input.classList.remove('is-valid', 'is-invalid');
+      });
+
+      // Remove toast after 5 seconds smoothly
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translate(-50%, 20px)';
+        toast.addEventListener('transitionend', () => toast.remove());
+      }, 5000);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

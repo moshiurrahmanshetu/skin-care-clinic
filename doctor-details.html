@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Specialist Portfolio | AuraCare Premium Skin Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+  
+  <!-- CUSTOM DETAILS STYLE -->
+  <style>
+    .back-to-directory {
+      color: var(--color-gold);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+      margin-bottom: 30px;
+    }
+    .back-to-directory:hover {
+      color: var(--color-gold-hover);
+      transform: translateX(-4px);
+    }
+
+    /* Left column profile elements */
+    .details-doc-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 35px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 100px;
+    }
+    .details-img-wrap {
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-gold-border);
+      height: 420px;
+      background-color: #ECEAE4;
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .details-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: var(--transition-smooth);
+    }
+    .details-img-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    .doc-stat-pill {
+      background-color: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 16px 20px;
+      text-align: center;
+      transition: var(--transition-fast);
+    }
+    .doc-stat-pill:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Education Academic Timeline */
+    .academic-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin-top: 20px;
+    }
+    .academic-timeline::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 7px;
+      width: 2px;
+      height: calc(100% - 24px);
+      background-color: var(--color-gold-border);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 24px;
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-marker {
+      position: absolute;
+      top: 6px;
+      left: -30px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--surface-clinic);
+      border: 2px solid var(--color-gold);
+      z-index: 2;
+    }
+    .timeline-year {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-gold);
+      margin-bottom: 2px;
+    }
+    .timeline-degree {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    /* Book consult box inside details */
+    .book-consult-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--color-gold-border);
+      border-radius: var(--border-radius-xl);
+      padding: 35px;
+      box-shadow: var(--shadow-md);
+      margin-top: 30px;
+    }
+    
+    /* Custom treatments list tags */
+    .treatment-tag {
+      background-color: var(--color-gold-light);
+      border: 1px solid var(--color-gold-border);
+      color: var(--color-gold);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 4px;
+      transition: var(--transition-fast);
+    }
+    .treatment-tag:hover {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    /* Detailed biography block */
+    .biography-quote {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      line-height: 1.5;
+      font-style: italic;
+      color: var(--text-main);
+      border-left: 3px solid var(--color-gold);
+      padding-left: 24px;
+      margin-bottom: 35px;
+      position: relative;
+    }
+    .biography-quote::after {
+      content: '”';
+      font-size: 4rem;
+      color: var(--color-gold-light);
+      position: absolute;
+      right: 10px;
+      bottom: -30px;
+      line-height: 0;
+      opacity: 0.5;
+    }
+
+    /* Achievements card details */
+    .achievement-item-box {
+      background-color: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      transition: var(--transition-smooth);
+    }
+    .achievement-item-box:hover {
+      border-color: var(--color-gold-border);
+      background-color: var(--surface-clinic);
+      transform: translateX(4px);
+    }
+
+    /* Tailored Review cards */
+    .details-review-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-fast);
+      position: relative;
+    }
+    .details-review-card:hover {
+      border-color: var(--color-gold-border);
+    }
+    .review-stars {
+      color: var(--color-gold);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link mb-0" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link active" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Banner (Will be populated dynamically) -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase" id="banner-doc-name" data-aos="fade-down">Dr. Marcus Vance</h1>
+      <ul class="breadcrumb-container hero-fade-reveal" data-aos="fade-up" data-aos-delay="100">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="doctors.html">Doctors</a></li>
+        <li class="breadcrumb-item active" id="breadcrumb-doc-name">Dr. Marcus Vance</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="py-5" style="background-color: var(--bg-clinic);">
+    <div class="container py-4">
+      
+      <!-- Back to directory button -->
+      <a href="doctors.html" class="back-to-directory">
+        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+        <span>Back To Board Specialists</span>
+      </a>
+
+      <div class="row g-5">
+        <!-- LEFT COLUMN: Profile card, stats, booking card -->
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="details-doc-card">
+            <div class="details-img-wrap">
+              <img id="detail-doc-image" src="" alt="Doctor Portrait" referrerPolicy="no-referrer">
+            </div>
+            
+            <h2 class="h4 font-serif text-center mb-1" id="detail-doc-name">Dr. Marcus Vance</h2>
+            <p class="text-gold text-center small text-uppercase tracking-wider fw-semibold mb-4" id="detail-doc-role">Clinical Director</p>
+            
+            <!-- Quick stats -->
+            <div class="row g-3 text-center mb-4">
+              <div class="col-6">
+                <div class="doc-stat-pill">
+                  <div class="h3 font-serif text-gold mb-1" id="detail-stat-satisfaction">99.4%</div>
+                  <div class="small text-muted font-sans text-uppercase tracking-wider" style="font-size: 0.7rem;">Satisfaction</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="doc-stat-pill">
+                  <div class="h3 font-serif text-gold mb-1" id="detail-stat-completed">4,800+</div>
+                  <div class="small text-muted font-sans text-uppercase tracking-wider" style="font-size: 0.7rem;">Procedures</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Schedule info -->
+            <div class="p-3 border rounded-3 mb-4 text-center" style="background-color: var(--bg-clinic); border-color: var(--border-clinic) !important;">
+              <i data-lucide="clock" class="text-gold me-2 d-inline-block align-middle" style="width: 16px; height: 16px;"></i>
+              <span class="small text-muted align-middle fw-medium" id="detail-doc-schedule">Mon, Wed, Fri (9:00 AM - 4:00 PM)</span>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-outline-gold p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;" aria-label="Instagram"><i data-lucide="instagram" style="width: 18px; height: 18px;"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="btn-outline-gold p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;" aria-label="LinkedIn"><i data-lucide="linkedin" style="width: 18px; height: 18px;"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="btn-outline-gold p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;" aria-label="Twitter"><i data-lucide="twitter" style="width: 18px; height: 18px;"></i></a>
+            </div>
+          </div>
+
+          <!-- Quick Book Consultation Card -->
+          <div class="book-consult-card">
+            <h3 class="h4 font-serif text-uppercase mb-3 text-center">Bespoke Consult Request</h3>
+            <p class="small text-muted text-center mb-4">Request a dedicated 3D diagnostics evaluation with <span class="fw-bold text-gold" id="book-card-doc-name">Dr. Vance</span>.</p>
+            
+            <form id="details-consult-form" onsubmit="handleConsultSubmit(event)">
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Full Name" required style="border-radius: var(--border-radius-sm); font-size: 0.9rem; padding: 12px; background-color: var(--bg-clinic); border-color: var(--border-clinic);">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Email Address" required style="border-radius: var(--border-radius-sm); font-size: 0.9rem; padding: 12px; background-color: var(--bg-clinic); border-color: var(--border-clinic);">
+              </div>
+              <div class="mb-3">
+                <input type="tel" class="form-control" placeholder="Contact Phone" required style="border-radius: var(--border-radius-sm); font-size: 0.9rem; padding: 12px; background-color: var(--bg-clinic); border-color: var(--border-clinic);">
+              </div>
+              <div class="mb-4">
+                <select class="form-select" required style="border-radius: var(--border-radius-sm); font-size: 0.9rem; padding: 12px; background-color: var(--bg-clinic); border-color: var(--border-clinic);">
+                  <option value="" disabled selected>Select Primary Treatment Concern</option>
+                  <option value="remodeling">Structural Remodeling (Morpheus8)</option>
+                  <option value="laser">Advanced Laser Resurfacing</option>
+                  <option value="injectables">Facial Contour & Injectables</option>
+                  <option value="regenerative">Cellular Restoration (PRP)</option>
+                  <option value="acne">Cystic Acne / Melasma Control</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-gold btn-ripple w-100 py-3 text-uppercase font-sans fw-semibold tracking-wider small" style="border-radius: var(--border-radius-sm);">Submit Consult Inquiry</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Detailed clinical bio, timeline, treatments, credentials -->
+        <div class="col-lg-7" data-aos="fade-left">
+          
+          <!-- Quote -->
+          <div class="biography-quote" id="detail-doc-quote">
+            "Skincare is not merely corrective; it is an active preservation of your biological grace."
+          </div>
+
+          <!-- Extended Biography -->
+          <div class="mb-5">
+            <h3 class="h4 font-serif text-uppercase mb-3">Clinical Profile</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            <div id="detail-doc-bio-paragraphs">
+              <!-- Dynamically populated paragraphs -->
+            </div>
+          </div>
+
+          <!-- Specialized Treatments Administered -->
+          <div class="mb-5">
+            <h3 class="h4 font-serif text-uppercase mb-3">Administered Clinical Therapies</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            <p class="small text-muted mb-3">These premium treatments are personally calibrated, tested, and executed by this specialist:</p>
+            <div id="detail-doc-treatments" class="d-flex flex-wrap gap-2">
+              <!-- Treatments tags dynamic -->
+            </div>
+          </div>
+
+          <!-- Academic Timeline -->
+          <div class="mb-5">
+            <h3 class="h4 font-serif text-uppercase mb-3">Education & Fellowships</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            <div class="academic-timeline" id="detail-doc-timeline">
+              <!-- Timeline elements dynamically loaded -->
+            </div>
+          </div>
+
+          <!-- Achievements / Publications -->
+          <div class="mb-5">
+            <h3 class="h4 font-serif text-uppercase mb-3">Board Accreditations & Recognitions</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            <div class="d-flex flex-column gap-3" id="detail-doc-achievements">
+              <!-- Injected achievements blocks -->
+            </div>
+          </div>
+
+          <!-- Tailored Patient Reviews -->
+          <div>
+            <h3 class="h4 font-serif text-uppercase mb-3">Specialist Patient Reviews</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            <div class="row g-4" id="detail-doc-reviews">
+              <!-- Review Cards dynamically injected -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SUCCESS TOAST / BANNER FOR SUBMITTED CONSULTATION -->
+  <div class="modal fade" id="consultationSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-premium text-center">
+        <div class="modal-body modal-body-premium py-5">
+          <div class="text-gold mb-3">
+            <i data-lucide="check-circle" style="width: 60px; height: 60px; stroke-width: 1.5;"></i>
+          </div>
+          <h2 class="font-serif text-uppercase mb-3">Consultation Requested</h2>
+          <p class="text-muted small px-3 mb-4">
+            Thank you. Your request for an elite skincare consultation has been successfully logged with our medical advisory board. Our private concierge team will reach out to you within 24 hours to schedule your session.
+          </p>
+          <button type="button" class="btn-gold btn-ripple px-5 py-3 small text-uppercase font-sans fw-semibold tracking-wide" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- BOOTSTRAP, GSAP, AOS, AND LUCIDE ICONS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- CLINICAL DATABASE AND DINAMIC POPULATION CONTROLLER -->
+  <script>
+    const doctorsDatabase = {
+      "marcus-vance": {
+        id: "marcus-vance",
+        name: "Dr. Marcus Vance",
+        role: "Clinical Director & Board-Certified Dermatologist",
+        specialty: "Clinical Dermatology & Non-Surgical Facelifts",
+        experience: "16+ Years Experience",
+        qualification: "M.D. Stanford University School of Medicine",
+        image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "99.4%",
+        completed: "5,400+",
+        schedule: "Mon, Wed, Fri (9:00 AM - 4:00 PM)",
+        quote: "Skincare is not merely corrective; it is an active preservation of your biological grace.",
+        bio: [
+          "Dr. Marcus Vance is a world-renowned pioneer in non-surgical structural facial rejuvenation. After completing his Chief Residency in Dermatology at Stanford Dermal Health, he founded the Vance Laser Institute before joining AuraCare as our Clinical Director.",
+          "He has personally overseen more than 10,000 advanced laser resurfacing and Morpheus8® remodeling sessions. Dr. Vance regularly serves as an editor for leading dermal rejuvenation academic publications and travels internationally to host laser safety clinics.",
+          "His clinical motto focuses on micro-dosed laser triggers that promote active cellular synthesis without stripping the outer skin barrier's natural lipid matrices."
+        ],
+        treatments: ["Morpheus8 Remodeling", "CO2 Fractional Laser", "Liquid Facelift", "Micro-needling with Peptide Serum", "Cellular Resurfacing"],
+        education: [
+          { year: "2010", degree: "Fellowship in Advanced Laser & Cosmetic Surgery, UCLA" },
+          { year: "2008", degree: "Residency in Dermatology, Stanford University Medical Center" },
+          { year: "2005", degree: "Doctor of Medicine (M.D.), Stanford University School of Medicine" }
+        ],
+        achievements: [
+          "Recipient of the Beverly Hills Aesthetic Excellence Award (2024)",
+          "Published 15+ papers on fractional CO2 laser safety and tissue remodeling",
+          "Prior Chief Resident at Stanford Dermal Health & Medical Board Advisor"
+        ],
+        reviews: [
+          { text: "Dr. Vance restored my jawline structure flawlessly. The procedure was comfortable and his explanations were incredibly thorough.", author: "Helena R., Beverly Hills", rating: 5 },
+          { text: "Absolute clinical precision. My laser resurfacing results exceeded all expectations.", author: "James L., Los Angeles", rating: 5 }
+        ]
+      },
+      "evelyn-thorne": {
+        id: "evelyn-thorne",
+        name: "Dr. Evelyn Thorne",
+        role: "Master Aesthetic Sculptor & Laser Specialist",
+        specialty: "Laser Resurfacing & Dermal Remodeling",
+        experience: "12+ Years Experience",
+        qualification: "Ph.D. Harvard Medical School, Board-Certified",
+        image: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "98.9%",
+        completed: "3,800+",
+        schedule: "Tue, Thu, Sat (10:00 AM - 6:00 PM)",
+        quote: "True skin renewal balances state-of-the-art optical physics with the organic rhythm of the dermis.",
+        bio: [
+          "Dr. Evelyn Thorne is a double board-certified dermatologist and biomedical optics expert. Her graduate thesis at Harvard focused on fractional photothermolysis, paving the way for modern hyperpigmentation sweeps.",
+          "She is highly sought after for her bespoke botanical-acid peel calibrations and high-precision laser sweeps. Dr. Thorne believes that correct skin light exposure can promote massive cellular self-clearing, making heavy products unnecessary.",
+          "She coordinates the research laboratories at AuraCare, testing skin care solutions to confirm compatibility with all skin tones and sensitive classifications."
+        ],
+        treatments: ["Fractionated Resurfacing", "Aura Botanical Acid Peel", "Pigment Shattering", "Ultra-Spectra LED Treatment", "Dermal Pore Remodeling"],
+        education: [
+          { year: "2014", degree: "Fellowship in Laser Aesthetics, Harvard Dermal Science" },
+          { year: "2012", degree: "Doctorate in Biomedical Optics (Ph.D.), Harvard University" },
+          { year: "2009", degree: "Doctor of Medicine (M.D.), Columbia University" }
+        ],
+        achievements: [
+          "Advisory Panel Member for the International Laser Therapy Association",
+          "Voted Best Aesthetic Laser Specialist in California (2025)",
+          "Co-inventor of the AuraCare Nano-Peel calibration system"
+        ],
+        reviews: [
+          { text: "My melasma is completely gone. Dr. Thorne is the absolute master of laser diagnostics.", author: "Clarissa M., Malibu", rating: 5 },
+          { text: "Meticulous peel calibration. The recovery was quick and my skin is glowing.", author: "Vivian D., Pasadena", rating: 5 }
+        ]
+      },
+      "clara-fontaine": {
+        id: "clara-fontaine",
+        name: "Dr. Clara Fontaine",
+        role: "Cellular Regenerative Medicine Specialist",
+        specialty: "PRP & Micro-Channeling Therapy",
+        experience: "14+ Years Experience",
+        qualification: "M.D. Johns Hopkins University, Board-Certified",
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "99.1%",
+        completed: "4,200+",
+        schedule: "Mon, Tue, Thu (8:30 AM - 5:00 PM)",
+        quote: "Your body contains its own healing blueprint. Our duty is to focus and amplify that potential.",
+        bio: [
+          "Dr. Clara Fontaine is a visionary in autologous cellular therapy. Trained at Johns Hopkins University, she spent a decade researching platelet biology and stem cell migration.",
+          "She designed AuraCare's signature cooling lipid barrier protocol and is a leading global trainer for Platelet-Rich Plasma (PRP) treatments. Her scientific philosophy values regenerative activation over synthetic chemical fillers.",
+          "Dr. Fontaine's clinical routines trigger massive collagen production naturally, allowing the skin structure to restore density and elasticity from within."
+        ],
+        treatments: ["Autologous Platelet Therapy (PRP)", "Collagen Induction Therapy", "Cellular Hydration Sweep", "Micro-Channeling Remodeling", "Botanical Nutrient Infusions"],
+        education: [
+          { year: "2013", degree: "Fellowship in Autologous Cellular Therapy, Johns Hopkins" },
+          { year: "2011", degree: "Residency in Dermatology, Johns Hopkins Hospital" },
+          { year: "2008", degree: "Doctor of Medicine (M.D.), Johns Hopkins University" }
+        ],
+        achievements: [
+          "Keynote Speaker at the World Congress of Regenerative Medicine (2025)",
+          "Author of 'The Cellular Skin Frontier' clinical textbook",
+          "Clinical Director of the Dermal Wound & Repair Council"
+        ],
+        reviews: [
+          { text: "The PRP session with Dr. Fontaine was virtually painless. She is a pioneer in regenerative science.", author: "Regina K., Santa Monica", rating: 5 },
+          { text: "Amazing cellular healing protocols. My skin feels five years younger and incredibly dense.", author: "Fiona S., Brentwood", rating: 5 }
+        ]
+      },
+      "julian-sterling": {
+        id: "julian-sterling",
+        name: "Dr. Julian Sterling",
+        role: "Master Cosmetic Injector",
+        specialty: "Advanced Dermal Fillers & Lip Artistry",
+        experience: "10+ Years Experience",
+        qualification: "M.D. Yale School of Medicine, Board-Certified",
+        image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "99.2%",
+        completed: "3,100+",
+        schedule: "Wed, Thu, Fri (11:00 AM - 7:00 PM)",
+        quote: "Aesthetics is a game of millimeters. True mastery creates symmetry without artificial fullness.",
+        bio: [
+          "Dr. Julian Sterling brings a sculptor's touch and a scientist's precision to cosmetic injections. Educated at Yale, he specializes in three-dimensional facial contouring, micro-dosed neuromodulators, and natural lip restoration.",
+          "He is famous for his signature 'Liquid Face Lift' which restores volume without surgical scars. Dr. Sterling advises pharmaceutical firms on next-generation hyaluronic acid compounds, optimizing flexibility and hold.",
+          "Clients travel globally to consult on his facial-axis mapping method, which ensures standard expressions remain organic and lively."
+        ],
+        treatments: ["Precision Neuromodulators (Botox)", "Bespoke Hyaluronic Volume", "Non-Surgical Rhinoplasty", "Cheekbone Structural Contouring", "Lip Re-Symmetry Restorations"],
+        education: [
+          { year: "2017", degree: "Fellowship in Facial Plastic & Cosmetic Surgery, Beverly Hills" },
+          { year: "2015", degree: "Residency in General Surgery & Plastic Surgery, Yale New Haven" },
+          { year: "2011", degree: "Doctor of Medicine (M.D.), Yale School of Medicine" }
+        ],
+        achievements: [
+          "Named 'Master of Facial Symmetry' by Dermal Sculpt Journal (2024)",
+          "Injected over 150 elite Hollywood and Beverly Hills clients",
+          "Primary Investigator for new hyaluronic gel formulas at Yale Lab"
+        ],
+        reviews: [
+          { text: "The liquid facelift is a masterpiece of symmetry. Zero puffiness, just perfectly lifted contours.", author: "Julianne P., Hollywood", rating: 5 },
+          { text: "Dr. Sterling has an artist's eye. My lip restoration is so subtle and beautiful.", author: "Penelope G., West Hollywood", rating: 5 }
+        ]
+      },
+      "sophia-mercer": {
+        id: "sophia-mercer",
+        name: "Dr. Sophia Mercer",
+        role: "Pediatric & Cosmetic Dermatologist",
+        specialty: "Cystic Acne & Hormonal Hyperpigmentation",
+        experience: "11+ Years Experience",
+        qualification: "M.D. Columbia University, Board-Certified",
+        image: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "98.7%",
+        completed: "4,600+",
+        schedule: "Mon, Wed, Thu (9:00 AM - 5:30 PM)",
+        quote: "Clearing skin blemish cycles requires deep systemic analysis, not just surface application.",
+        bio: [
+          "Dr. Sophia Mercer specializes in stubborn, treatment-resistant skin anomalies. From severe cystic acne subcisions to hormonal melasmas, she combines cutting-edge clinical chemistry with targeted laser resurfacing.",
+          "She holds dual board certifications and is a passionate advocate for modern dermal nutrition. Dr. Mercer's diagnostic strategy begins with complete diet, metabolic, and allergen panel evaluations to address root issues.",
+          "She frequently writes clinical papers on teenage skin sensitivity and publishes advice for skin wellness in national dermatological journals."
+        ],
+        treatments: ["Cystic Acne Subcision", "Melasma Laser Sweep", "Botanical Acid Clearing", "Laser Deep Scar Repair", "Systemic Lipid Balancing"],
+        education: [
+          { year: "2016", degree: "Fellowship in Pediatric & Cosmetic Dermatology, Columbia" },
+          { year: "2014", degree: "Residency in Dermatology, Columbia University Medical Center" },
+          { year: "2011", degree: "Doctor of Medicine (M.D.), Columbia University Vagelos College" }
+        ],
+        achievements: [
+          "Lead researcher for the FDA-cleared multi-wave laser pigment protocol",
+          "Voted 'Best Acne & Scar Specialist' in Southern California (2024)",
+          "Founder of the Mercer Pediatric Skin Foundation"
+        ],
+        reviews: [
+          { text: "I struggled with severe cystic acne for ten years. Dr. Mercer cured it within months. Unbelievable care.", author: "Sasha S., San Diego", rating: 5 },
+          { text: "Outstanding subcision technique. My deep rolling scars are completely flat now.", author: "Marcus T., Orange County", rating: 5 }
+        ]
+      },
+      "adrian-sterling": {
+        id: "adrian-sterling",
+        name: "Dr. Adrian Sterling",
+        role: "Laser & Phototherapy Specialist",
+        specialty: "Multispectral LED & Cryogenic Systems",
+        experience: "9+ Years Experience",
+        qualification: "M.D. UCSF School of Medicine, Board-Certified",
+        image: "https://images.unsplash.com/photo-1637059824899-a441006a6875?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "98.5%",
+        completed: "2,900+",
+        schedule: "Tue, Wed, Fri (10:00 AM - 6:30 PM)",
+        quote: "By modulating specific optical wavelengths, we can reprogram skin cells to self-repair.",
+        bio: [
+          "Dr. Adrian Sterling is an authority on photo-biomodulation and cryogenic skin treatments. Graduating from the top-ranked UCSF Dermatology Program, he designed our advanced multi-spectrum LED light pods.",
+          "He developed the thermal-shock cryo protocols that tighten pore matrices instantly. Dr. Sterling believes that gentle energy manipulation can produce phenomenal skin-repair loops without skin-peel trauma.",
+          "His clinical equipment is highly advanced, utilizing laser systems that hit specific targets with zero thermal damage to adjacent tissues."
+        ],
+        treatments: ["Multispectral LED Phototherapy", "Cryo Dermal Pore Tightening", "Picosecond Tattoo Shattering", "Acoustic Pigment Clearing", "Thermal Contrast Synthesis"],
+        education: [
+          { year: "2018", degree: "Fellowship in Photobiomodology, UCSF Dermal Lab" },
+          { year: "2016", degree: "Residency in Dermatology, UCSF Medical Center" },
+          { year: "2013", degree: "Doctor of Medicine (M.D.), University of California, San Francisco" }
+        ],
+        achievements: [
+          "Pioneered AuraCare's acoustic non-thermal picosecond pigment shattering",
+          "Distinguished Young Investigator Award from the American Society for Laser Medicine",
+          "Senior Scientific Consultant for top clinical optical engineering brands"
+        ],
+        reviews: [
+          { text: "The thermal-shock cryo facial instantly tightened my pores. Adrian is a genius with optical frequencies.", author: "Daniel C., Santa Barbara", rating: 5 },
+          { text: "Picosecond laser removed my sunspots without any downtime. Highly recommend.", author: "Gemma H., Bel Air", rating: 5 }
+        ]
+      },
+      "beatrice-rose": {
+        id: "beatrice-rose",
+        name: "Dr. Beatrice Rose",
+        role: "Integrative Anti-Aging Specialist",
+        specialty: "Hormonal Rejuvenation & Elasticity Restoration",
+        experience: "13+ Years Experience",
+        qualification: "M.D. UPenn School of Medicine, Board-Certified",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "99.3%",
+        completed: "3,900+",
+        schedule: "Mon, Tue, Fri (8:00 AM - 4:30 PM)",
+        quote: "Aesthetic perfection is an ecosystem where internal endocrine health meets micro-targeted topical science.",
+        bio: [
+          "Dr. Beatrice Rose is renowned for her holistic, integrative approach to skin preservation. Rather than focusing solely on surface lines, she analyzes cellular hydration limits and endocrine parameters to reverse deep aging.",
+          "Her signature collagen synthesis routines have been featured extensively in Vogue and Harper's Bazaar. Dr. Rose advises patients on maintaining cellular density by pairing customized organic serums with trace dermal minerals.",
+          "She coordinates our wellness lifestyle retreats, integrating nutrition science directly into luxury skin rehabilitation programs."
+        ],
+        treatments: ["Endocrine Dermal Matrix Calibration", "Intense Collagen Synthesis", "Deep Moisture Oxygenation", "Holistic Barrier Repair", "Mineral Micro-Channeling"],
+        education: [
+          { year: "2015", degree: "Fellowship in Integrative Dermal Science, UPenn" },
+          { year: "2012", degree: "Residency in Anti-Aging Medicine & Endocrinology, Philadelphia Clinic" },
+          { year: "2009", degree: "Doctor of Medicine (M.D.), University of Pennsylvania" }
+        ],
+        achievements: [
+          "Voted 'Top Anti-Aging Specialist' by Beverly Hills Med-Tech Circle (2023-2025)",
+          "Developer of the UPenn Dermal Nutrition & Endocrine Matrix guidelines",
+          "Regular expert contributor to leading luxury fashion and beauty publications"
+        ],
+        reviews: [
+          { text: "Dr. Rose's holistic approach transformed my skin's elasticity. It's not just topical; it's a wellness system.", author: "Isabella V., Calabasas", rating: 5 },
+          { text: "The collagen synthesis therapies made my deep lines melt away. She is incredible.", author: "Genevieve A., Beverly Hills", rating: 5 }
+        ]
+      },
+      "kenneth-choi": {
+        id: "kenneth-choi",
+        name: "Dr. Kenneth Choi",
+        role: "Clinical Dermal Surgeon & Oncologist",
+        specialty: "Mole Mapping & Reconstructive Dermal Surgery",
+        experience: "15+ Years Experience",
+        qualification: "M.D. Mayo Clinic, Board-Certified",
+        image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600",
+        satisfaction: "99.5%",
+        completed: "4,100+",
+        schedule: "Tue, Thu, Sat (8:00 AM - 3:30 PM)",
+        quote: "Surgical safety and microscopic accuracy are the absolute baselines of skin preservation.",
+        bio: [
+          "Dr. Kenneth Choi is a master clinical surgeon specializing in microscopic skin barrier reconstructions, precise mole mappings, and cellular tumor clearances.",
+          "Trained at the Mayo Clinic, he has successfully executed over 4,000 surgical dermal procedures and advises global medical panels on patient safety standards.",
+          "Dr. Choi has invented several micro-surgical tools that reduce scarring during resection, allowing clients to receive vital medical procedures with optimal visual recovery."
+        ],
+        treatments: ["Micrographic Dermal Resections", "Advanced Mole Mapping", "Reconstructive Skin Barrier Care", "Surgical Dermal Closures", "In-Depth Biopsy Analyses"],
+        education: [
+          { year: "2013", degree: "Fellowship in Micrographic Surgery & Cutaneous Oncology, Mayo Clinic" },
+          { year: "2010", degree: "Residency in Dermatologic Surgery, Mayo Clinic Graduate School" },
+          { year: "2007", degree: "Doctor of Medicine (M.D.), Mayo Clinic Alix School of Medicine" }
+        ],
+        achievements: [
+          "Mayo Clinic Distinguished Surgeon of the Year Award (2022)",
+          "Inventor of the Choi Micro-Surgical Needle Retractor system",
+          "Active Fellow of the American College of Mohs Surgery"
+        ],
+        reviews: [
+          { text: "Dr. Choi is an absolute surgeon-hero. His microscopic resection left absolutely zero visible scarring.", author: "Lawrence B., Newport Beach", rating: 5 },
+          { text: "Incredibly thorough mole mapping. He caught high-risk patches early with advanced optical technology.", author: "Patricia W., Beverly Hills", rating: 5 }
+        ]
+      }
+    };
+
+    // Load URL parameter and inject database data
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let doctorId = urlParams.get('id');
+
+      // Default to Marcus Vance if parameter missing or invalid
+      if (!doctorId || !doctorsDatabase[doctorId]) {
+        doctorId = "marcus-vance";
+      }
+
+      const doctor = doctorsDatabase[doctorId];
+
+      // Update titles
+      document.title = `${doctor.name} | AuraCare Specialist`;
+      document.getElementById('banner-doc-name').innerText = doctor.name;
+      document.getElementById('breadcrumb-doc-name').innerText = doctor.name;
+
+      // Update Profile Details Card (Left Col)
+      document.getElementById('detail-doc-image').src = doctor.image;
+      document.getElementById('detail-doc-image').alt = doctor.name;
+      document.getElementById('detail-doc-name').innerText = doctor.name;
+      document.getElementById('detail-doc-role').innerText = doctor.role;
+      document.getElementById('detail-stat-satisfaction').innerText = doctor.satisfaction;
+      document.getElementById('detail-stat-completed').innerText = doctor.completed;
+      document.getElementById('detail-doc-schedule').innerText = doctor.schedule;
+      document.getElementById('book-card-doc-name').innerText = doctor.name;
+
+      // Update Quote (Right Col)
+      document.getElementById('detail-doc-quote').innerHTML = `"${doctor.quote}"`;
+
+      // Update Biography Paragraphs
+      const bioParagraphsContainer = document.getElementById('detail-doc-bio-paragraphs');
+      bioParagraphsContainer.innerHTML = '';
+      doctor.bio.forEach(para => {
+        const p = document.createElement('p');
+        p.className = 'text-muted leading-relaxed mb-3';
+        p.innerText = para;
+        bioParagraphsContainer.appendChild(p);
+      });
+
+      // Update Treatments Administered
+      const treatmentsContainer = document.getElementById('detail-doc-treatments');
+      treatmentsContainer.innerHTML = '';
+      doctor.treatments.forEach(tr => {
+        const span = document.createElement('span');
+        span.className = 'treatment-tag';
+        span.innerText = tr;
+        treatmentsContainer.appendChild(span);
+      });
+
+      // Update Timeline
+      const timelineContainer = document.getElementById('detail-doc-timeline');
+      timelineContainer.innerHTML = '';
+      doctor.education.forEach(edu => {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.innerHTML = `
+          <div class="timeline-marker"></div>
+          <div class="timeline-year">${edu.year}</div>
+          <div class="timeline-degree">${edu.degree}</div>
+        `;
+        timelineContainer.appendChild(item);
+      });
+
+      // Update Achievements List
+      const achievementsContainer = document.getElementById('detail-doc-achievements');
+      achievementsContainer.innerHTML = '';
+      doctor.achievements.forEach((ach, index) => {
+        const block = document.createElement('div');
+        block.className = 'achievement-item-box';
+        block.innerHTML = `
+          <div class="p-2 bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px; border: 1px solid var(--border-clinic);">
+            <i data-lucide="award" class="text-gold" style="width: 18px; height: 18px;"></i>
+          </div>
+          <div>
+            <p class="mb-0 small text-muted fw-medium">${ach}</p>
+          </div>
+        `;
+        achievementsContainer.appendChild(block);
+      });
+
+      // Update Reviews
+      const reviewsContainer = document.getElementById('detail-doc-reviews');
+      reviewsContainer.innerHTML = '';
+      doctor.reviews.forEach(rev => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        
+        let starsHTML = '';
+        for (let i = 0; i < rev.rating; i++) {
+          starsHTML += '<i data-lucide="star" class="fill-gold" style="width: 14px; height: 14px; margin-right: 2px;"></i>';
+        }
+
+        col.innerHTML = `
+          <div class="details-review-card h-100">
+            <div class="review-stars">${starsHTML}</div>
+            <p class="small text-muted mb-3 italic">"${rev.text}"</p>
+            <div class="d-flex align-items-center gap-2">
+              <div class="small fw-semibold text-main">${rev.author}</div>
+              <span class="badge bg-light text-muted small border" style="font-size: 0.7rem; font-weight: 500;">Verified Patient</span>
+            </div>
+          </div>
+        `;
+        reviewsContainer.appendChild(col);
+      });
+
+      // Reinitialize Lucide Icons after dynamic loads
+      lucide.createIcons();
+    });
+
+    // Custom Consultation Form submission
+    function handleConsultSubmit(event) {
+      event.preventDefault();
+      
+      // Trigger dynamic Success Modal
+      const modalElement = document.getElementById('consultationSuccessModal');
+      const bootstrapModal = new bootstrap.Modal(modalElement);
+      bootstrapModal.show();
+      
+      // Reset form
+      document.getElementById('details-consult-form').reset();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treatment Details | AuraCare Premium Skin Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+  
+  <!-- CUSTOM SERVICE-DETAILS STYLE -->
+  <style>
+    /* Details Container Styling */
+    .detail-badge {
+      display: inline-block;
+      background-color: var(--color-gold-light);
+      border: 1px solid var(--color-gold-border);
+      color: var(--color-gold);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+    
+    /* Meta Metrics Row styling */
+    .detail-metric-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+    .detail-metric-card:hover {
+      border-color: var(--color-gold-border);
+      transform: translateY(-3px);
+    }
+    .detail-metric-icon {
+      color: var(--color-gold);
+      margin-bottom: 10px;
+    }
+    .detail-metric-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .detail-metric-value {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Benefits card layout */
+    .benefits-box {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .benefit-item:last-child {
+      margin-bottom: 0;
+    }
+    .benefit-icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--color-gold-light);
+      border: 1px solid var(--color-gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+      flex-shrink: 0;
+    }
+
+    /* Floating Image frame details */
+    .detail-img-wrapper {
+      position: relative;
+    }
+    .detail-img-frame {
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--color-gold-border);
+      box-shadow: var(--shadow-lg);
+    }
+    .detail-img-frame img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    @media (max-width: 991.98px) {
+      .detail-img-frame img {
+        height: 360px;
+      }
+    }
+    .detail-floating-badge {
+      position: absolute;
+      bottom: -24px;
+      left: 40px;
+      background-color: rgba(18, 17, 16, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--color-gold-border);
+      border-radius: var(--border-radius-md);
+      padding: 20px 30px;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+    }
+    @media (max-width: 575.98px) {
+      .detail-floating-badge {
+        left: 20px;
+        right: 20px;
+        bottom: -30px;
+        padding: 15px 20px;
+      }
+    }
+
+    /* Process Flow Timeline details page */
+    .scientific-box {
+      border-left: 2px solid var(--color-gold-border);
+      padding-left: 30px;
+      margin-left: 10px;
+    }
+    .scientific-step {
+      position: relative;
+      margin-bottom: 35px;
+    }
+    .scientific-step:last-child {
+      margin-bottom: 0;
+    }
+    .scientific-dot {
+      position: absolute;
+      top: 4px;
+      left: -41px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: var(--bg-clinic);
+      border: 4px solid var(--color-gold);
+      box-shadow: 0 0 8px rgba(197, 168, 128, 0.3);
+    }
+
+    /* Recommendation Cards */
+    .related-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .related-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .related-img {
+      height: 180px;
+      overflow: hidden;
+    }
+    .related-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .related-card:hover .related-img img {
+      transform: scale(1.05);
+    }
+    .related-body {
+      padding: 25px;
+    }
+
+    /* CTA Banner Component details page */
+    .details-cta-banner {
+      background: linear-gradient(135deg, rgba(18, 17, 16, 0.94) 0%, rgba(30, 28, 26, 0.92) 100%), url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+      color: #F7F5F0;
+      border-radius: var(--border-radius-xl);
+      padding: 70px 40px;
+      border: 1px solid var(--color-gold-border);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dynamic Banner Section -->
+  <header class="page-banner">
+    <div class="container">
+      <span class="small font-sans text-uppercase text-gold tracking-wider fw-semibold mb-2 d-block" id="banner-category" data-aos="fade-down">Treatment Category</span>
+      <h1 class="banner-title hero-title-reveal text-uppercase" id="banner-title" data-aos="fade-down" data-aos-delay="100">Treatment Details</h1>
+      <ul class="breadcrumb-container hero-fade-reveal" data-aos="fade-up" data-aos-delay="200">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="services.html">Services</a></li>
+        <li class="breadcrumb-item active" id="breadcrumb-current">Details</li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Treatment Primary Overview -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="detail-badge" id="detail-category-badge">Clinical Solution</span>
+            <h2 class="font-serif text-uppercase mb-3" style="font-size: 2.3rem;" id="detail-title">Treatment Title</h2>
+            <div class="title-line ms-0 mb-4" style="width: 60px;"></div>
+            
+            <p class="text-muted leading-relaxed mb-4" id="detail-long-desc">
+              Placeholder description of the clinical treatment. Our medical practitioners use elite systems and targeted protocols to restore skin cells back to full natural radiance.
+            </p>
+            
+            <p class="text-muted mb-5" id="detail-suitability">
+              <strong>Ideal For:</strong> Individuals looking to repair skin barrier texture, restore collagen levels, and clear deep-seated melanin impurities safely.
+            </p>
+
+            <!-- Metrics grid -->
+            <div class="row g-3">
+              <div class="col-4">
+                <div class="detail-metric-card">
+                  <i data-lucide="dollar-sign" class="detail-metric-icon" style="width: 20px; height: 20px;"></i>
+                  <div class="detail-metric-title">Price Range</div>
+                  <div class="detail-metric-value" id="detail-price">$350</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="detail-metric-card">
+                  <i data-lucide="clock" class="detail-metric-icon" style="width: 20px; height: 20px;"></i>
+                  <div class="detail-metric-title">Duration</div>
+                  <div class="detail-metric-value" id="detail-duration">45 Mins</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="detail-metric-card">
+                  <i data-lucide="shield" class="detail-metric-icon" style="width: 20px; height: 20px;"></i>
+                  <div class="detail-metric-title">Downtime</div>
+                  <div class="detail-metric-value" id="detail-downtime">2-3 Days</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="detail-img-wrapper">
+              <div class="detail-img-frame" id="details-img-tilt">
+                <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" alt="Skin Care Treatment Process" id="detail-image" referrerPolicy="no-referrer">
+              </div>
+              <div class="detail-floating-badge d-flex align-items-center gap-3">
+                <i data-lucide="heart" class="text-gold" style="width: 28px; height: 28px;"></i>
+                <div>
+                  <h4 class="h6 font-serif mb-0 text-white">Board Certified</h4>
+                  <span class="small text-muted">100% Patient Safe</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Benefits & Scientific Walkthrough -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="row g-5">
+          <!-- Benefits -->
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="benefits-box">
+              <span class="subtitle-accent">Clinical Outcomes</span>
+              <h3 class="font-serif text-uppercase mb-4" style="font-size: 1.6rem;">Key Dermal Benefits</h3>
+              <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+              
+              <div id="benefits-container">
+                <!-- Benefis dynamically populated -->
+                <div class="benefit-item">
+                  <div class="benefit-icon-circle"><i data-lucide="sparkles" style="width: 16px; height: 16px;"></i></div>
+                  <div>
+                    <h4 class="h6 font-serif mb-1">Benefit Header</h4>
+                    <p class="small text-muted mb-0">Detailed clinical outcome tracking showing cellular optimization and recovery.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scientific process -->
+          <div class="col-lg-6" data-aos="fade-left">
+            <span class="subtitle-accent">Biomedical Process</span>
+            <h3 class="font-serif text-uppercase mb-4" style="font-size: 1.6rem;">How This Treatment Works</h3>
+            <div class="title-line ms-0 mb-4" style="width: 50px;"></div>
+            
+            <p class="text-muted mb-4" id="detail-how-desc">
+              Understand the biological scientific sequence of this treatment's active mechanism on sub-dermal levels.
+            </p>
+
+            <div class="scientific-box">
+              <div class="scientific-step">
+                <div class="scientific-dot"></div>
+                <h4 class="h6 font-serif text-uppercase text-gold mb-2">Phase A: Spectral Diagnostics</h4>
+                <p class="small text-muted mb-0">High-intensity light wavelengths analyze dynamic structures before physical application.</p>
+              </div>
+              <div class="scientific-step">
+                <div class="scientific-dot"></div>
+                <h4 class="h6 font-serif text-uppercase text-gold mb-2">Phase B: Micro-Targeting</h4>
+                <p class="small text-muted mb-0">Applying highly calibrated thermal or biological triggers into the active dermis matrix.</p>
+              </div>
+              <div class="scientific-step">
+                <div class="scientific-dot"></div>
+                <h4 class="h6 font-serif text-uppercase text-gold mb-2">Phase C: Synthesis Boost</h4>
+                <p class="small text-muted mb-0">Triggering accelerated cell mitosis, collagen deposition, and structural elastin restoration.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aftercare instructions -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="subtitle-accent">Sustaining Perfection</span>
+            <h2 class="font-serif text-uppercase mb-4" style="font-size: 2.2rem; line-height: 1.2;">Post-Treatment Care Instructions</h2>
+            <div class="title-line ms-0 mb-4" style="width: 60px;"></div>
+            <p class="text-muted">
+              Optimal clinical results rely heavily on initial recovery preservation. Follow our simplified professional directions for 72 hours post-session to lock in hydration and protect cellular defense.
+            </p>
+            <div class="d-flex align-items-center gap-3 mt-4">
+              <i data-lucide="info" class="text-gold" style="width: 24px; height: 24px;"></i>
+              <span class="small text-muted">Consult with your care coordinator if any temporary redness or slight flaking exceeds 4 days.</span>
+            </div>
+          </div>
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="row g-4" id="aftercare-container">
+              <!-- Dynamically populated card blocks -->
+              <div class="col-md-6">
+                <div class="p-4 border rounded-4 h-100" style="background-color: var(--bg-clinic); border-color: var(--border-clinic) !important;">
+                  <div class="h3 font-serif text-gold mb-2">01</div>
+                  <h4 class="h6 font-serif text-uppercase mb-2">Strict SPF Shield</h4>
+                  <p class="small text-muted mb-0">Apply a comprehensive broad-spectrum mineral SPF 50+ broad-spectrum filter daily.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cross-navigation Recomendations -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">Curated Complements</span>
+          <h2 class="section-title text-uppercase">Other Elite Treatments</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <div class="row g-4" id="related-treatments-container">
+          <!-- Dynamically populated complementary recommendations -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Book Consultation CTA Section -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-4">
+        <div class="details-cta-banner" data-aos="zoom-in">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <span class="subtitle-accent text-gold">Ready for Cellular Rebirth?</span>
+              <h2 class="display-6 font-serif text-white mb-3 text-uppercase" id="cta-treatment-headline">Book Your Signature Session</h2>
+              <p class="text-muted mb-5" style="color: #A8A29E !important;">
+                Every custom treatment plan begins with an in-person, 3D skin diagnostics analysis. Schedule a session today to experience California's finest dermal wellness.
+              </p>
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="appointment.html" class="btn-gold btn-ripple px-5 py-3 text-uppercase font-sans fw-semibold small tracking-wider" id="cta-book-btn">
+                  Book This Treatment
+                </a>
+                <a href="services.html" class="btn-outline-gold px-5 py-3 text-uppercase font-sans fw-semibold small tracking-wider" style="color: #FFFFFF !important; border-color: #FFFFFF !important; background-color: transparent;">
+                  <span>Back to All Solutions</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- BOOTSTRAP, GSAP, AOS, AND LUCIDE ICONS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- REUSABLE TREATMENT DATA ENGINE -->
+  <script>
+    const treatmentsData = {
+      "laser-resurfacing": {
+        id: "laser-resurfacing",
+        title: "Signature Laser Resurfacing",
+        category: "Clinical Laser",
+        price: "$350",
+        duration: "45 Mins",
+        downtime: "2-3 Days",
+        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Ultra-precision fractional CO2 micro-beams designed to accelerate cell renewal and erase age lines.",
+        longDesc: "Our Signature Laser Resurfacing utilizes state-of-the-art non-ablative micro-fractional laser matrices to target damaged skin layers safely. Microscopic laser waves bypass outer epidermal barriers to trigger deep dermal collagen synthesis pathways, addressing fine lines, enlarged pores, and hyperpigmentation.",
+        suitability: "Best suited for individuals with age lines, pigmentation blocks, sun spots, or superficial acne scars wishing for dramatic skin remodeling.",
+        benefits: [
+          { title: "Collagen Synthesis", desc: "Forces the body to generate highly ordered dermal structural fibers over 60 days." },
+          { title: "Texture Smoothing", desc: "Dissolves surface roughness and micro-anomalies for a polished glow." },
+          { title: "Erases Age Lines", desc: "Pulls skin taut, naturally smoothing forehead wrinkles and mouth folds." },
+          { title: "Anti-Pigment Sweep", desc: "Shatters deep-seated melanin deposits to safely restore an even tone." }
+        ],
+        howDesc: "Our laser energy focuses micro-thermal columns precisely in the skin matrix, triggering an immediate cell-healing cascade.",
+        aftercare: [
+          { num: "01", title: "Broad SPF Broad-Spectrum", desc: "Apply broad-spectrum mineral SPF 50+ broad-spectrum sunscreen every 3 hours post-treatment." },
+          { num: "02", title: "Hyaluronic Acid", desc: "Keep cells hydrated with pure peptide and hyaluronic acid serum drops." },
+          { num: "03", title: "Avoid Heat & Sweat", desc: "No dry saunas, steam rooms, or intense cardiovascular exercises for 48 hours." },
+          { num: "04", title: "Gentle Cleansing", desc: "Wash skin with only cool water and mild organic cleansing gels." }
+        ]
+      },
+      "botox": {
+        id: "botox",
+        title: "Premium Botox Injectables",
+        category: "Premium Injectables",
+        price: "$280",
+        duration: "20 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Targeted, FDA-approved micro-doses to relax dynamic muscles, resulting in a naturally smooth expression.",
+        longDesc: "Experience the absolute gold-standard of facial line relaxation. Dr. Marcus Vance utilizes precision micro-doses of highly purified aesthetic proteins to relax the dynamic facial muscles responsible for frown lines, squint lines, and forehead ripples, keeping your expression soft and naturally refreshed.",
+        suitability: "Perfect for patients wishing to soften existing expression wrinkles and proactively prevent deep structural creases.",
+        benefits: [
+          { title: "Relaxes Frown Lines", desc: "Relaxes forehead stress structures, restoring a restful, calm facial expression." },
+          { title: "Crow's Feet Smoothing", desc: "Gently smooths the delicate lines surrounding the orbital eye areas." },
+          { title: "Proactive Prevention", desc: "Stops fine lines from turning into permanent deep structural creases." },
+          { title: "Fast Treatment", desc: "Takes less than 20 minutes with absolute comfort and zero facial down-time." }
+        ],
+        howDesc: "Purified proteins temporarily block dynamic nerve impulses inside targeted expressive muscles, smoothing dynamic movement.",
+        aftercare: [
+          { num: "01", title: "Stay Upright", desc: "Remain fully upright for at least 4 hours post-session to stabilize the proteins." },
+          { num: "02", title: "Zero Massaging", desc: "Do not massage, rub, or apply hard physical pressure to injection sites." },
+          { num: "03", title: "Skip Exercise", desc: "Postpone intense workout activities or hard sweating for 24 hours." },
+          { num: "04", title: "Avoid Hard Scrubs", desc: "Avoid strong facial scrubs, peels, or hard tools for the first 3 days." }
+        ]
+      },
+      "dermal-fillers": {
+        id: "dermal-fillers",
+        title: "Advanced Dermal Fillers",
+        category: "Premium Injectables",
+        price: "$450",
+        duration: "30 Mins",
+        downtime: "1 Day",
+        image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Hyaluronic acid elixirs designed to restore youthful cheek volume, plump lips, and contour jawlines.",
+        longDesc: "Restore youthful contours and correct deep structural shadows. We use cross-linked bio-compatible hyaluronic acid gel formulas to sculpt cheekbones, define natural jaw lines, and safely fill deep nasolabial folds, restoring natural volume.",
+        suitability: "Recommended for patients experiencing sub-dermal volume depletion, deep shadows, or thin lips.",
+        benefits: [
+          { title: "Volume Restoration", desc: "Instantly lifts sunken cheeks and tired under-eye hollows." },
+          { title: "Jawline Sculpting", desc: "Creates sharp, highly defined, elegant contours along the lower face." },
+          { title: "Lip Plumping", desc: "Infuses soft, balanced, and premium symmetry into the lips." },
+          { title: "Durable Results", desc: "Provides beautiful structural enhancement that lasts from 9 to 18 months." }
+        ],
+        howDesc: "Bespoke cross-linked hyaluronic acid gel is safely integrated under the deep facial muscle planes, acting as a supportive pillow.",
+        aftercare: [
+          { num: "01", title: "Avoid Pressure", desc: "Avoid sleeping directly on your face or cheeks for the first 48 hours." },
+          { num: "02", title: "Apply Cool Packs", desc: "Apply a lightweight cold wrap to injection zones if slight swelling occurs." },
+          { num: "03", title: "No Heat Exposure", desc: "Avoid saunas, sunbathing, or highly hot showers for the first week." },
+          { num: "04", title: "Alcohol Restriction", desc: "Avoid alcohol for 24 hours to prevent minor bruising." }
+        ]
+      },
+      "hydrafacial": {
+        id: "hydrafacial",
+        title: "HydraFacial Luxury Elixir",
+        category: "Facials & Peels",
+        price: "$195",
+        duration: "60 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Multi-stage vortex-infusion clearing away impurities while flooding skin with custom peptides and antioxidants.",
+        longDesc: "This premier multi-stage treatment sweeps away dead skin cells and extracts deep-seated impurities using patented vortex vacuum systems. Simultaneously, skin is flooded with bespoke active botanical peptides, hyaluronic acid, and broad-spectrum antioxidants.",
+        suitability: "An absolute essential facial protocol for all skin types. Highly recommended 48 hours before wedding or red-carpet events.",
+        benefits: [
+          { title: "Red-Carpet Radiance", desc: "Reveals an immediate, flawless, glowing complexion in just one hour." },
+          { title: "Deep Pore Clearance", desc: "Painless vortex suction vacuums away stubborn blackheads and dirt blocks." },
+          { title: "Intense Hydration", desc: "Saturates dry cells with custom clinical-grade moisture serums." },
+          { title: "Zero Downtime", desc: "Zero skin flaking, zero irritation. Walk out directly to your dinner events." }
+        ],
+        howDesc: "A multi-step vortex tip exfoliates, extracts congestion, and infuses restorative peptide serums in one automated sweep.",
+        aftercare: [
+          { num: "01", title: "Enjoy Your Glow", desc: "Allow the luxury peptide shield to fully absorb; avoid immediate makeup for 12 hours." },
+          { num: "02", title: "Water Intake", desc: "Drink plenty of mineral water to maximize cell hydration and glowing longevity." },
+          { num: "03", title: "Mild Washing", desc: "Cleanse face gently with warm water and soft towels before sleeping." },
+          { num: "04", title: "Protect Outer Barrier", desc: "Maintain standard SPF 50 filters if walking outdoors in peak sun." }
+        ]
+      },
+      "chemical-peel": {
+        id: "chemical-peel",
+        title: "Medical-Grade Chemical Peel",
+        category: "Facials & Peels",
+        price: "$150",
+        duration: "45 Mins",
+        downtime: "3-5 Days",
+        image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Custom botanical-acid peeling designed to lift dark spots, minimize pore appearance, and reveal clear skin.",
+        longDesc: "Our medical-grade peeling sweeps away damaged outer skin layers. Utilizing bespoke concentrations of alpha and beta-hydroxy acids, we dissolve old surface proteins to reveal fresh, tight, healthy skin underneath, curing hyperpigmentation.",
+        suitability: "Highly effective for patients with melasma, pigmented sunspots, congested acne flareups, or rough skin texture.",
+        benefits: [
+          { title: "Cell Regeneration", desc: "Forces old, hyperpigmented surface cells to shed quickly." },
+          { title: "Hyperpigmentation Eraser", desc: "Shatters brown spots and evens skin tone." },
+          { title: "Pore Size Shrinkage", desc: "Clears out pore walls, forcing them to contract and disappear." },
+          { title: "Active Acne Control", desc: "Neutralizes surface bacteria and clears clogged sebaceous glands." }
+        ],
+        howDesc: "Our specific chemical acids dissolve intercellular bond linkages, prompting rapid cellular shedding and regeneration.",
+        aftercare: [
+          { num: "01", title: "No Pulling Skin", desc: "Allow flaking skin to fall off naturally; do not pick, peel, or pull." },
+          { num: "02", title: "Extreme Sun Safety", desc: "Sun exposure is strictly forbidden; wear broad SPF and wide hats." },
+          { num: "03", title: "Skip Active Scrubs", desc: "Do not use retinol, glycolic scrubs, or drying acids for 10 days." },
+          { num: "04", title: "Apply Bland Barrier", desc: "Keep skin comfortable with simple, unscented ceramide moisturizers." }
+        ]
+      },
+      "microneedling": {
+        id: "microneedling",
+        title: "Microneedling Collagen Boost",
+        category: "Dermal Rejuvenation",
+        price: "$220",
+        duration: "50 Mins",
+        downtime: "1-2 Days",
+        image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "High-speed micro-channel creation stimulating the skin's natural repair pathways and collagen synthesis.",
+        longDesc: "Create microscopic pathways to unlock your skin's healing code. Using sterile, automated micro-needles, we safely puncture deep dermal layers. This micro-injury triggers an intense cell healing cascade, producing healthy new collagen and elastin fibers.",
+        suitability: "Highly recommended for patients wishing to treat pitted acne scars, overall skin sagging, or enlarged pore fields.",
+        benefits: [
+          { title: "Max Serum Absorption", desc: "Boosts active clinical topical skincare absorption by up to 300%." },
+          { title: "Scars Smoothed Out", desc: "Gradually fills out depressed rolling acne scars from the bottom up." },
+          { title: "Skin Tightening", desc: "Squeeze loose dermal layers together, restoring skin elasticity." },
+          { title: "Minimizes Pores", desc: "Thickens surrounding tissue, making large pores look remarkably tiny." }
+        ],
+        howDesc: "Ultra-thin sterile needles puncture the dermis, forcing cells to activate immediate repair and collagen synthesis pathways.",
+        aftercare: [
+          { num: "01", title: "Cool Water Wash", desc: "Wash skin with cool water only; avoid soaps or active cleansers for 24 hours." },
+          { num: "02", title: "Hyaluronic Serums", desc: "Apply sterile hyaluronic acid to keep open micro-channels hydrated." },
+          { num: "03", title: "No Makeup", desc: "Do not apply heavy cosmetic foundation or makeup powders for 24 hours." },
+          { num: "04", title: "Avoid Direct Sweating", desc: "No intense gym workouts, dry saunas, or swimming pools for 2 days." }
+        ]
+      },
+      "prp-therapy": {
+        id: "prp-therapy",
+        title: "Platelet-Rich Plasma (PRP) Therapy",
+        category: "Dermal Rejuvenation",
+        price: "$500",
+        duration: "75 Mins",
+        downtime: "1-2 Days",
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Harnessing your body's natural growth factors to rebuild skin elasticity and achieve an organic youth glow.",
+        longDesc: "Rebuild your skin organically. Dr. Marcus Vance extracts a small vial of your blood and spins it in our sterile clinical centrifuge to isolate your body's active growth platelets. This pure, gold platelet-rich plasma is then microneedled back into your skin to rebuild skin barrier strength.",
+        suitability: "The perfect organic rejuvenation therapy for clients wishing to avoid synthetic ingredients or fillers.",
+        benefits: [
+          { title: "100% Organic", desc: "Uses your own biology, eliminating any risk of allergy reactions." },
+          { title: "Under-Eye Revival", desc: "Dramatically rebuilds thin, dark, sunken under-eye tissue structures." },
+          { title: "Rebuilds Thinning Skin", desc: "Restores density and thickness to mature, delicate skin tissues." },
+          { title: "Textural Glow", desc: "Delivers a deeply soft, luminous, and refined skin texture." }
+        ],
+        howDesc: "Concentrated biological growth factors stimulate rapid stem cell multiplication, blood flow, and skin regeneration.",
+        aftercare: [
+          { num: "01", title: "Keep Dry", desc: "Keep skin fully dry for at least 6 hours; do not wash or apply creams." },
+          { num: "02", title: "Zero Anti-Inflammatories", desc: "Avoid ibuprofen or aspirin; they can reduce the active healing cascade." },
+          { num: "03", title: "Hydrate Organically", desc: "Hydrate cells internally by drinking plenty of mineral water." },
+          { num: "04", title: "Sun Exposure Halt", desc: "Avoid peak direct sun rays for 72 hours to prevent hyperpigmentation." }
+        ]
+      },
+      "rf-tightening": {
+        id: "rf-tightening",
+        title: "Radiofrequency Skin Tightening",
+        category: "Dermal Rejuvenation",
+        price: "$320",
+        duration: "60 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "High-frequency thermal waves targeting deep dermis layers to contract collagen fibers and sculpt sagging areas.",
+        longDesc: "Tighten sagging cheeks and restore jaw definition. Our high-frequency radiofrequency platform delivers safe, targeted thermal heat deep into the dermal matrix. This controlled heat contracts loose collagen fibers instantly while stimulating long-term skin elasticity.",
+        suitability: "Recommended for patients experiencing skin laxity, heavy jowls, or early structural sagging.",
+        benefits: [
+          { title: "Immediate Facelift Effect", desc: "Contracts old collagen fibers, immediately pulling skin taut and firm." },
+          { title: "Sleek Jaw Contours", desc: "Defines and chisels sagging jawlines and cheek hollows." },
+          { title: "No Downtime", desc: "Enjoy a warm, healthy glow post-treatment with zero surface peeling." },
+          { title: "Pain-Free Luxury", desc: "Feels like a relaxing warm-stone massage for your face." }
+        ],
+        howDesc: "Focused high-frequency waves create thermal action in deep collagen layers, forcing fibers to contract.",
+        aftercare: [
+          { num: "01", title: "Lock In Moisture", desc: "Keep skin hydrated with moisture-rich peptide creams." },
+          { num: "02", title: "Daily Sun Block", desc: "Apply broad-spectrum mineral sunscreen to protect fresh cells." },
+          { num: "03", title: "Avoid Ice Packing", desc: "Avoid cooling or icing the skin; thermal stimulation is key for collagen." },
+          { num: "04", title: "Hydrate", desc: "Drink plenty of water to support deep tissue healing." }
+        ]
+      },
+      "cryotherapy": {
+        id: "cryotherapy",
+        title: "Cryotherapy Skin Renewal",
+        category: "Specialized Therapy",
+        price: "$180",
+        duration: "30 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Micro-fine targeted sub-zero liquid nitrogen cooling to constrict blood vessels, reduce swelling, and tighten pores.",
+        longDesc: "Awaken your skin with thermal contrast. We sweep controlled, pressurized sub-zero vapor over the face. This rapid cooling constricts blood vessels instantly, forcing fluid drainage, pore tightening, and a rush of oxygen-rich blood.",
+        suitability: "Perfect for tired, inflamed, puffy skin or as an immediate glow booster before photoshoots.",
+        benefits: [
+          { title: "Pore Constriction", desc: "Thermal shock tightens skin surface pores instantly." },
+          { title: "De-Puffs & Drains", desc: "Triggers lymphatic drainage, removing fluid retention." },
+          { title: "Reduces Redness", desc: "Soothes inflamed skin types and reduces vascular swelling." },
+          { title: "Immediate Brightening", desc: "Boosts micro-circulation for a fresh, rosy complexion." }
+        ],
+        howDesc: "Pressurized sub-zero vapor triggers thermal shock, forcing blood vessel constriction and instant micro-drainage.",
+        aftercare: [
+          { num: "01", title: "Moisturize Gels", desc: "Moisturize skin with lightweight hyaluronic gel shields." },
+          { num: "02", title: "No Heat Saunas", desc: "Skip dry saunas, hot tubs, or hot steam facials for 24 hours." },
+          { num: "03", title: "Avoid Harsh Scrubs", desc: "Do not use strong acid exfoliants or physical scrubs for 48 hours." },
+          { num: "04", title: "Standard SPF Shield", desc: "Maintain standard SPF 50 filters to guard against sun rays." }
+        ]
+      },
+      "acne-scar": {
+        id: "acne-scar",
+        title: "Acne Scar Subcision & Laser",
+        category: "Specialized Therapy",
+        price: "$290",
+        duration: "60 Mins",
+        downtime: "3-4 Days",
+        image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Delicate surgical release of deep fibrous scar anchors combined with fractional resurfacing lasers.",
+        longDesc: "Release stubborn tethered acne scars permanently. We use a specialized clinical micro-needle to slide under the skin and release the tough fibrous anchors pulling scars downward. Simultaneously, we use fractional lasers to smooth the surface texture.",
+        suitability: "Best for clients with deep pitted, rolling, or boxed acne scars.",
+        benefits: [
+          { title: "Raises Pitted Scars", desc: "Releases deep scar anchors, permanently lifting the skin." },
+          { title: "Dermal Smoothing", desc: "Laser sweeps refine surface texture and minor color blemishes." },
+          { title: "Rebuilds Dermal Volume", desc: "Forces new collagen to fill in released under-scar pockets." },
+          { title: "Permanent Results", desc: "Structural release is permanent, delivering lifetime skin confidence." }
+        ],
+        howDesc: "A sub-dermal micro-blade releases fibrous scar bonds, while fractional lasers smooth the surface skin layers.",
+        aftercare: [
+          { num: "01", title: "Apply Ointment", desc: "Keep treated areas protected with clinical healing ointments." },
+          { num: "02", title: "Keep Clean", desc: "Wash gently with tepid water and mild cleanser; avoid touching." },
+          { num: "03", title: "Zero Makeup", desc: "Avoid heavy foundations or beauty powders for 48 hours." },
+          { num: "04", title: "Strict Sun Guard", desc: "Strictly avoid sun rays; wear mineral SPF 50+ broad-spectrum sunscreen." }
+        ]
+      },
+      "melasma": {
+        id: "melasma",
+        title: "Melasma & Pigmentation Therapy",
+        category: "Specialized Therapy",
+        price: "$210",
+        duration: "45 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Innovative non-heat laser pigment targeting paired with botanical tyrosinase inhibitors.",
+        longDesc: "Shatter stubborn pigmentation blocks without heat. Using acoustic picosecond laser waves, we target dark melanin patches without generating thermal heat. This prevents post-inflammatory rebound pigment flares, making it highly safe for all skin types.",
+        suitability: "Highly recommended for clients struggling with melasma, sun spots, or dark pigmentation.",
+        benefits: [
+          { title: "Shatters Pigmentation", desc: "Acoustic waves shatter melanin blocks into micro-particles." },
+          { title: "No Rebound Flares", desc: "Non-thermal acoustic action prevents post-inflammatory melasma spikes." },
+          { title: "Safe On All Skin Types", desc: "Extremely safe on deeper, darker ethnic skin tones." },
+          { title: "Restores Tone Harmony", desc: "Fades dark spots, restoring an even, uniform complexion." }
+        ],
+        howDesc: "Acoustic picosecond pulses shatter hyperpigmented areas, allowing the body's natural systems to clear them.",
+        aftercare: [
+          { num: "01", title: "Non-Negotiable SPF", desc: "Strict, non-negotiable mineral SPF 50+ broad-spectrum sunscreen application is required." },
+          { num: "02", title: "Vitamin C Serums", desc: "Incorporate active Vitamin C serums to prevent pigment relapse." },
+          { num: "03", title: "Avoid Hot Showers", desc: "Avoid hot showers, steam saunas, or strenuous sweating for 48 hours." },
+          { num: "04", title: "Gentle Products", desc: "Use mild cleansers and avoid strong scrubs for 10 days." }
+        ]
+      },
+      "led-phototherapy": {
+        id: "led-phototherapy",
+        title: "Custom LED Phototherapy",
+        category: "Facials & Peels",
+        price: "$95",
+        duration: "30 Mins",
+        downtime: "None",
+        image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800",
+        shortDesc: "Multi-spectrum clinical light frequencies designed to eliminate acne bacteria and stimulate cellular ATP repair.",
+        longDesc: "Power up your cells with clinical light. Using specific wavelengths of high-purity LED light, we penetrate deep skin layers. Blue light sterilizes acne bacteria, while red light boosts cellular ATP, reducing redness and accelerating cell renewal.",
+        suitability: "Excellent for clients with active acne breakout zones, surface redness, or tired complexions.",
+        benefits: [
+          { title: "Sterilizes Bacteria", desc: "Blue light waves eliminate deep-seated acne bacteria." },
+          { title: "Calms Redness", desc: "Red light waves soothe irritated skin types and reduce inflammation." },
+          { title: "Boosts Cell Energy", desc: "Stimulates ATP production inside cells, speeding up skin recovery." },
+          { title: "Painless Session", desc: "Fully painless and relaxing. Fall asleep under our warm ambient canopy." }
+        ],
+        howDesc: "Bespoke LED light wavelengths trigger natural photobiostimulation, boosting cellular recovery pathways.",
+        aftercare: [
+          { num: "01", title: "Hydration Serums", desc: "Keep skin hydrated with peptide or hyaluronic serums." },
+          { num: "02", title: "Standard SPF Shield", desc: "Protect fresh skin cells with mineral sunscreen shields." },
+          { num: "03", title: "Clean Skincare", desc: "Use clean, fragrance-free moisturizers for the first 24 hours." },
+          { num: "04", title: "Enjoy the Radiance", desc: "No downtime. Enjoy your beautifully bright, calm skin tone." }
+        ]
+      }
+    };
+
+    // Parse Query Parameter
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const serviceId = getQueryParam('id') || 'laser-resurfacing';
+      const treatment = treatmentsData[serviceId] || treatmentsData['laser-resurfacing'];
+
+      // 1. Dynamic Content Population
+      document.title = `${treatment.title} | AuraCare Premium Skin Care Clinic`;
+      document.getElementById('banner-category').innerText = treatment.category;
+      document.getElementById('banner-title').innerText = treatment.title;
+      document.getElementById('breadcrumb-current').innerText = treatment.title;
+      document.getElementById('detail-category-badge').innerText = treatment.category;
+      document.getElementById('detail-title').innerText = treatment.title;
+      document.getElementById('detail-long-desc').innerText = treatment.longDesc;
+      document.getElementById('detail-suitability').innerHTML = `<strong>Ideal For:</strong> ${treatment.suitability}`;
+      document.getElementById('detail-price').innerText = treatment.price;
+      document.getElementById('detail-duration').innerText = treatment.duration;
+      document.getElementById('detail-downtime').innerText = treatment.downtime;
+      document.getElementById('detail-image').src = treatment.image;
+      document.getElementById('detail-image').alt = treatment.title;
+      document.getElementById('cta-treatment-headline').innerText = `Book Your ${treatment.title}`;
+      document.getElementById('cta-book-btn').href = `appointment.html?treatment=${treatment.id}`;
+
+      // 2. Populate Key Benefits
+      const benefitsContainer = document.getElementById('benefits-container');
+      benefitsContainer.innerHTML = '';
+      treatment.benefits.forEach(benefit => {
+        const item = document.createElement('div');
+        item.className = 'benefit-item';
+        item.innerHTML = `
+          <div class="benefit-icon-circle"><i data-lucide="sparkles" style="width: 16px; height: 16px;"></i></div>
+          <div>
+            <h4 class="h6 font-serif mb-1">${benefit.title}</h4>
+            <p class="small text-muted mb-0">${benefit.desc}</p>
+          </div>
+        `;
+        benefitsContainer.appendChild(item);
+      });
+
+      // 3. Populate Aftercare Steps
+      const aftercareContainer = document.getElementById('aftercare-container');
+      aftercareContainer.innerHTML = '';
+      treatment.aftercare.forEach(step => {
+        const block = document.createElement('div');
+        block.className = 'col-md-6';
+        block.innerHTML = `
+          <div class="p-4 border rounded-4 h-100" style="background-color: var(--bg-clinic); border-color: var(--border-clinic) !important;">
+            <div class="h3 font-serif text-gold mb-2">${step.num}</div>
+            <h4 class="h6 font-serif text-uppercase mb-2">${step.title}</h4>
+            <p class="small text-muted mb-0">${step.desc}</p>
+          </div>
+        `;
+        aftercareContainer.appendChild(block);
+      });
+
+      // 4. Populate Related Treatments (exclude current, pick next 3)
+      const relatedContainer = document.getElementById('related-treatments-container');
+      relatedContainer.innerHTML = '';
+      const allKeys = Object.keys(treatmentsData);
+      const filteredKeys = allKeys.filter(k => k !== treatment.id);
+      
+      // Select 3 items
+      const selectedKeys = filteredKeys.slice(0, 3);
+      
+      selectedKeys.forEach(key => {
+        const rel = treatmentsData[key];
+        const cardCol = document.createElement('div');
+        cardCol.className = 'col-lg-4 col-md-6';
+        cardCol.innerHTML = `
+          <div class="related-card">
+            <div class="related-img">
+              <img src="${rel.image}" alt="${rel.title}" referrerPolicy="no-referrer" loading="lazy">
+            </div>
+            <div class="related-body">
+              <span class="small font-sans text-uppercase text-gold tracking-wider fw-semibold mb-1 d-block" style="font-size: 0.7rem;">${rel.category}</span>
+              <h4 class="h5 font-serif text-uppercase mb-3">${rel.title}</h4>
+              <p class="small text-muted mb-4">${rel.shortDesc}</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="font-sans fw-semibold text-gold">${rel.price}</span>
+                <a href="service-details.html?id=${rel.id}" class="btn-outline-gold px-3 py-2 btn-ripple small" style="font-size: 0.8rem; border-radius: 20px;">Learn More</a>
+              </div>
+            </div>
+          </div>
+        `;
+        relatedContainer.appendChild(cardCol);
+      });
+
+      // Create newly appended Lucide icons
+      lucide.createIcons();
+
+      // 5. Image subtle mouse move tilt effect details page
+      const detailsTiltFrame = document.getElementById('details-img-tilt');
+      if (detailsTiltFrame && window.innerWidth > 991) {
+        detailsTiltFrame.addEventListener('mousemove', (e) => {
+          const bounding = detailsTiltFrame.getBoundingClientRect();
+          const x = e.clientX - bounding.left;
+          const y = e.clientY - bounding.top;
+          const xc = bounding.width / 2;
+          const yc = bounding.height / 2;
+          const dx = x - xc;
+          const dy = y - yc;
+
+          gsap.to(detailsTiltFrame, {
+            rotationY: dx / 40,
+            rotationX: -dy / 40,
+            transformPerspective: 500,
+            ease: "power2.out",
+            duration: 0.5
+          });
+        });
+
+        detailsTiltFrame.addEventListener('mouseleave', () => {
+          gsap.to(detailsTiltFrame, {
+            rotationY: 0,
+            rotationX: 0,
+            ease: "power2.out",
+            duration: 0.8
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Gallery | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+
+  <!-- CUSTOM EMBEDDED STYLES FOR PREMIUM LUXURY GALLERY -->
+  <style>
+    /* Custom Gallery Page Styles */
+    .gallery-intro-sec {
+      padding: 100px 0 50px 0;
+    }
+
+    .gallery-section {
+      padding: 20px 0 100px 0;
+    }
+
+    /* Filter Buttons Styling */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .filter-btn {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      padding: 10px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .filter-btn.active {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+    }
+
+    /* Masonry Grid CSS */
+    .gallery-masonry-wrapper {
+      columns: 3;
+      column-gap: 28px;
+      width: 100%;
+      transition: var(--transition-smooth);
+    }
+
+    @media (max-width: 1199px) {
+      .gallery-masonry-wrapper {
+        columns: 3;
+        column-gap: 20px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .gallery-masonry-wrapper {
+        columns: 2;
+        column-gap: 20px;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .gallery-masonry-wrapper {
+        columns: 1;
+      }
+    }
+
+    /* Gallery Card Wrapper & Tilt Effects */
+    .gallery-card-wrapper {
+      break-inside: avoid;
+      margin-bottom: 28px;
+      position: relative;
+      width: 100%;
+    }
+
+    @media (max-width: 1199px) {
+      .gallery-card-wrapper {
+        margin-bottom: 20px;
+      }
+    }
+
+    .gallery-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease-out, box-shadow 0.4s ease, border-color 0.4s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gallery-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-hover);
+    }
+
+    /* Spotlight dynamic glow inside cards */
+    .card-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 5;
+      transition: background 0.15s ease-out;
+      border-radius: var(--border-radius-md);
+    }
+
+    .gallery-img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius-md);
+      transform: translateZ(20px);
+    }
+
+    /* Ensure images have perfect visual style */
+    .gallery-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.08);
+    }
+
+    /* Card hover info overlay */
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(18, 17, 16, 0) 30%, rgba(18, 17, 16, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 3;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .card-info-box {
+      transform: translateY(15px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      color: #FFFFFF;
+    }
+
+    .gallery-card:hover .card-info-box {
+      transform: translateY(0);
+    }
+
+    .card-category {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .card-action-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+
+    /* Special Before-After Card split */
+    .before-after-split {
+      display: flex;
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border-radius: var(--border-radius-md);
+      transform: translateZ(20px);
+    }
+
+    @media (max-width: 575px) {
+      .before-after-split {
+        height: 240px;
+      }
+    }
+
+    .split-side {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .split-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .split-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background-color: rgba(18, 17, 16, 0.8);
+      backdrop-filter: blur(4px);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .after-side .split-badge {
+      left: auto;
+      right: 12px;
+      background-color: var(--color-gold);
+      border-color: rgba(197, 168, 128, 0.3);
+    }
+
+    .split-divider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: var(--color-gold);
+      z-index: 4;
+      box-shadow: 0 0 10px var(--color-gold);
+    }
+
+    /* Grid Filter animation helpers */
+    .gallery-card-wrapper {
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+    }
+
+    .gallery-card-wrapper.filtered-out {
+      opacity: 0 !important;
+      transform: scale(0.8) translateY(30px) !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      visibility: hidden !important;
+      margin-bottom: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    /* Custom Lightbox */
+    .custom-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+      background-color: rgba(10, 9, 8, 0.95);
+      backdrop-filter: blur(15px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      padding: 24px;
+    }
+
+    .custom-lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-content-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .lightbox-media-container {
+      width: 100%;
+      height: 55vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: var(--border-radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background-color: #000000;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+
+    .lightbox-split {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .lightbox-split-side {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lightbox-split-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lightbox-split-label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(18, 17, 16, 0.85);
+      color: #FFFFFF;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 6px 14px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .lightbox-split-side:last-child .lightbox-split-label {
+      left: auto;
+      right: 20px;
+      background-color: var(--color-gold);
+    }
+
+    /* Lightbox Info overlay */
+    .lightbox-info-panel {
+      width: 100%;
+      background: rgba(30, 28, 26, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--border-radius-md);
+      padding: 24px;
+      color: #FFFFFF;
+    }
+
+    .lightbox-category {
+      font-size: 0.75rem;
+      color: var(--color-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .lightbox-title-text {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #FFFFFF;
+    }
+
+    .lightbox-desc-text {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 0;
+      font-weight: 300;
+    }
+
+    /* Lightbox Controls */
+    .lightbox-btn {
+      position: absolute;
+      background: rgba(30, 28, 26, 0.6);
+      border: 1px solid rgba(197, 168, 128, 0.2);
+      color: #FFFFFF;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10100;
+      transition: var(--transition-smooth);
+    }
+
+    .lightbox-btn:hover {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      box-shadow: 0 0 15px rgba(197, 168, 128, 0.4);
+    }
+
+    .lightbox-prev {
+      left: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 1080px) {
+      .lightbox-prev {
+        left: 10px;
+        top: auto;
+        bottom: -80px;
+        transform: none;
+      }
+      .lightbox-next {
+        right: 10px;
+        top: auto;
+        bottom: -80px;
+        transform: none;
+      }
+    }
+
+    .lightbox-close {
+      top: 24px;
+      right: 24px;
+      background: rgba(18, 17, 16, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      cursor: pointer;
+      position: absolute;
+      transition: var(--transition-smooth);
+      z-index: 10200;
+    }
+
+    .lightbox-close:hover {
+      background: #C53030;
+      border-color: #C53030;
+      transform: rotate(90deg);
+    }
+
+    .lightbox-counter-label {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(0, 0, 0, 0.5);
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* Video Section styling */
+    .video-grid-sec {
+      background-color: var(--surface-clinic);
+      border-top: 1px solid var(--border-clinic);
+      border-bottom: 1px solid var(--border-clinic);
+      padding: 100px 0;
+      transition: background-color 0.5s ease;
+    }
+
+    .video-card {
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--border-clinic);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-border);
+    }
+
+    .video-card-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 1;
+    }
+
+    .video-card:hover .video-card-bg {
+      transform: scale(1.06);
+    }
+
+    .video-overlay-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(18, 17, 16, 0.1) 0%, rgba(18, 17, 16, 0.85) 100%);
+      z-index: 2;
+    }
+
+    .play-btn-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.4);
+      animation: playPulse 2s infinite;
+      transition: var(--transition-smooth);
+      color: var(--color-gold-hover);
+      padding-left: 4px; /* Align play triangle */
+    }
+
+    .video-card:hover .play-btn {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(197, 168, 128, 0.6);
+      animation: none;
+    }
+
+    @keyframes playPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(197, 168, 128, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 0 20px rgba(197, 168, 128, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(197, 168, 128, 0);
+      }
+    }
+
+    .video-card-content {
+      position: relative;
+      z-index: 3;
+      color: #FFFFFF;
+    }
+
+    .video-duration {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(197, 168, 128, 0.2);
+    }
+
+    .video-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .video-desc {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 0;
+      font-weight: 300;
+    }
+
+    /* Instagram Feed Preview section */
+    .insta-feed-sec {
+      padding: 100px 0;
+    }
+
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1199px) {
+      .insta-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .insta-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+
+    .insta-card {
+      aspect-ratio: 1 / 1;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-clinic);
+      position: relative;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+
+    .insta-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+
+    .insta-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(18, 17, 16, 0.8);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      opacity: 0;
+      color: #FFFFFF;
+      transition: var(--transition-smooth);
+      z-index: 2;
+    }
+
+    .insta-card:hover {
+      transform: scale(0.98);
+      box-shadow: var(--shadow-md);
+    }
+
+    .insta-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .insta-card:hover .insta-overlay {
+      opacity: 1;
+    }
+
+    .insta-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .insta-tag {
+      color: var(--color-gold);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .insta-caption {
+      font-size: 0.75rem;
+      font-weight: 300;
+      text-align: center;
+      padding: 0 16px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0;
+    }
+
+    /* Luxury CTA section style */
+    .luxury-cta-sec {
+      background: linear-gradient(135deg, #1A1816 0%, #11100F 100%);
+      border-top: 1px solid rgba(197, 168, 128, 0.15);
+      padding: 100px 0;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .luxury-cta-sec .section-title {
+      color: #FFFFFF !important;
+    }
+
+    .luxury-cta-sec .btn-gold {
+      box-shadow: 0 4px 20px rgba(197, 168, 128, 0.3);
+    }
+
+    .luxury-cta-sec .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      background: transparent;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: var(--transition-smooth);
+    }
+
+    .luxury-cta-sec .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .bg-pattern-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.08) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .bg-pattern-glow-left {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    /* Extra mini utilities */
+    .stat-mini-divider {
+      width: 1px;
+      height: 40px;
+      background-color: var(--border-clinic);
+      align-self: center;
+    }
+    @media (max-width: 575px) {
+      .stat-mini-divider {
+        display: none;
+      }
+    }
+    .fs-xs {
+      font-size: 0.75rem;
+    }
+    .text-gold {
+      color: var(--color-gold);
+    }
+    .tracking-wide {
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Clinic Gallery</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Gallery</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SECTION 2: GALLERY INTRODUCTION -->
+  <section class="gallery-intro-sec">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Visual Sanctuary</span>
+          <h2 class="section-title mt-2 font-serif">Curated Aesthetics & Clinical Mastery</h2>
+          <p class="text-muted mt-3 fs-5 mx-auto" style="max-width: 700px;">
+            Step inside AuraCare. Browse through our luxury clinical environments, state-of-the-art diagnostics, medical laser suites, and authentic treatment transformations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Aesthetic Stat Points -->
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-8 text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="d-flex flex-wrap justify-content-center gap-4 gap-md-5 mt-3">
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">15k+</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">Perfected Skins</span>
+            </div>
+            <div class="stat-mini-divider"></div>
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">100%</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">Retouched Free</span>
+            </div>
+            <div class="stat-mini-divider"></div>
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">Board</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">Certified Specialists</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 & 4: FILTERABLE GALLERY & MASONRY GRID -->
+  <section class="gallery-section">
+    <div class="container">
+      
+      <!-- Filter Controls -->
+      <div class="filter-container" data-aos="fade-up" id="filter-controls">
+        <button class="filter-btn active" data-filter="all">All Collection</button>
+        <button class="filter-btn" data-filter="clinic">The Clinic</button>
+        <button class="filter-btn" data-filter="treatments">Treatments</button>
+        <button class="filter-btn" data-filter="before-after">Before & After</button>
+        <button class="filter-btn" data-filter="doctors">Our Doctors</button>
+        <button class="filter-btn" data-filter="facilities">Facilities</button>
+      </div>
+
+      <!-- Masonry Grid Wrapper -->
+      <div class="gallery-masonry-wrapper" id="gallery-grid">
+        <!-- Gallery cards will be dynamically loaded here by JavaScript to maintain perfection -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: IMAGE LIGHTBOX WITH PREVIOUS/NEXT NAVIGATION -->
+  <div id="gallery-lightbox" class="custom-lightbox" role="dialog" aria-modal="true" aria-label="Image gallery details">
+    <div class="lightbox-close" id="lightbox-close-btn" aria-label="Close Lightbox"><i data-lucide="x"></i></div>
+    <button class="lightbox-btn lightbox-prev" id="lightbox-prev-btn" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+    <button class="lightbox-btn lightbox-next" id="lightbox-next-btn" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+    
+    <div class="lightbox-content-container">
+      <div class="lightbox-media-container" id="lightbox-media-container">
+        <!-- Media (single image or split side-by-side) will be rendered here -->
+      </div>
+      
+      <!-- Metadata panel -->
+      <div class="lightbox-info-panel">
+        <span class="lightbox-category" id="lightbox-cat">CATEGORY</span>
+        <h4 class="lightbox-title-text" id="lightbox-title">Item Title</h4>
+        <p class="lightbox-desc-text" id="lightbox-desc">Item premium description and medical details.</p>
+        <div class="lightbox-counter-label" id="lightbox-counter">1 / 12</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: VIDEO GALLERY PREVIEW -->
+  <section class="video-grid-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-7 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Aura In Motion</span>
+          <h2 class="section-title mt-2 font-serif">Clinical Procedure Previews</h2>
+          <p class="text-muted mt-3">Watch our world-class dermatologists calibrate luxury therapies with pristine laser tech and active organic botanicals.</p>
+        </div>
+      </div>
+
+      <div class="row g-4" id="video-collection-grid">
+        <!-- Video Card 1 -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="video-card" onclick="openVideoLightbox(0)">
+            <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=600" alt="Dermal Consultation Preview" class="video-card-bg">
+            <div class="video-overlay-gradient"></div>
+            <div class="play-btn-wrapper">
+              <div class="play-btn"><i data-lucide="play" style="width: 28px; height: 28px; fill: currentColor;"></i></div>
+            </div>
+            <div class="video-card-content">
+              <span class="video-duration">02:45 MIN</span>
+              <h3 class="video-title">Diagnostic Skin Scanning</h3>
+              <p class="video-desc">Step-by-step clinical lipid scan with Dr. Marcus Vance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="video-card" onclick="openVideoLightbox(1)">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600" alt="HydraFacial Procedure Preview" class="video-card-bg" loading="lazy">
+            <div class="video-overlay-gradient"></div>
+            <div class="play-btn-wrapper">
+              <div class="play-btn"><i data-lucide="play" style="width: 28px; height: 28px; fill: currentColor;"></i></div>
+            </div>
+            <div class="video-card-content">
+              <span class="video-duration">03:10 MIN</span>
+              <h3 class="video-title">Aura HydraFacial Routine</h3>
+              <p class="video-desc">Calibrating deep vacuum extractions and peptide infusions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="col-lg-4 col-md-6 mx-auto d-block" data-aos="fade-up" data-aos-delay="300">
+          <div class="video-card" onclick="openVideoLightbox(2)">
+            <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600" alt="Morpheus8 Treatment Preview" class="video-card-bg" loading="lazy">
+            <div class="video-overlay-gradient"></div>
+            <div class="play-btn-wrapper">
+              <div class="play-btn"><i data-lucide="play" style="width: 28px; height: 28px; fill: currentColor;"></i></div>
+            </div>
+            <div class="video-card-content">
+              <span class="video-duration">01:50 MIN</span>
+              <h3 class="video-title">Morpheus8 Micro-Channeling</h3>
+              <p class="video-desc">Precision subdermal radio-frequency collagen stimulation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM VIDEO LIGHTBOX OVERLAY -->
+  <div id="video-lightbox" class="custom-lightbox" role="dialog" aria-modal="true" aria-label="Video procedure player">
+    <div class="lightbox-close" id="video-lightbox-close" aria-label="Close Video Lightbox"><i data-lucide="x"></i></div>
+    <div class="lightbox-content-container">
+      <div class="lightbox-media-container" style="height: 60vh; max-width: 960px;">
+        <video id="lightbox-video-player" src="" controls class="w-100 h-100" style="object-fit: contain;"></video>
+      </div>
+      <div class="lightbox-info-panel" style="max-width: 960px;">
+        <span class="lightbox-category" id="video-lightbox-cat">PROCEDURE</span>
+        <h4 class="lightbox-title-text" id="video-lightbox-title">Video Title</h4>
+        <p class="lightbox-desc-text" id="video-lightbox-desc">Video Description</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: INSTAGRAM FEED PREVIEW -->
+  <section class="insta-feed-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Stay Connected</span>
+          <h2 class="section-title mt-2 font-serif">On the Feed @AuraCareClinic</h2>
+          <p class="text-muted mt-3">Join our digital community. Daily skin science, medical-grade home care regimens, and exclusive member announcements.</p>
+        </div>
+      </div>
+
+      <div class="insta-grid" id="insta-feed-container">
+        <!-- Instagram Post 1 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="50" onclick="openInstagramModal(0)">
+          <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=400" alt="Botanical componding apothecary" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>1.4k</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>48</span>
+            </div>
+            <span class="insta-tag">#CuratedSkincare</span>
+          </div>
+        </div>
+
+        <!-- Instagram Post 2 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="100" onclick="openInstagramModal(1)">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400" alt="Radiant client selfie" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>2.1k</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>89</span>
+            </div>
+            <span class="insta-tag">#AuraGlow</span>
+          </div>
+        </div>
+
+        <!-- Instagram Post 3 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="150" onclick="openInstagramModal(2)">
+          <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=400" alt="Clinical laser suite" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>942</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>31</span>
+            </div>
+            <span class="insta-tag">#Morpheus8</span>
+          </div>
+        </div>
+
+        <!-- Instagram Post 4 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="200" onclick="openInstagramModal(3)">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400" alt="Dr. Marcus Vance in action" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>3.2k</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>142</span>
+            </div>
+            <span class="insta-tag">#EliteBoard</span>
+          </div>
+        </div>
+
+        <!-- Instagram Post 5 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="250" onclick="openInstagramModal(4)">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=400" alt="Aesthetic warm clinic travertine lobby" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>1.1k</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>26</span>
+            </div>
+            <span class="insta-tag">#LuxuryDermal</span>
+          </div>
+        </div>
+
+        <!-- Instagram Post 6 -->
+        <div class="insta-card" data-aos="zoom-in" data-aos-delay="300" onclick="openInstagramModal(5)">
+          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=400" alt="Luxury oil serum pipette close up" loading="lazy">
+          <div class="insta-overlay">
+            <i data-lucide="instagram" style="width: 24px; height: 24px; color: var(--color-gold);"></i>
+            <div class="insta-stats">
+              <span><i data-lucide="heart" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>853</span>
+              <span><i data-lucide="message-circle" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>19</span>
+            </div>
+            <span class="insta-tag">#DermalScience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: BOOK APPOINTMENT CTA -->
+  <section class="luxury-cta-sec">
+    <div class="bg-pattern-glow"></div>
+    <div class="bg-pattern-glow-left"></div>
+    <div class="container relative">
+      <div class="row align-items-center justify-content-between g-5">
+        <div class="col-lg-7" data-aos="fade-right">
+          <span class="section-subtitle text-uppercase tracking-wider text-gold">Elite Clinical Standards</span>
+          <h2 class="section-title mt-2 font-serif" style="color: #FFFFFF;">Experience the AuraCare Standard</h2>
+          <p class="mt-4" style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; max-width: 620px;">
+            Every skin assessment is a custom synthesis of aesthetic artistry and clinical medical-grade precision. Let our board-certified dermatologists elevate your skin biology to its natural, pristine state.
+          </p>
+          <div class="d-flex flex-wrap gap-4 mt-5">
+            <a href="appointment.html" class="btn-gold btn-ripple text-uppercase font-sans" style="padding: 15px 32px; font-weight: 600; letter-spacing: 1px;">Book Bespoke Consult</a>
+            <a href="services.html" class="btn-outline text-uppercase font-sans">Explore Treatments</a>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-left">
+          <div style="border: 1px solid rgba(197, 168, 128, 0.25); border-radius: var(--border-radius-lg); padding: 40px; background: rgba(30, 28, 26, 0.4); backdrop-filter: blur(10px);">
+            <h3 class="font-serif text-white mb-4 fs-4">Concierge Hours</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">
+              <li class="d-flex justify-content-between border-bottom pb-2" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+                <span>Monday - Friday</span>
+                <span class="text-white font-serif">9:00 AM - 7:00 PM</span>
+              </li>
+              <li class="d-flex justify-content-between border-bottom pb-2" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+                <span>Saturday</span>
+                <span class="text-white font-serif">9:00 AM - 6:00 PM</span>
+              </li>
+              <li class="d-flex justify-content-between pb-2">
+                <span>Sunday</span>
+                <span class="text-gold font-serif">By Appointment Only</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-3 border-top d-flex align-items-center gap-3" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+              <i data-lucide="phone" style="color: var(--color-gold); width: 20px; height: 20px;"></i>
+              <div>
+                <span class="d-block text-muted" style="font-size: 0.75rem;">CONCIERGE DESK</span>
+                <a href="tel:+13105550198" class="text-white font-serif fs-5 hover:text-gold">+1 (310) 555-0198</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold" onclick="event.preventDefault(); return false;">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold" onclick="event.preventDefault(); return false;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- DYNAMIC GALLERY SCRIPT -->
+  <script>
+    // 1. Gallery and Instagram Database Definitions
+    const galleryDatabase = [
+      {
+        id: "fac-1",
+        category: "facilities",
+        title: "Aura Laser Resurfacing Suite",
+        image: "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&q=80&w=800",
+        desc: "Equipped with dual-polar CO2 fractionated laser systems and advanced diagnostic light arrays."
+      },
+      {
+        id: "treat-1",
+        category: "treatments",
+        title: "Morpheus8® Fractional Remodeling",
+        image: "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=800",
+        desc: "Micro-channeling with active multi-peptide infusions targeting the sub-dermal collagen matrices."
+      },
+      {
+        id: "ba-1",
+        category: "before-after",
+        title: "Hormonal Cystic Acne Remediation",
+        beforeImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=400",
+        afterImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400",
+        desc: "12-week customized clinical program combining subcision therapy and medical-grade blue LED sweep."
+      },
+      {
+        id: "doc-1",
+        category: "doctors",
+        title: "Microscopic Lipid Analysis",
+        image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800",
+        desc: "Every assessment begins with high-fidelity microscopic lipid scans to calibrate exact treatment depths."
+      },
+      {
+        id: "clinic-1",
+        category: "clinic",
+        title: "The Alabaster Entrance Lobby",
+        image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800",
+        desc: "Designed in warm Italian travertine stone, natural cedar acoustic slats, and waterfall installations."
+      },
+      {
+        id: "treat-2",
+        category: "treatments",
+        title: "Aura Signature Peel Calibration",
+        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=800",
+        desc: "Advanced chemical exfoliation using complex medical acids matched to individual skin lipid baselines."
+      },
+      {
+        id: "ba-2",
+        category: "before-after",
+        title: "Dermal Melasma & Sunspot Sweep",
+        beforeImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400",
+        afterImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
+        desc: "2-session acoustic picosecond laser program showing complete epidermal hyperpigmentation clearance."
+      },
+      {
+        id: "fac-2",
+        category: "facilities",
+        title: "The Walnut Consult Suite",
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
+        desc: "An intimate, quiet consultation workspace where sub-dermal scanner diagnostic maps are privately reviewed."
+      },
+      {
+        id: "doc-2",
+        category: "doctors",
+        title: "Inter-Disciplinary Case Review",
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800",
+        desc: "Our board-certified surgical team reviews complex patient dermatological profiles together."
+      },
+      {
+        id: "clinic-2",
+        category: "clinic",
+        title: "The Pressurized Oxygen Suite",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+        desc: "A pure hyperbaric atmosphere calibrated to accelerate cellular ATP and speed up post-laser healing."
+      },
+      {
+        id: "treat-3",
+        category: "treatments",
+        title: "Thermal-Shock Cryo Facial",
+        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+        desc: "Micro-pulses of cooled medical nitrogen gas to contract expanded capillary walls and tighten pores."
+      },
+      {
+        id: "fac-3",
+        category: "facilities",
+        title: "Botanical Compound Apothecary",
+        image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=800",
+        desc: "Our high-potency medical skincare serums are compounded and packaged fresh for immediate aftercare."
+      }
+    ];
+
+    const instagramDatabase = [
+      {
+        image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=400",
+        likes: "1.4k",
+        comments: "48",
+        tag: "#CuratedSkincare",
+        text: "Compounding fresh active botanical serums daily inside our custom clinic apothecary wall."
+      },
+      {
+        image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400",
+        likes: "2.1k",
+        comments: "89",
+        tag: "#AuraGlow",
+        text: "Our signature AuraCare hydration glow program results. Absolute epidermal clarity and flawless skin bounce."
+      },
+      {
+        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=400",
+        likes: "942",
+        comments: "31",
+        tag: "#Morpheus8",
+        text: "Laser clinical precision at work. Redefining medical dermatological systems with state-of-the-art CO2 devices."
+      },
+      {
+        image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+        likes: "3.2k",
+        comments: "142",
+        tag: "#EliteBoard",
+        text: "Clinical director Dr. Marcus Vance evaluating custom sub-dermal scanning calibrations."
+      },
+      {
+        image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=400",
+        likes: "1.1k",
+        comments: "26",
+        tag: "#LuxuryDermal",
+        text: "Step out of the noise and into Travertine-sculpted tranquil Alabaster lounges."
+      },
+      {
+        image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=400",
+        likes: "853",
+        comments: "19",
+        tag: "#DermalScience",
+        text: "Active medical lipid compounds synthesizing on cellular membranes. Formulated with scientific elegance."
+      }
+    ];
+
+    const videoDatabase = [
+      {
+        title: "Diagnostic Skin Scanning",
+        desc: "Microscopic lipid analysis with high-fidelity camera array and 3D sub-dermal mapping.",
+        category: "CLINICAL SCIENCE",
+        videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-dermatologist-examining-the-face-of-a-woman-40347-large.mp4"
+      },
+      {
+        title: "Aura Signature HydraFacial",
+        desc: "Calibrated micro-vacuum exfoliation, extractions, and deep dermal multivitamin peptide sweeps.",
+        category: "PROCEDURE DETAILS",
+        videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-beauty-treatment-in-a-salon-40348-large.mp4"
+      },
+      {
+        title: "Morpheus8 Micro-Needling",
+        desc: "Watch our Board-certified experts apply targeted radiofrequency energy to restore dermal structural elasticity.",
+        category: "COLLAGEN SWEARDS",
+        videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-young-woman-cleansing-her-face-with-water-41584-large.mp4"
+      }
+    ];
+
+    let currentIndex = 0;
+    let activeFilter = 'all';
+    let currentLightboxMode = 'gallery'; // 'gallery' or 'instagram'
+
+    // 2. Initialize and Render Gallery Grid
+    function renderGalleryGrid() {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+
+      galleryDatabase.forEach((item, index) => {
+        const cardWrapper = document.createElement('div');
+        cardWrapper.className = `gallery-card-wrapper`;
+        cardWrapper.setAttribute('data-category', item.category);
+        cardWrapper.setAttribute('data-aos', 'fade-up');
+        cardWrapper.setAttribute('data-index', index);
+
+        // Before & After specialized card
+        if (item.category === 'before-after') {
+          cardWrapper.innerHTML = `
+            <div class="gallery-card" onclick="openLightbox(${index})">
+              <div class="card-glow"></div>
+              <div class="before-after-split">
+                <div class="split-side before-side">
+                  <img src="${item.beforeImage}" alt="${item.title} Before" loading="lazy">
+                  <span class="split-badge">BEFORE</span>
+                </div>
+                <div class="split-divider"></div>
+                <div class="split-side after-side">
+                  <img src="${item.afterImage}" alt="${item.title} After" loading="lazy">
+                  <span class="split-badge">AFTER</span>
+                </div>
+              </div>
+              <div class="gallery-overlay">
+                <div class="card-info-box">
+                  <span class="card-category">BEFORE & AFTER</span>
+                  <h4 class="card-title">${item.title}</h4>
+                  <p class="card-desc">${item.desc}</p>
+                  <span class="card-action-indicator">
+                    <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i> View High-Res Split
+                  </span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // General Card
+          cardWrapper.innerHTML = `
+            <div class="gallery-card" onclick="openLightbox(${index})">
+              <div class="card-glow"></div>
+              <div class="gallery-img-container">
+                <img src="${item.image}" alt="${item.title}" class="gallery-img" loading="lazy">
+              </div>
+              <div class="gallery-overlay">
+                <div class="card-info-box">
+                  <span class="card-category">${item.category}</span>
+                  <h4 class="card-title">${item.title}</h4>
+                  <p class="card-desc">${item.desc}</p>
+                  <span class="card-action-indicator">
+                    <i data-lucide="zoom-in" style="width: 14px; height: 14px;"></i> View Fullscreen
+                  </span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        grid.appendChild(cardWrapper);
+      });
+
+      // Refresh Lucide Icons for dynamically generated elements
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      // Attach mouse tilt and hover effects
+      initializeEffects();
+    }
+
+    // 3. Hover Zoom, Tilt, Glow, & Mouse Move Effects
+    function initializeEffects() {
+      const cards = document.querySelectorAll('.gallery-card');
+
+      cards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+          const cardRect = this.getBoundingClientRect();
+          const cardWidth = cardRect.width;
+          const cardHeight = cardRect.height;
+          
+          // Calculate normalized mouse positions inside card
+          const mouseX = e.clientX - cardRect.left - cardWidth / 2;
+          const mouseY = e.clientY - cardRect.top - cardHeight / 2;
+          
+          // Constrained tilt angles (max 12 degrees)
+          const rotateX = (mouseY / cardHeight) * -12;
+          const rotateY = (mouseX / cardWidth) * 12;
+          
+          this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          
+          // Dynamically adjust radial reflection spotlight glow
+          const glow = this.querySelector('.card-glow');
+          if (glow) {
+            const glowX = e.clientX - cardRect.left;
+            const glowY = e.clientY - cardRect.top;
+            glow.style.background = `radial-gradient(circle 130px at ${glowX}px ${glowY}px, rgba(197, 168, 128, 0.16), transparent 70%)`;
+          }
+        });
+
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          const glow = this.querySelector('.card-glow');
+          if (glow) {
+            glow.style.background = 'transparent';
+          }
+        });
+      });
+    }
+
+    // 4. Client-side Filter Handling
+    function filterGallery(category) {
+      activeFilter = category;
+      const items = document.querySelectorAll('.gallery-card-wrapper');
+      
+      // Update filter active button styling
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Animate filter transitions with CSS transforms & opacity
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+          item.classList.remove('filtered-out');
+        } else {
+          item.classList.add('filtered-out');
+        }
+      });
+    }
+
+    // 5. Lightbox System
+    function openLightbox(index) {
+      currentLightboxMode = 'gallery';
+      currentIndex = index;
+      updateLightboxContent();
+      document.getElementById('gallery-lightbox').classList.add('active');
+    }
+
+    function openInstagramModal(index) {
+      currentLightboxMode = 'instagram';
+      currentIndex = index;
+      updateLightboxContent();
+      document.getElementById('gallery-lightbox').classList.add('active');
+    }
+
+    function updateLightboxContent() {
+      const container = document.getElementById('lightbox-media-container');
+      const categoryEl = document.getElementById('lightbox-cat');
+      const titleEl = document.getElementById('lightbox-title');
+      const descEl = document.getElementById('lightbox-desc');
+      const counterEl = document.getElementById('lightbox-counter');
+
+      if (currentLightboxMode === 'gallery') {
+        const item = galleryDatabase[currentIndex];
+        
+        if (item.category === 'before-after') {
+          // High-Res Split screen for Before & After
+          container.innerHTML = `
+            <div class="lightbox-split">
+              <div class="lightbox-split-side">
+                <img src="${item.beforeImage}" alt="Before treatment" class="lightbox-img" loading="lazy">
+                <div class="lightbox-split-label">BEFORE TREATMENT</div>
+              </div>
+              <div class="lightbox-split-side">
+                <img src="${item.afterImage}" alt="After treatment" class="lightbox-img" loading="lazy">
+                <div class="lightbox-split-label">AFTER CLINIC TRANSFORMATION</div>
+              </div>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `<img src="${item.image}" alt="${item.title}" class="lightbox-img" loading="lazy">`;
+        }
+
+        categoryEl.innerText = item.category.toUpperCase().replace('-', ' & ');
+        titleEl.innerText = item.title;
+        descEl.innerText = item.desc;
+        counterEl.innerText = `${currentIndex + 1} / ${galleryDatabase.length}`;
+
+      } else {
+        // Instagram Post Mode
+        const post = instagramDatabase[currentIndex];
+        container.innerHTML = `<img src="${post.image}" alt="Instagram Post" class="lightbox-img" loading="lazy">`;
+        categoryEl.innerText = "INSTAGRAM ARCHIVE";
+        titleEl.innerText = `@AuraCareClinic • Instagram`;
+        descEl.innerText = `"${post.text}" — (${post.likes} Likes • ${post.comments} Comments)`;
+        counterEl.innerText = `Post ${currentIndex + 1} / ${instagramDatabase.length}`;
+      }
+    }
+
+    function closeLightbox() {
+      document.getElementById('gallery-lightbox').classList.remove('active');
+    }
+
+    function navigateLightbox(direction) {
+      const databaseLength = currentLightboxMode === 'gallery' ? galleryDatabase.length : instagramDatabase.length;
+      
+      if (direction === 'next') {
+        currentIndex = (currentIndex + 1) % databaseLength;
+      } else {
+        currentIndex = (currentIndex - 1 + databaseLength) % databaseLength;
+      }
+      
+      // Smooth out the transition
+      const container = document.getElementById('lightbox-media-container');
+      container.style.opacity = '0';
+      container.style.transform = 'scale(0.95)';
+      
+      setTimeout(() => {
+        updateLightboxContent();
+        container.style.opacity = '1';
+        container.style.transform = 'scale(1)';
+      }, 180);
+    }
+
+    // 6. Video Modal system
+    function openVideoLightbox(index) {
+      const video = videoDatabase[index];
+      const modal = document.getElementById('video-lightbox');
+      const player = document.getElementById('lightbox-video-player');
+      
+      document.getElementById('video-lightbox-cat').innerText = video.category;
+      document.getElementById('video-lightbox-title').innerText = video.title;
+      document.getElementById('video-lightbox-desc').innerText = video.desc;
+      
+      player.src = video.videoUrl;
+      player.load();
+      player.play();
+
+      modal.classList.add('active');
+    }
+
+    function closeVideoLightbox() {
+      const modal = document.getElementById('video-lightbox');
+      const player = document.getElementById('lightbox-video-player');
+      player.pause();
+      player.src = "";
+      modal.classList.remove('active');
+    }
+
+    // 7. Event Listeners & Bootstrapping
+    document.addEventListener('DOMContentLoaded', () => {
+      // Render Initial Gallery
+      renderGalleryGrid();
+
+      // Filter Button Clicks
+      const filterControls = document.getElementById('filter-controls');
+      filterControls.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        const filterValue = btn.getAttribute('data-filter');
+        filterGallery(filterValue);
+      });
+
+      // Lightbox Navigation click listeners
+      document.getElementById('lightbox-close-btn').addEventListener('click', closeLightbox);
+      document.getElementById('lightbox-prev-btn').addEventListener('click', () => navigateLightbox('prev'));
+      document.getElementById('lightbox-next-btn').addEventListener('click', () => navigateLightbox('next'));
+      
+      // Close lightbox on backdrop click
+      document.getElementById('gallery-lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'gallery-lightbox') {
+          closeLightbox();
+        }
+      });
+
+      // Video lightbox close handlers
+      document.getElementById('video-lightbox-close').addEventListener('click', closeVideoLightbox);
+      document.getElementById('video-lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'video-lightbox') {
+          closeVideoLightbox();
+        }
+      });
+
+      // Keyboard Accessibility for Lightboxes
+      document.addEventListener('keydown', (e) => {
+        const imageLightbox = document.getElementById('gallery-lightbox');
+        const videoLightbox = document.getElementById('video-lightbox');
+
+        if (imageLightbox.classList.contains('active')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') navigateLightbox('next');
+          if (e.key === 'ArrowLeft') navigateLightbox('prev');
+        }
+
+        if (videoLightbox.classList.contains('active')) {
+          if (e.key === 'Escape') closeVideoLightbox();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

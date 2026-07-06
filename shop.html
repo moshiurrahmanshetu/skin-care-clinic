@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Clinical Shop | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+
+  <!-- CUSTOM EMBEDDED STYLES FOR PREMIUM LUXURY SHOP -->
+  <style>
+    /* Section spacings */
+    .shop-featured-sec {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--surface-clinic) 0%, transparent 100%);
+    }
+    .shop-main-sec {
+      padding: 60px 0 100px 0;
+    }
+    .tips-banner-sec {
+      background-color: var(--surface-clinic);
+      border-top: 1px solid var(--border-clinic);
+      border-bottom: 1px solid var(--border-clinic);
+      padding: 100px 0;
+      transition: background-color 0.5s ease;
+    }
+    .newsletter-sec {
+      padding: 100px 0;
+    }
+
+    /* Category Filter Controls */
+    .filter-pills {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+    .category-pill {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .category-pill:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-1px);
+    }
+    .category-pill.active {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(197, 168, 128, 0.25);
+    }
+
+    /* Search & Filter Sidepanel/Controls */
+    .search-input-wrapper {
+      position: relative;
+    }
+    .search-input-wrapper input {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-main);
+      border-radius: 50px;
+      padding: 12px 20px 12px 45px;
+      font-size: 0.9rem;
+      width: 100%;
+      font-family: var(--font-sans);
+      transition: var(--transition-smooth);
+    }
+    .search-input-wrapper input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.15);
+    }
+    .search-icon-inside {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 16px;
+      height: 16px;
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0;
+      display: none;
+    }
+    .search-clear-btn:hover {
+      color: var(--color-gold);
+    }
+
+    .shop-sidebar {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      position: sticky;
+      top: 110px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-widget-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border-clinic);
+    }
+
+    /* Product Card Styling */
+    .product-grid-wrapper {
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .product-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease-out, box-shadow 0.4s ease, border-color 0.4s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+
+    /* Spot glow effect */
+    .card-glow-spotlight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(197, 168, 128, 0.1), transparent 85%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .product-card:hover .card-glow-spotlight {
+      opacity: 1;
+    }
+
+    .product-img-box {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      background-color: var(--surface-clinic-alt);
+    }
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.06);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 3;
+      background: var(--color-gold);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(197, 168, 128, 0.25);
+    }
+    .product-badge.new {
+      background: #475a4e;
+    }
+    .product-badge.clinical {
+      background: #2E5B82;
+    }
+
+    .product-actions-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(18, 17, 16, 0.85) 100%);
+      padding: 20px;
+      display: flex;
+      gap: 10px;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 3;
+    }
+    .product-card:hover .product-actions-overlay {
+      transform: translateY(0);
+    }
+
+    .product-action-btn {
+      flex: 1;
+      padding: 10px 14px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border-radius: 50px;
+      text-align: center;
+      transition: var(--transition-smooth);
+    }
+    .btn-quickview {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+    .btn-quickview:hover {
+      background: #FFFFFF;
+      color: #121110;
+      border-color: #FFFFFF;
+    }
+    .btn-viewdetails {
+      background: var(--color-gold);
+      border: 1px solid var(--color-gold);
+      color: #FFFFFF;
+    }
+    .btn-viewdetails:hover {
+      background: #FFFFFF;
+      border-color: #FFFFFF;
+      color: #121110;
+    }
+
+    .product-info {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      position: relative;
+      z-index: 2;
+    }
+    .product-brand {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 12px;
+      flex-grow: 1;
+      transition: color 0.3s ease;
+    }
+    .product-card:hover .product-name {
+      color: var(--color-gold);
+    }
+
+    .product-rating-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 15px;
+    }
+    .rating-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--color-gold);
+    }
+    .rating-stars svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+    .rating-value {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .product-footer-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border-clinic);
+      padding-top: 15px;
+      margin-top: auto;
+    }
+    .product-price {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .btn-add-to-cart {
+      background: transparent;
+      border: 1px solid var(--border-clinic);
+      color: var(--text-main);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .product-card:hover .btn-add-to-cart {
+      border-color: var(--color-gold);
+      background: var(--color-gold);
+      color: #FFFFFF !important;
+    }
+    .btn-add-to-cart svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Active Filtering Class */
+    .product-grid-wrapper.filtered-out {
+      opacity: 0 !important;
+      transform: scale(0.8) translateY(30px) !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      visibility: hidden !important;
+      margin-bottom: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    /* Sidebar list item style */
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .sidebar-list-item:hover {
+      color: var(--color-gold);
+    }
+    .sidebar-list-item.active {
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+    .sidebar-badge {
+      background: var(--surface-clinic-alt);
+      border: 1px solid var(--border-clinic);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Featured Product Slider Section */
+    .featured-slider-box {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      transition: background-color 0.5s ease;
+    }
+    .featured-badge-top {
+      font-family: var(--font-sans);
+      color: var(--color-gold);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    .featured-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .featured-desc {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .featured-img-box {
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      height: 380px;
+      border: 1px solid var(--border-clinic);
+    }
+    .featured-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Range input styling */
+    .price-range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border-clinic);
+      outline: none;
+      margin-top: 10px;
+    }
+    .price-range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(197, 168, 128, 0.3);
+      transition: transform 0.1s ease;
+    }
+    .price-range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Best Sellers Widget Inside Sidebar */
+    .best-seller-widget-item {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed var(--border-clinic);
+    }
+    .best-seller-widget-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .widget-product-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-clinic);
+      background: var(--surface-clinic-alt);
+    }
+    .widget-product-name {
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+    .widget-product-name:hover {
+      color: var(--color-gold);
+    }
+    .widget-product-price {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--color-gold);
+    }
+
+    /* Interactive Skin Tips Steps */
+    .step-tips-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      height: 100%;
+      transition: var(--transition-smooth);
+    }
+    .step-tips-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--color-gold);
+      box-shadow: var(--shadow-md);
+    }
+    .step-num-badge {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-gold-light);
+      line-height: 1;
+      margin-bottom: 15px;
+    }
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+    .step-text {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* Modal Quick View Styles */
+    .modal-content-custom {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--surface-clinic-alt);
+      border: 1px solid var(--border-clinic);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition-fast);
+    }
+    .modal-close-btn:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      border-color: var(--color-gold);
+    }
+    .modal-product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 380px;
+    }
+    .modal-product-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--text-main);
+    }
+    .modal-product-price {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--color-gold);
+    }
+    .modal-section-title {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    /* Mini Cart Offcanvas */
+    .cart-offcanvas {
+      background: var(--surface-clinic);
+      border-left: 1px solid var(--border-clinic);
+      color: var(--text-main);
+    }
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border-clinic);
+    }
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border-clinic);
+    }
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    .cart-item-name {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+      color: var(--text-main);
+    }
+    .cart-item-price {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+    .cart-item-remove {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    .cart-item-remove:hover {
+      color: #b0413e;
+    }
+
+    /* Notification Toast */
+    .toast-container-custom {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1050;
+    }
+    .toast-custom {
+      background: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(120%);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .toast-custom.show {
+      transform: translateY(0);
+    }
+    .toast-icon {
+      color: var(--color-gold);
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Grid count tag */
+    .results-count-text {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Luxury Newsletter style */
+    .luxury-newsletter-box {
+      background: linear-gradient(135deg, #1A1816 0%, #11100F 100%);
+      border: 1px solid rgba(197, 168, 128, 0.15);
+      border-radius: var(--border-radius-xl);
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+      color: #FFFFFF;
+    }
+    .luxury-newsletter-box .section-title {
+      color: #FFFFFF !important;
+    }
+    .news-input-group {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      padding: 6px;
+      display: flex;
+    }
+    .news-input-group input {
+      background: transparent;
+      border: none;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      flex-grow: 1;
+      font-size: 0.9rem;
+    }
+    .news-input-group input:focus {
+      outline: none;
+    }
+    .news-input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .news-input-group button {
+      background: var(--color-gold);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 50px;
+      padding: 0 30px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: var(--transition-smooth);
+    }
+    .news-input-group button:hover {
+      background: #FFFFFF;
+      color: #121110;
+    }
+
+    /* Empty state */
+    .empty-results-box {
+      background: var(--surface-clinic);
+      border: 1px dashed var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE ELEMENTS -->
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <!-- Toggle theme -->
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          
+          <!-- Shopping bag trigger -->
+          <button class="btn-ripple position-relative" style="background: transparent; border: none; color: var(--text-main);" data-bs-toggle="offcanvas" data-bs-target="#miniCartOffcanvas" aria-label="Open Shopping Bag">
+            <i data-lucide="shopping-bag"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count-badge" style="display: none; font-size: 0.65rem; padding: 4px 6px;">0</span>
+          </button>
+
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Aura Shop</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Shop</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SECTION 2: FEATURED PRODUCTS SPOTLIGHT -->
+  <section class="shop-featured-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">The Apothecary</span>
+          <h2 class="section-title mt-2 font-serif">Featured Skin Formulations</h2>
+          <p class="text-muted mt-3">Discover the pinnacle of clinical research. Our featured advanced formulations combine high-potency chemical compounds with organic cell repair factors.</p>
+        </div>
+      </div>
+
+      <!-- Featured Product Banner -->
+      <div class="featured-slider-box" data-aos="fade-up">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="featured-badge-top mb-3">Featured Innovation</div>
+            <h3 class="featured-title mb-3">Aura Ultra-Gold Serum</h3>
+            <p class="featured-desc mb-4">
+              An opulent face serum infused with micro-colloidal 24k gold, cell-energizing coenzymes, and bespoke marine botanicals. Engineered to target deep signs of skin aging while delivering an immediate light-reflecting glass finish.
+            </p>
+            <div class="d-flex align-items-center gap-4 mb-4">
+              <div>
+                <span class="text-muted text-uppercase fs-xs d-block">Price</span>
+                <span class="fs-2 font-serif text-gold fw-semibold">$145.00</span>
+              </div>
+              <div class="border-start ps-4" style="border-color: var(--border-clinic) !important;">
+                <span class="text-muted text-uppercase fs-xs d-block">Rating</span>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                  <div class="rating-stars">
+                    <i data-lucide="star"></i>
+                    <i data-lucide="star"></i>
+                    <i data-lucide="star"></i>
+                    <i data-lucide="star"></i>
+                    <i data-lucide="star"></i>
+                  </div>
+                  <span class="text-muted fs-xs">(4.9/5)</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-3">
+              <button class="btn-gold btn-ripple d-inline-flex align-items-center gap-2 add-to-cart-direct-btn" data-id="ultra-gold-serum">
+                <i data-lucide="shopping-cart"></i> Add to Cart
+              </button>
+              <a href="product-details.html?id=ultra-gold-serum" class="btn-outline-gold btn-ripple d-inline-flex align-items-center gap-2">
+                <span>View Full Analysis</span> <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="featured-img-box">
+              <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800" alt="Aura Ultra-Gold Serum bottle" class="featured-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3, 4, 5: SEARCH, FILTERS & MAIN SHOP GRID -->
+  <section class="shop-main-sec">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Sidebar Filters Column (Desktop left, mobile stack top) -->
+        <div class="col-lg-3 col-md-4">
+          <div class="shop-sidebar" data-aos="fade-right">
+            
+            <!-- Search widget -->
+            <div class="mb-4">
+              <h4 class="sidebar-widget-title">Search Products</h4>
+              <div class="search-input-wrapper">
+                <i data-lucide="search" class="search-icon-inside"></i>
+                <input type="text" id="product-search-input" placeholder="Type skin concern, brand...">
+                <button id="product-search-clear" class="search-clear-btn" aria-label="Clear Search">
+                  <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Categories widget -->
+            <div class="mb-4">
+              <h4 class="sidebar-widget-title">Categories</h4>
+              <ul class="sidebar-list" id="sidebar-categories">
+                <li class="sidebar-list-item active" data-category="all">
+                  <span>All Formulations</span>
+                  <span class="sidebar-badge" id="count-all">15</span>
+                </li>
+                <li class="sidebar-list-item" data-category="serums">
+                  <span>Serums & Elixirs</span>
+                  <span class="sidebar-badge" id="count-serums">6</span>
+                </li>
+                <li class="sidebar-list-item" data-category="moisturizers">
+                  <span>Hydrators & Creams</span>
+                  <span class="sidebar-badge" id="count-moisturizers">4</span>
+                </li>
+                <li class="sidebar-list-item" data-category="cleansers">
+                  <span>Cleansers & Toners</span>
+                  <span class="sidebar-badge" id="count-cleansers">3</span>
+                </li>
+                <li class="sidebar-list-item" data-category="sun-care">
+                  <span>Solar & Protection</span>
+                  <span class="sidebar-badge" id="count-sun-care">2</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Price Filter widget -->
+            <div class="mb-4">
+              <h4 class="sidebar-widget-title">Max Budget</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted fs-xs">Up to</span>
+                <span class="text-gold fw-semibold fs-5" id="price-limit-display">$150</span>
+              </div>
+              <input type="range" class="price-range-slider" id="price-limit-slider" min="50" max="150" value="150">
+            </div>
+
+            <!-- Best Sellers Mini widget -->
+            <div class="mb-2 d-none d-md-block">
+              <h4 class="sidebar-widget-title">Top Sellers</h4>
+              <div class="d-flex flex-column gap-3">
+                <div class="best-seller-widget-item">
+                  <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=120" alt="Retinol Elixir" class="widget-product-img" loading="lazy">
+                  <div>
+                    <a href="product-details.html?id=retinol-cellular-elixir" class="widget-product-name d-block font-serif">Retinol 2.5% Elixir</a>
+                    <span class="widget-product-price">$120.00</span>
+                  </div>
+                </div>
+                <div class="best-seller-widget-item">
+                  <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=120" alt="C-Shield" class="widget-product-img" loading="lazy">
+                  <div>
+                    <a href="product-details.html?id=c-shield-glow-15" class="widget-product-name d-block font-serif">C-Shield Glow-15</a>
+                    <span class="widget-product-price">$110.00</span>
+                  </div>
+                </div>
+                <div class="best-seller-widget-item">
+                  <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=120" alt="Ceramide Cream" class="widget-product-img" loading="lazy">
+                  <div>
+                    <a href="product-details.html?id=ceramide-barrier-defense" class="widget-product-name d-block font-serif">Ceramide Defense</a>
+                    <span class="widget-product-price">$95.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Main Products Grid Column -->
+        <div class="col-lg-9 col-md-8">
+          
+          <!-- Category Pills + Sort Controls Header -->
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4" data-aos="fade-up">
+            <div class="filter-pills d-md-flex d-none">
+              <button class="category-pill active" data-category="all">All Formulations</button>
+              <button class="category-pill" data-category="serums">Serums</button>
+              <button class="category-pill" data-category="moisturizers">Hydrators</button>
+              <button class="category-pill" data-category="cleansers">Cleansers</button>
+              <button class="category-pill" data-category="sun-care">Sun Care</button>
+            </div>
+            
+            <div class="d-flex align-items-center gap-3 ms-auto w-100 justify-content-between w-md-auto">
+              <span class="results-count-text" id="results-count">Showing 15 clinical items</span>
+              <div class="d-flex align-items-center gap-2">
+                <span class="text-muted fs-xs text-nowrap">Sort By</span>
+                <select id="sort-products" class="form-select form-select-sm" style="background-color: var(--surface-clinic); border-color: var(--border-clinic); color: var(--text-main); border-radius: 20px; font-size: 0.82rem; padding: 6px 30px 6px 14px;">
+                  <option value="featured">Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Dynamic Products Row -->
+          <div class="row g-4" id="shop-products-grid" data-aos="fade-up">
+            <!-- Dynamic elements loaded via JS -->
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-results-box my-4 d-none" id="empty-products-state">
+            <i data-lucide="search-slash" style="width: 48px; height: 48px; color: var(--color-gold); margin-bottom: 15px;"></i>
+            <h4 class="font-serif">No Clinical Products Found</h4>
+            <p class="text-muted mx-auto fs-xs" style="max-width: 400px;">We couldn't find matches for your current filters. Try resetting your search term or increasing your max budget.</p>
+            <button class="btn-gold btn-ripple btn-sm mt-2" id="reset-filters-btn">Reset All Filters</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: INTERACTIVE SKIN CARE TIPS BANNER -->
+  <section class="tips-banner-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Clinical Guidance</span>
+          <h2 class="section-title mt-2 font-serif">The Aura Core Skin Regimen</h2>
+          <p class="text-muted mt-3">Skincare is a structured art. Formulate your ultimate home regimen using our curated steps, balancing gentle botanical cleansers with target clinical treatments.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="step-tips-card text-center">
+            <div class="step-num-badge">01</div>
+            <h3 class="step-title">Cleanse & Prep</h3>
+            <p class="step-text">Eliminate surface lipids and micro-debris without altering skin pH. Provides the clean slate required for therapeutic molecular absorption.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="step-tips-card text-center">
+            <div class="step-num-badge">02</div>
+            <h3 class="step-title">Exfoliate & Tone</h3>
+            <p class="step-text">Sweep away dead cellular layers chemically. Enhances dermal luminosity and ensures therapeutic formulas penetrate deeply.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="step-tips-card text-center">
+            <div class="step-num-badge">03</div>
+            <h3 class="step-title">Target & Treat</h3>
+            <p class="step-text">Apply high-potency serums containing retinoids, Vitamin C, or peptides. Fixes specific skin concerns at cellular depths.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="step-tips-card text-center">
+            <div class="step-num-badge">04</div>
+            <h3 class="step-title">Hydrate & Protect</h3>
+            <p class="step-text">Reinforce broken lipid barriers and coat epidermal cells with broad-spectrum zinc block to prevent sun pigment synthesis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: NEWSLETTER -->
+  <section class="newsletter-sec">
+    <div class="container">
+      <div class="luxury-newsletter-box text-center" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <span class="section-subtitle text-uppercase tracking-wider text-white-50">Scientific Journal</span>
+            <h2 class="section-title mt-2 font-serif text-white">Join the Aura Privilege Desk</h2>
+            <p class="text-white-50 mt-3 mb-4 mx-auto" style="max-width: 600px;">
+              Receive early invitations to limited apothecary releases, detailed skin research updates, and bespoke treatment packages directly in your inbox.
+            </p>
+            
+            <form id="newsletter-form" class="mt-4">
+              <div class="news-input-group mx-auto" style="max-width: 500px;">
+                <input type="email" placeholder="Your clinical email address..." required id="newsletter-email">
+                <button type="submit" class="btn-ripple">Subscribe</button>
+              </div>
+            </form>
+            <div id="newsletter-success" class="text-gold mt-3 font-sans fs-xs d-none">
+              Thank you. You have been registered at our privilege desk.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: FINAL BOOKING CTA -->
+  <section class="luxury-cta-sec">
+    <div class="bg-pattern-glow"></div>
+    <div class="bg-pattern-glow-left"></div>
+    <div class="container text-center relative z-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider text-white-50">In-Depth Assessment</span>
+          <h2 class="section-title mt-2 font-serif text-white mb-4">Request a Digital Visia Skin Analysis</h2>
+          <p class="text-white-50 mt-3 mb-5 mx-auto" style="max-width: 650px;">
+            A professional 3D microscopic analysis mapping sub-surface pigmentation, pore depth, UV damage, and vascular inflammation. Our clinical specialists will build your target apothecary prescription.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="appointment.html" class="btn-gold btn-ripple">Schedule Appointment</a>
+            <a href="contact.html" class="btn-outline">Speak to a Skin Concierge</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- QUICK VIEW MODAL -->
+  <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content modal-content-custom position-relative">
+        <button class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close Modal">
+          <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+        </button>
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="" id="modal-product-image" alt="Product Quick View" class="modal-product-img" loading="lazy">
+            </div>
+            <div class="col-md-6 p-4 p-lg-5 d-flex flex-column justify-content-center">
+              <span class="product-brand mb-2" id="modal-product-brand"></span>
+              <h3 class="modal-product-title font-serif mb-2" id="modal-product-name"></h3>
+              
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <div class="rating-stars" id="modal-product-stars"></div>
+                <span class="rating-value" id="modal-product-rating-text"></span>
+              </div>
+              
+              <div class="modal-product-price mb-4" id="modal-product-price"></div>
+              
+              <div class="mb-4">
+                <div class="modal-section-title">Formulation Overview</div>
+                <p class="text-muted fs-xs mb-0" id="modal-product-description" style="line-height: 1.6;"></p>
+              </div>
+
+              <div class="mb-4">
+                <div class="modal-section-title">Key Actives</div>
+                <p class="text-muted fs-xs mb-0" id="modal-product-ingredients" style="line-height: 1.6; font-style: italic;"></p>
+              </div>
+
+              <div class="d-flex gap-3">
+                <button class="btn-gold btn-ripple d-inline-flex align-items-center gap-2" id="modal-add-to-cart-btn" style="flex: 1;">
+                  <i data-lucide="shopping-cart" style="width: 14px; height: 14px;"></i> Add to Cart
+                </button>
+                <a href="" id="modal-view-details-link" class="btn-outline-gold btn-ripple text-center" style="flex: 1; padding: 12px 10px; font-size: 0.9rem;">
+                  Full Analysis
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPPING BAG OFFCANVAS -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="miniCartOffcanvas" aria-labelledby="miniCartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom" style="border-color: var(--border-clinic) !important;">
+      <h5 class="offcanvas-title font-serif" id="miniCartOffcanvasLabel">Your Clinical Bag</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" style="filter: var(--theme-close-btn);"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between">
+      <div id="mini-cart-items-container">
+        <!-- Loaded dynamically -->
+      </div>
+      
+      <!-- Cart Bottom total & purchase -->
+      <div class="border-top pt-4" style="border-color: var(--border-clinic) !important;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted fs-xs text-uppercase">Subtotal</span>
+          <span class="fs-4 font-serif text-gold fw-semibold" id="cart-total-price">$0.00</span>
+        </div>
+        <button class="btn-gold btn-ripple w-100 py-3" id="cart-checkout-btn">Proceed to Secure Checkout</button>
+        <p class="text-muted text-center fs-xs mt-3">Complimentary premium shipping on all apothecary orders.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container-custom">
+    <div class="toast-custom" id="cart-toast">
+      <i data-lucide="check-circle" class="toast-icon"></i>
+      <span class="text-main fs-xs" id="toast-message">Added to your clinical bag.</span>
+    </div>
+  </div>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- SHOP ENGINE JAVASCRIPT -->
+  <script>
+    // Skincare Database Array (15 Premium Formulations)
+    const originalProducts = [
+      {
+        id: "ultra-gold-serum",
+        name: "Aura Ultra-Gold Serum",
+        category: "serums",
+        price: 145,
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600",
+        brand: "AuraCare Clinical",
+        badge: "Best Seller",
+        description: "An opulent face serum infused with micro-colloidal 24k gold, cell-energizing coenzymes, and bespoke marine botanicals designed to speed cellular renewal and restore high skin luster.",
+        ingredients: "24k Colloidal Gold, CoQ10, Niacinamide (Vitamin B3), Hyaluronic Acid, Peptide Matrix, Rosewater Distillate.",
+        usage: "Dispense 3-4 drops onto clean, damp face and neck morning and night. Press gently into cells."
+      },
+      {
+        id: "retinol-cellular-elixir",
+        name: "Retinol 2.5% Cellular Elixir",
+        category: "serums",
+        price: 120,
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Dermaceuticals",
+        badge: "Clinical Grade",
+        description: "High-potency encapsulated retinol balanced with blue tansy oil to diminish wrinkles and dark age blemishes while averting standard retinoid-induced skin sensitivity.",
+        ingredients: "Pure Encapsulated Retinol 2.5%, Blue Tansy Leaf Oil, Squalane, Tocopherol (Vitamin E), Centella Asiatica.",
+        usage: "Apply a pea-sized amount to clean, dry skin only in your night routine. Begin 2-3 times per week, then increase."
+      },
+      {
+        id: "c-shield-glow-15",
+        name: "C-Shield Glow-15 Serum",
+        category: "serums",
+        price: 110,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=600",
+        brand: "AuraCare Clinical",
+        badge: "Best Seller",
+        description: "A highly concentrated 15% L-Ascorbic Acid formula enhanced with organic Ferulic Acid and Vitamin E to neutralize environmental radicals and illuminate skin glow.",
+        ingredients: "15% L-Ascorbic Acid, 0.5% Ferulic Acid, 1% Vitamin E, Sodium Hyaluronate, Sweet Orange Extract.",
+        usage: "Massage 4-5 drops onto cleansed face and neck every morning. Follow immediately with UV blocking fluid."
+      },
+      {
+        id: "phyto-active-hydrating",
+        name: "Phyto-Active Hydrating Gel",
+        category: "moisturizers",
+        price: 85,
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1601612620779-992852274b7a?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Pure Botanicals",
+        badge: "New Arrival",
+        description: "An ultra-weightless, cooling plant-gel formulated with cucumber extracts and amino acids to calm dry, flushing, or sensitive epidermal tissue.",
+        ingredients: "Cucumber Distillate, Aloe Barbadensis Leaf, Amino Acid Complex, Green Tea Polyphenols, Glycerin.",
+        usage: "Apply liberally over clean face and neck. Can be used morning and evening as a soothing base."
+      },
+      {
+        id: "ceramide-barrier-defense",
+        name: "Ceramide Barrier Defense Cream",
+        category: "moisturizers",
+        price: 95,
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Dermaceuticals",
+        badge: "Highly Rated",
+        description: "A lipid-rich cream containing an optimal 3:1:1 ratio of essential ceramides, cholesterol, and natural fatty acids to deeply heal and repair broken skin barriers.",
+        ingredients: "Ceramide NP, Ceramide AP, Ceramide EOP, Pure Cholesterol, Phytosphingosine, Shea Butter, Allantoin.",
+        usage: "Warm a small dollop between fingers and press gently into skin. Ideal for nighttime use or post-chemical treatment."
+      },
+      {
+        id: "squalane-melting-balm",
+        name: "Squalane Intense Melting Balm",
+        category: "moisturizers",
+        price: 78,
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Pure Botanicals",
+        badge: "Organic",
+        description: "100% plant-derived squalane formulation that melts from a solid luxurious balm into a deeply nourishing skin oil, locking in hydration without heavy congestion.",
+        ingredients: "Pure Sugarcane-Derived Squalane, Meadowfoam Seed Oil, Jojoba Wax, Tocopherol.",
+        usage: "Smooth over dry areas, lips, or the entire face. Best applied as the final sealing step in your nightly sequence."
+      },
+      {
+        id: "salicylic-acid-purifying",
+        name: "Salicylic Acid Purifying Gel",
+        category: "cleansers",
+        price: 55,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=600",
+        brand: "AuraCare Clinical",
+        badge: "Clinical Grade",
+        description: "A foaming therapeutic cleanser featuring 2% salicylic acid to clear congested skin pores, dissolve blackheads, and regulate daily sebum.",
+        ingredients: "2% Salicylic Acid (BHA), Melaleuca Alternifolia (Tea Tree) Oil, Zinc PCA, Willow Bark Extract, Allantoin.",
+        usage: "Lather a dime-sized amount with water, massage in circular motions for 60 seconds, then rinse with tepid water."
+      },
+      {
+        id: "squalane-oat-cleansing",
+        name: "Squalane & Oat Cleansing Milk",
+        category: "cleansers",
+        price: 58,
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Pure Botanicals",
+        badge: "New Arrival",
+        description: "A mild, pH-balanced creamy milk cleanser that easily dissolves longwear makeup and pollution without stripping protective dermal lipids.",
+        ingredients: "Colloidal Oatmeal, Sugarcane Squalane, Sweet Almond Oil, Chamomile Extract, Panthenol (Vitamin B5).",
+        usage: "Massage over dry or damp face. Wipe away gently with a warm microcloth or rinse with clean water."
+      },
+      {
+        id: "glycolic-acid-toner",
+        name: "Glycolic Acid Resurfacing Toner",
+        category: "cleansers",
+        price: 65,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600",
+        brand: "AuraCare Clinical",
+        badge: "Best Seller",
+        description: "An exfoliating 8% Glycolic Acid treatment toner designed to sweep dead skin cells, refine skin texture, and reveal underlying brilliance.",
+        ingredients: "8% Glycolic Acid (AHA), Witch Hazel Distillate, Aloe Vera Leaf Juice, Ginseng Root, Urea.",
+        usage: "Saturate a reusable cotton pad and sweep across face after cleansing. Avoid eye contours. Use 3-4 nights a week."
+      },
+      {
+        id: "zinc-shield-mineral",
+        name: "Zinc-Shield Mineral SPF 50",
+        category: "sun-care",
+        price: 70,
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Dermaceuticals",
+        badge: "Best Seller",
+        description: "A weightless 20% Zinc Oxide mineral sunscreen that offers total broad-spectrum defense with a sheer finish, preventing solar-induced pigment synthesis.",
+        ingredients: "20% Zinc Oxide, Resveratrol, Bisabolol, Camellia Sinensis (Green Tea) Extract, Iron Oxides.",
+        usage: "Apply two fingers' length to face and neck as the final morning step. Reapply every two hours of active exposure."
+      },
+      {
+        id: "phyto-protective-solar",
+        name: "Phyto-Protective Solar Fluid",
+        category: "sun-care",
+        price: 65,
+        rating: 4.6,
+        image: "https://images.unsplash.com/photo-1614859324967-bdf461fcf769?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Pure Botanicals",
+        badge: "New Arrival",
+        description: "An organic broad-spectrum SPF 45 liquid enriched with plant-stem antioxidants and botanical shields to protect cellular DNA from UV rays and blue light.",
+        ingredients: "Plant-Derived SPF Complex, Centella Asiatica Extract, Lingonberry Stem Cells, Vitamin E, Hyaluronic Acid.",
+        usage: "Shake bottle well. Apply a generous, even layer over face, ears, and neck before sun exposure."
+      },
+      {
+        id: "eye-ceramide-contour",
+        name: "Eye Ceramide Contour Repair",
+        category: "serums",
+        price: 88,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Dermaceuticals",
+        badge: "Highly Rated",
+        description: "A specialized, lipid-dense eye cream utilizing a ceramide complex and concentrated caffeine to target dark vascular circles and puffy eye hollows.",
+        ingredients: "Ceramide Complex, 1.5% Caffeine, Coenzyme Q10, Arnica Montana, Licorice Root Extract.",
+        usage: "Dab a tiny dot around the orbital bone morning and evening using your ring finger. Tap gently."
+      },
+      {
+        id: "bakuchiol-alternative",
+        name: "Bakuchiol Retinol Alternative",
+        category: "serums",
+        price: 115,
+        rating: 4.7,
+        image: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Pure Botanicals",
+        badge: "Organic",
+        description: "A botanical retinol surrogate facial oil utilizing 2% Bakuchiol to firm, smooth wrinkles, and resurface tissues without redness or irritation.",
+        ingredients: "2% Bakuchiol, Rosehip Seed Oil, Marula Oil, Olive Squalane, Rosemary Antioxidant.",
+        usage: "Press 3-4 drops into skin after toning. Safe and highly effective for both day and night use."
+      },
+      {
+        id: "niacinamide-pore-refiner",
+        name: "Niacinamide 10% Pore-Refiner",
+        category: "serums",
+        price: 82,
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&q=80&w=600",
+        brand: "AuraCare Clinical",
+        badge: "Highly Rated",
+        description: "A clinical-strength serum combining 10% Niacinamide and 2% Zinc PCA to visibly minimize enlarged skin pores, fade post-blemish spots, and balance oil.",
+        ingredients: "10% Niacinamide (Vitamin B3), 2% Zinc PCA, Centella Asiatica (Cica), Allantoin, Hyaluronic Acid.",
+        usage: "Apply 3 drops onto clean face prior to heavy creams. Highly suitable for both morning and night routine."
+      },
+      {
+        id: "probiotic-calming",
+        name: "Probiotic Calming Infusion",
+        category: "moisturizers",
+        price: 90,
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=600",
+        brand: "Aura Dermaceuticals",
+        badge: "New Arrival",
+        description: "A soothing facial emulsion blended with fermented lactobacillus lysates to reinforce your skin's natural microbiome and suppress dermal flushing.",
+        ingredients: "Lactobacillus Ferment Lysate, Beta-Glucan, Madecassoside (Cica), Calendula Hydrosol, Hyaluronic Acid.",
+        usage: "Massage over face as a lightweight daily moisturizer or layered under heavier barrier repair balms."
+      }
+    ];
+
+    // State Variables
+    let products = [...originalProducts];
+    let cart = [];
+    let currentCategory = "all";
+    let currentSearch = "";
+    let currentMaxPrice = 150;
+    let currentSort = "featured";
+
+    // DOM Elements
+    const gridContainer = document.getElementById("shop-products-grid");
+    const searchInput = document.getElementById("product-search-input");
+    const searchClear = document.getElementById("product-search-clear");
+    const priceSlider = document.getElementById("price-limit-slider");
+    const priceDisplay = document.getElementById("price-limit-display");
+    const resultsCount = document.getElementById("results-count");
+    const sortDropdown = document.getElementById("sort-products");
+    const emptyState = document.getElementById("empty-products-state");
+    const resetFiltersBtn = document.getElementById("reset-filters-btn");
+    const sidebarCategories = document.getElementById("sidebar-categories");
+    const filterPillsContainer = document.querySelector(".filter-pills");
+    const toastElement = document.getElementById("cart-toast");
+    const toastMessage = document.getElementById("toast-message");
+    const miniCartContainer = document.getElementById("mini-cart-items-container");
+    const cartCountBadge = document.getElementById("cart-count-badge");
+    const cartTotalPrice = document.getElementById("cart-total-price");
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", () => {
+      // Load cart from localStorage
+      const savedCart = localStorage.getItem("aura_skincare_cart");
+      if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartUI();
+      }
+
+      // Calculate Category Counts
+      calculateCategoryCounts();
+
+      // Initial Render
+      renderProducts();
+
+      // Bind Event Listeners
+      setupEventListeners();
+    });
+
+    // Calculate Category Counts
+    function calculateCategoryCounts() {
+      document.getElementById("count-all").textContent = originalProducts.length;
+      document.getElementById("count-serums").textContent = originalProducts.filter(p => p.category === "serums").length;
+      document.getElementById("count-moisturizers").textContent = originalProducts.filter(p => p.category === "moisturizers").length;
+      document.getElementById("count-cleansers").textContent = originalProducts.filter(p => p.category === "cleansers").length;
+      document.getElementById("count-sun-care").textContent = originalProducts.filter(p => p.category === "sun-care").length;
+    }
+
+    // Set up Event Listeners
+    function setupEventListeners() {
+      // Search input change
+      searchInput.addEventListener("input", (e) => {
+        currentSearch = e.target.value.trim().toLowerCase();
+        if (currentSearch.length > 0) {
+          searchClear.style.display = "block";
+        } else {
+          searchClear.style.display = "none";
+        }
+        filterAndRender();
+      });
+
+      // Clear search
+      searchClear.addEventListener("click", () => {
+        searchInput.value = "";
+        currentSearch = "";
+        searchClear.style.display = "none";
+        filterAndRender();
+      });
+
+      // Price slider change
+      priceSlider.addEventListener("input", (e) => {
+        currentMaxPrice = parseInt(e.target.value);
+        priceDisplay.textContent = `$${currentMaxPrice}`;
+        filterAndRender();
+      });
+
+      // Sort dropdown change
+      sortDropdown.addEventListener("change", (e) => {
+        currentSort = e.target.value;
+        filterAndRender();
+      });
+
+      // Sidebar Category clicks
+      sidebarCategories.addEventListener("click", (e) => {
+        const targetLi = e.target.closest("li");
+        if (!targetLi) return;
+        
+        // Remove active class from all
+        sidebarCategories.querySelectorAll("li").forEach(li => li.classList.remove("active"));
+        targetLi.classList.add("active");
+        
+        currentCategory = targetLi.getAttribute("data-category");
+        
+        // Sync with filter pills at the top
+        if (filterPillsContainer) {
+          filterPillsContainer.querySelectorAll(".category-pill").forEach(btn => {
+            if (btn.getAttribute("data-category") === currentCategory) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+        }
+        
+        filterAndRender();
+      });
+
+      // Top Filter Pills clicks
+      if (filterPillsContainer) {
+        filterPillsContainer.addEventListener("click", (e) => {
+          const targetBtn = e.target.closest("button");
+          if (!targetBtn) return;
+
+          filterPillsContainer.querySelectorAll(".category-pill").forEach(btn => btn.classList.remove("active"));
+          targetBtn.classList.add("active");
+
+          currentCategory = targetBtn.getAttribute("data-category");
+
+          // Sync with sidebar categories
+          sidebarCategories.querySelectorAll("li").forEach(li => {
+            if (li.getAttribute("data-category") === currentCategory) {
+              li.classList.add("active");
+            } else {
+              li.classList.remove("active");
+            }
+          });
+
+          filterAndRender();
+        });
+      }
+
+      // Reset filters button
+      resetFiltersBtn.addEventListener("click", resetAllFilters);
+
+      // Card tilt effect & dynamic mouse spotlight coordinates
+      gridContainer.addEventListener("mousemove", (e) => {
+        const card = e.target.closest(".product-card");
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      });
+
+      // Offcanvas checkout button
+      document.getElementById("cart-checkout-btn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Your clinical bag is currently empty.");
+        } else {
+          showToast("Order compiled. Redirecting to secure clinic portal...");
+          setTimeout(() => {
+            alert("This is a demo. Checkout integration is processed on our secure stripe servers in production.");
+          }, 1000);
+        }
+      });
+
+      // Featured Add-to-cart button
+      document.querySelector(".add-to-cart-direct-btn").addEventListener("click", (e) => {
+        const pId = e.currentTarget.getAttribute("data-id");
+        addToCart(pId);
+      });
+
+      // Newsletter form submit
+      document.getElementById("newsletter-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("newsletter-email").value;
+        if (email) {
+          document.getElementById("newsletter-form").style.display = "none";
+          document.getElementById("newsletter-success").classList.remove("d-none");
+        }
+      });
+    }
+
+    // Reset all filters function
+    function resetAllFilters() {
+      searchInput.value = "";
+      currentSearch = "";
+      searchClear.style.display = "none";
+      currentMaxPrice = 150;
+      priceSlider.value = 150;
+      priceDisplay.textContent = "$150";
+      currentCategory = "all";
+      currentSort = "featured";
+      sortDropdown.value = "featured";
+
+      // Reset pills
+      if (filterPillsContainer) {
+        filterPillsContainer.querySelectorAll(".category-pill").forEach(btn => {
+          if (btn.getAttribute("data-category") === "all") btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+      }
+
+      // Reset sidebar
+      sidebarCategories.querySelectorAll("li").forEach(li => {
+        if (li.getAttribute("data-category") === "all") li.classList.add("active");
+        else li.classList.remove("active");
+      });
+
+      filterAndRender();
+    }
+
+    // Filter, Sort, and Trigger rendering
+    function filterAndRender() {
+      // Filter by category, search term, and max price
+      products = originalProducts.filter(p => {
+        const matchesCategory = (currentCategory === "all" || p.category === currentCategory);
+        const matchesSearch = (p.name.toLowerCase().includes(currentSearch) || 
+                               p.brand.toLowerCase().includes(currentSearch) || 
+                               p.description.toLowerCase().includes(currentSearch));
+        const matchesPrice = (p.price <= currentMaxPrice);
+        return matchesCategory && matchesSearch && matchesPrice;
+      });
+
+      // Sort
+      if (currentSort === "price-low") {
+        products.sort((a, b) => a.price - b.price);
+      } else if (currentSort === "price-high") {
+        products.sort((a, b) => b.price - a.price);
+      } else if (currentSort === "rating") {
+        products.sort((a, b) => b.rating - a.rating);
+      } else {
+        // Featured default (revert to database array order)
+        const orderMap = originalProducts.reduce((acc, p, idx) => {
+          acc[p.id] = idx;
+          return acc;
+        }, {});
+        products.sort((a, b) => orderMap[a.id] - orderMap[b.id]);
+      }
+
+      renderProducts();
+    }
+
+    // Render filtered products in Grid
+    function renderProducts() {
+      // Results Count
+      resultsCount.textContent = `Showing ${products.length} clinical items`;
+
+      if (products.length === 0) {
+        gridContainer.innerHTML = "";
+        emptyState.classList.remove("d-none");
+        return;
+      }
+
+      emptyState.classList.add("d-none");
+
+      let html = "";
+      products.forEach((p, index) => {
+        // Star generation
+        let starsHtml = "";
+        const wholeStars = Math.floor(p.rating);
+        for (let i = 0; i < 5; i++) {
+          if (i < wholeStars) {
+            starsHtml += `<i data-lucide="star"></i>`;
+          } else {
+            starsHtml += `<i data-lucide="star" style="opacity: 0.2;"></i>`;
+          }
+        }
+
+        // Color badge determination
+        let badgeClass = "";
+        if (p.badge === "New Arrival") badgeClass = "new";
+        if (p.badge === "Clinical Grade") badgeClass = "clinical";
+
+        html += `
+          <div class="col-lg-4 col-sm-6 product-grid-wrapper" data-aos="fade-up" data-aos-delay="${50 * (index % 3)}">
+            <div class="product-card" onclick="location.href='product-details.html?id=${p.id}'">
+              <div class="card-glow-spotlight"></div>
+              
+              <!-- Image & actions overlay -->
+              <div class="product-img-box">
+                <span class="product-badge ${badgeClass}">${p.badge}</span>
+                <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy">
+                <div class="product-actions-overlay" onclick="event.stopPropagation();">
+                  <button class="product-action-btn btn-quickview" onclick="openQuickView('${p.id}')">Quick View</button>
+                  <a href="product-details.html?id=${p.id}" class="product-action-btn btn-viewdetails">View Details</a>
+                </div>
+              </div>
+
+              <!-- Product Details -->
+              <div class="product-info">
+                <span class="product-brand">${p.brand}</span>
+                <h3 class="product-name font-serif">${p.name}</h3>
+                
+                <div class="product-rating-box">
+                  <div class="rating-stars">${starsHtml}</div>
+                  <span class="rating-value">(${p.rating}/5)</span>
+                </div>
+
+                <div class="product-footer-price" onclick="event.stopPropagation();">
+                  <span class="product-price">$${p.price}.00</span>
+                  <button class="btn-add-to-cart" onclick="addToCart('${p.id}')">
+                    <i data-lucide="shopping-cart"></i> Add
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+      });
+
+      gridContainer.innerHTML = html;
+      lucide.createIcons(); // Instantly map lucide icons to newly appended elements
+    }
+
+    // Modal Quick View trigger
+    function openQuickView(productId) {
+      const p = originalProducts.find(item => item.id === productId);
+      if (!p) return;
+
+      document.getElementById("modal-product-image").src = p.image;
+      document.getElementById("modal-product-brand").textContent = p.brand;
+      document.getElementById("modal-product-name").textContent = p.name;
+      document.getElementById("modal-product-price").textContent = `$${p.price}.00`;
+      document.getElementById("modal-product-description").textContent = p.description;
+      document.getElementById("modal-product-ingredients").textContent = p.ingredients;
+      document.getElementById("modal-product-rating-text").textContent = `(${p.rating} / 5.0 Rating)`;
+
+      // Draw stars inside modal
+      let starsHtml = "";
+      const wholeStars = Math.floor(p.rating);
+      for (let i = 0; i < 5; i++) {
+        if (i < wholeStars) starsHtml += `<i data-lucide="star"></i>`;
+        else starsHtml += `<i data-lucide="star" style="opacity: 0.2;"></i>`;
+      }
+      document.getElementById("modal-product-stars").innerHTML = starsHtml;
+
+      // Add to cart bind inside modal
+      const modalBtn = document.getElementById("modal-add-to-cart-btn");
+      // Recreate to clear previous listeners
+      const newModalBtn = modalBtn.cloneNode(true);
+      modalBtn.parentNode.replaceChild(newModalBtn, modalBtn);
+      newModalBtn.addEventListener("click", () => {
+        addToCart(p.id);
+        const myModalEl = document.getElementById('quickViewModal');
+        const modal = bootstrap.Modal.getInstance(myModalEl);
+        if (modal) modal.hide();
+      });
+
+      // View details link inside modal
+      document.getElementById("modal-view-details-link").href = `product-details.html?id=${p.id}`;
+
+      // Open Modal using Bootstrap
+      const myModal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+      myModal.show();
+      lucide.createIcons();
+    }
+
+    // Add To Cart Function
+    function addToCart(productId) {
+      const product = originalProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      // Check if product is already in the cart
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+
+      // Save to localStorage
+      localStorage.setItem("aura_skincare_cart", JSON.stringify(cart));
+
+      // Trigger UI updates
+      updateCartUI();
+
+      // Show success toast
+      showToast(`"${product.name}" added to clinical bag.`);
+    }
+
+    // Update Cart UI
+    function updateCartUI() {
+      // 1. Total Count Badge
+      const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+      if (totalCount > 0) {
+        cartCountBadge.textContent = totalCount;
+        cartCountBadge.style.display = "block";
+      } else {
+        cartCountBadge.style.display = "none";
+      }
+
+      // 2. Offcanvas Container rendering
+      if (cart.length === 0) {
+        miniCartContainer.innerHTML = `
+          <div class="text-center py-5">
+            <i data-lucide="shopping-bag" style="width: 40px; height: 40px; color: var(--text-muted); opacity: 0.5; margin-bottom: 15px;"></i>
+            <p class="text-muted font-sans fs-xs">Your clinical skincare bag is empty.</p>
+          </div>
+        `;
+        cartTotalPrice.textContent = "$0.00";
+        lucide.createIcons();
+        return;
+      }
+
+      let html = "";
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price * item.quantity;
+        html += `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-img" loading="lazy">
+            <div class="cart-item-details">
+              <h4 class="cart-item-name font-serif mb-1">${item.name}</h4>
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="cart-item-price">$${item.price}.00</span>
+                <span class="text-muted fs-xs">Qty: ${item.quantity}</span>
+              </div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove item">
+              <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+            </button>
+          </div>
+        `;
+      });
+
+      miniCartContainer.innerHTML = html;
+      cartTotalPrice.textContent = `$${subtotal}.00`;
+      lucide.createIcons();
+    }
+
+    // Remove From Cart
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      localStorage.setItem("aura_skincare_cart", JSON.stringify(cart));
+      updateCartUI();
+      showToast("Removed from clinical bag.");
+    }
+
+    // Show Custom Toast
+    let toastTimeout;
+    function showToast(message) {
+      toastMessage.textContent = message;
+      toastElement.classList.add("show");
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastElement.classList.remove("show");
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Details | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+  
+  <!-- PREMIUM LUXURY BLOG DETAILS CUSTOM STYLES -->
+  <style>
+    /* Subtitle & Accents */
+    .subtitle-accent {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--color-gold);
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .title-line {
+      height: 1px;
+      background-color: var(--color-gold);
+      width: 60px;
+      margin: 15px auto;
+    }
+    
+    /* Main Article Container */
+    .article-wrap-luxury {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 50px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+    .article-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin-bottom: 25px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .article-header-meta li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-header-meta li i {
+      color: var(--color-gold);
+      width: 15px;
+      height: 15px;
+    }
+    
+    /* Featured Image */
+    .article-featured-img-box {
+      width: 100%;
+      height: 480px;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      margin-bottom: 40px;
+      border: 1px solid var(--border-clinic);
+      box-shadow: var(--shadow-sm);
+    }
+    .article-featured-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .article-featured-img-box:hover img {
+      transform: scale(1.02);
+    }
+    
+    /* Typography Overrides for Article Content */
+    .article-body-luxury {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-main);
+    }
+    .article-body-luxury p {
+      margin-bottom: 25px;
+    }
+    .lead-paragraph-luxury {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      font-style: italic;
+      border-left: 3px solid var(--color-gold);
+      padding-left: 24px;
+      margin-bottom: 35px;
+    }
+    .article-body-luxury h3,
+    .article-body-luxury h4 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+    .article-body-luxury h3 {
+      font-size: 1.65rem;
+    }
+    .article-body-luxury h4 {
+      font-size: 1.3rem;
+    }
+    
+    /* Blockquote */
+    .blockquote-luxury {
+      background-color: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-left: 4px solid var(--color-gold);
+      padding: 35px;
+      border-radius: var(--border-radius-md);
+      margin: 40px 0;
+      position: relative;
+    }
+    .blockquote-text {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 15px;
+    }
+    .blockquote-author {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Custom Bullet Lists */
+    .article-list-luxury {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 30px;
+    }
+    .article-list-luxury li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 12px;
+    }
+    .article-list-luxury li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      color: var(--color-gold);
+      font-size: 1.3rem;
+      line-height: 1;
+      top: -1px;
+    }
+    
+    /* Tags Container */
+    .tags-container-luxury {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-clinic);
+    }
+    .tag-title-label {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      align-self: center;
+      margin-right: 10px;
+    }
+    .tag-pill-luxury {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background-color: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      padding: 6px 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .tag-pill-luxury:hover {
+      background-color: var(--color-gold-light);
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+    
+    /* Social Share Panel */
+    .share-panel-luxury {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      padding: 25px 35px;
+      background-color: var(--bg-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+    }
+    .share-icons {
+      display: flex;
+      gap: 12px;
+    }
+    .share-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+      text-decoration: none;
+    }
+    .share-icon-btn:hover {
+      background-color: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      transform: scale(1.08);
+    }
+    
+    /* Previous / Next Article Navigation */
+    .post-nav-section {
+      display: flex;
+      gap: 20px;
+      margin: 50px 0;
+    }
+    .post-nav-card {
+      flex: 1;
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      padding: 25px 30px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .post-nav-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-gold-border);
+    }
+    .post-nav-card.prev-card:hover {
+      transform: translateX(-4px);
+    }
+    .post-nav-card.next-card:hover {
+      transform: translateX(4px);
+    }
+    .nav-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    /* Related Posts */
+    .related-section {
+      margin-bottom: 50px;
+    }
+    .related-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      height: 100%;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .related-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-gold-border);
+      transform: translateY(-4px);
+    }
+    .related-img-wrap {
+      height: 160px;
+      overflow: hidden;
+    }
+    .related-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+    .related-card:hover .related-img-wrap img {
+      transform: scale(1.06);
+    }
+    .related-content {
+      padding: 20px;
+    }
+    .related-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .related-title a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .related-title a:hover {
+      color: var(--color-gold);
+    }
+    .related-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    
+    /* Comment Feed */
+    .comments-feed-section {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 45px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .comments-list-custom {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .comment-item-luxury {
+      display: flex;
+      gap: 20px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--border-clinic);
+    }
+    .comment-item-luxury:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .comment-avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-color: var(--bg-clinic);
+      border: 1.5px solid var(--color-gold-border);
+    }
+    .comment-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .comment-meta-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .commenter-name {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      color: var(--text-main);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    .comment-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .comment-reply-btn {
+      font-size: 0.75rem;
+      font-family: var(--font-sans);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--color-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition-fast);
+    }
+    .comment-reply-btn:hover {
+      color: var(--color-gold-hover);
+    }
+    .comment-text-custom {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+    
+    /* Comment Form Container */
+    .comment-form-section {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 45px;
+      box-shadow: var(--shadow-sm);
+    }
+    .form-control-custom {
+      background-color: var(--bg-clinic) !important;
+      border: 1px solid var(--border-clinic) !important;
+      border-radius: var(--border-radius-md) !important;
+      color: var(--text-main) !important;
+      padding: 14px 18px !important;
+      font-size: 0.95rem !important;
+      width: 100%;
+      transition: var(--transition-fast) !important;
+    }
+    .form-control-custom:focus {
+      border-color: var(--color-gold) !important;
+      box-shadow: 0 0 0 4px var(--color-gold-light) !important;
+      outline: none;
+    }
+    
+    /* Sidebar Widgets */
+    .sidebar-widget-luxury {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 35px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+    }
+    .widget-title-luxury {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      color: var(--text-main);
+    }
+    .widget-title-luxury::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 1px;
+      background-color: var(--color-gold);
+    }
+    .search-input-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input-group i {
+      position: absolute;
+      left: 18px;
+      color: var(--color-gold);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+    .search-control-custom {
+      background-color: var(--bg-clinic) !important;
+      border: 1px solid var(--border-clinic) !important;
+      border-radius: var(--border-radius-md) !important;
+      color: var(--text-main) !important;
+      padding: 13px 18px 13px 48px !important;
+      font-size: 0.95rem !important;
+      width: 100%;
+      transition: var(--transition-fast) !important;
+    }
+    .search-control-custom:focus {
+      border-color: var(--color-gold) !important;
+      box-shadow: 0 0 0 4px var(--color-gold-light) !important;
+      outline: none;
+    }
+    .category-list-custom {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .category-list-custom li {
+      margin-bottom: 12px;
+    }
+    .category-link-custom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: var(--transition-fast);
+    }
+    .category-link-custom:hover {
+      background-color: var(--bg-clinic);
+      color: var(--color-gold);
+      padding-left: 16px;
+    }
+    .category-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--color-gold-light);
+      color: var(--color-gold);
+      padding: 3px 9px;
+      border-radius: 50px;
+    }
+    .newsletter-widget-card {
+      background: linear-gradient(135deg, var(--surface-clinic) 0%, var(--bg-clinic) 100%);
+      border: 1px dashed var(--color-gold);
+    }
+    .custom-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      color: var(--text-main);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    @media (max-width: 991px) {
+      .article-wrap-luxury {
+        padding: 30px;
+      }
+      .article-featured-img-box {
+        height: 320px;
+      }
+      .post-nav-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Blog Details</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+        <li class="breadcrumb-item active">Article Details</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN ARTICLE CONTAINER -->
+  <main class="py-5" style="background-color: var(--bg-clinic);">
+    <div class="container py-4">
+      <div class="row g-5">
+        
+        <!-- LEFT: ARTICLE COLUMN -->
+        <div class="col-lg-8" data-aos="fade-up">
+          <article class="article-wrap-luxury" id="activeArticleContainer">
+            <!-- Dynamically populated article details go here -->
+            <div class="text-center py-5">
+              <div class="spinner-border text-gold" role="status">
+                <span class="visually-hidden">Loading article...</span>
+              </div>
+            </div>
+          </article>
+          
+          <!-- PREVIOUS / NEXT ARTICLE NAVIGATION -->
+          <div class="post-nav-section" id="articleNavigationContainer">
+            <!-- Dynamically populated post nav -->
+          </div>
+          
+          <!-- RELATED ARTICLES SECTION -->
+          <div class="related-section">
+            <h4 class="font-serif text-uppercase mb-4" style="letter-spacing: 0.5px; font-size: 1.3rem;">Related Publications</h4>
+            <div class="row g-4" id="relatedArticlesContainer">
+              <!-- Dynamically populated related articles -->
+            </div>
+          </div>
+          
+          <!-- COMMENTS FEED SECTION -->
+          <div class="comments-feed-section" id="commentsFeedSection">
+            <h4 class="font-serif text-uppercase mb-4" style="letter-spacing: 0.5px; font-size: 1.3rem;" id="commentSectionTitle">Client Discussion (2)</h4>
+            
+            <ul class="comments-list-custom" id="commentsContainer">
+              <!-- Comment 1 -->
+              <li class="comment-item-luxury">
+                <div class="comment-avatar">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Eleanor Vance">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="comment-meta-info">
+                    <h5 class="commenter-name">Eleanor Vance</h5>
+                    <span class="comment-date">July 4, 2026 at 2:30 PM</span>
+                  </div>
+                  <p class="comment-text-custom">
+                    This analysis on molecular weights is extremely enlightening. I recently received the Hyaluronic Serum from the Aura Care shop, and the visible hydration retention matches this paper perfectly! Thank you for the clinical perspective.
+                  </p>
+                  <div class="mt-2 text-end">
+                    <a href="#commentForm" class="comment-reply-btn" onclick="replyToComment('Eleanor Vance')">
+                      <i data-lucide="reply" style="width: 12px; height: 12px;"></i> Reply
+                    </a>
+                  </div>
+                </div>
+              </li>
+              
+              <!-- Comment 2 -->
+              <li class="comment-item-luxury">
+                <div class="comment-avatar">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Julian Kingsley" loading="lazy">
+                </div>
+                <div class="flex-grow-1">
+                  <div class="comment-meta-info">
+                    <h5 class="commenter-name">Julian Kingsley</h5>
+                    <span class="comment-date">July 4, 2026 at 4:15 PM</span>
+                  </div>
+                  <p class="comment-text-custom">
+                    Fascinating read on dermal penetration depth. Does Dr. Marcus recommend combining varying weights of HA with microneedling treatments like Morpheus8 immediately, or should there be a barrier repair grace period?
+                  </p>
+                  <div class="mt-2 text-end">
+                    <a href="#commentForm" class="comment-reply-btn" onclick="replyToComment('Julian Kingsley')">
+                      <i data-lucide="reply" style="width: 12px; height: 12px;"></i> Reply
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- COMMENT FORM -->
+          <div class="comment-form-section" id="commentForm">
+            <h4 class="font-serif text-uppercase mb-2" style="letter-spacing: 0.5px; font-size: 1.3rem;">Leave a Comment</h4>
+            <p class="text-muted small mb-4">Your clinical email is kept confidential. Required fields are marked *</p>
+            
+            <form id="auraCommentForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" id="commenterNameInput" class="form-control-custom" placeholder="Full Name *" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" id="commenterEmailInput" class="form-control-custom" placeholder="Email Address *" required>
+                </div>
+                <div class="col-12">
+                  <textarea id="commentTextInput" class="form-control-custom" rows="5" placeholder="Share your clinical feedback or query..." required></textarea>
+                </div>
+                <div class="col-12 text-end mt-4">
+                  <button type="submit" class="btn-gold btn-ripple py-2.5 px-4 font-sans text-uppercase tracking-wider" style="font-size: 0.85rem;">
+                    Post Comment
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- RIGHT: SIDEBAR CONTROLS -->
+        <div class="col-lg-4">
+          <div class="sticky-lg-top" style="top: 100px; z-index: 5;">
+            
+            <!-- WIDGET 1: SEARCH REDIRECT BOX -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left">
+              <h4 class="widget-title-luxury">Search Journals</h4>
+              <div class="search-input-group">
+                <i data-lucide="search"></i>
+                <input type="text" id="blogSearchInput" class="search-control-custom" placeholder="Search blog.html grid..." onkeydown="searchRedirect(event)">
+              </div>
+              <p class="text-muted small mt-2 mb-0" style="font-size: 0.78rem;">Press enter to search the main publications grid.</p>
+            </div>
+            
+            <!-- WIDGET 2: CATEGORIES -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left" data-aos-delay="100">
+              <h4 class="widget-title-luxury">Aura Categories</h4>
+              <ul class="category-list-custom">
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Clinical Treatments</span>
+                    <span class="category-count">3</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Laser & Phototherapy</span>
+                    <span class="category-count">2</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Anti-Aging Secrets</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Regenerative Care</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Organic Skincare</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="blog.html" class="category-link-custom">
+                    <span>Post-Procedural Care</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- WIDGET 3: POPULAR POSTS -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left" data-aos-delay="200">
+              <h4 class="widget-title-luxury">Popular Readings</h4>
+              
+              <a href="blog-details.html?id=1" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&w=150&q=80" alt="Hyaluronic Acid" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>The Evolution of Hyaluronic Acid: Multi-Weight Molecules</h5>
+                  <span class="popular-post-date">July 4, 2026</span>
+                </div>
+              </a>
+              
+              <a href="blog-details.html?id=2" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=150&q=80" alt="Morpheus8" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>Morpheus8 vs. Traditional Micro-Needling: The Gold Standard</h5>
+                  <span class="popular-post-date">June 28, 2026</span>
+                </div>
+              </a>
+              
+              <a href="blog-details.html?id=3" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=150&q=80" alt="Laser Rejuvenation" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>Photothermal Rejuvenation: Deciphering Laser Wavebands</h5>
+                  <span class="popular-post-date">June 15, 2026</span>
+                </div>
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- DYNAMIC CLINICAL JOURNAL ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. COMPREHENSIVE CLINICAL JOURNAL DATABASE (10 Articles)
+      const articlesDatabase = {
+        "featured": {
+          id: "featured",
+          title: "The Science of Deep Dermal Regeneration: Cellular Turnover Ratios",
+          category: "Research & Innovations",
+          categorySlug: "clinical",
+          author: "Dr. Marcus Vance",
+          date: "July 5, 2026",
+          readTime: "8 Mins Read",
+          image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=80",
+          lead: "Our chief medical director evaluates the latest breakthroughs in extracellular matrix remodeling, peptide sequencing, and physical barrier recovery timelines for clinical treatment post-care.",
+          quoteText: "Accelerating basal stem cell division without reinforcing the lipid barrier leads to trans-epidermal water loss. Regeneration must always be a synchronized, multi-depth process.",
+          quoteAuthor: "Dr. Marcus Vance, Chief Medical Director",
+          tags: ["Dermal Science", "Regeneration", "Clinical Research"],
+          content: `
+            <h3>I. Basal Stem Cells and Epidermal Turnover</h3>
+            <p>The human epidermis is a self-renewing tissue that relies on a dedicated population of stem cells located in the basal layer. Under healthy, youthful conditions, the complete cellular turnover cycle takes approximately 28 days, wherein keratinocytes differentiate and migrate upwards to form the stratum corneum.</p>
+            <p>As biological aging progress, this turnover rate slows down, leading to a dull complexion, uneven texture, and a weakened barrier. Stimulating this process requires precise cellular signaling without triggering micro-inflammation.</p>
+            
+            <h3>II. Synthetic Peptide Sequencing & Fibroblast Activation</h3>
+            <p>By introducing synthetic biomimetic peptides, we can target specific cell surface receptors on fibroblasts within the papillary dermis. This signals the cells to resume the synthesis of high-quality collagen and elastin fibers.</p>
+            <ul class="article-list-luxury">
+              <li><strong>Hexapeptide-11:</strong> Clinically proven to improve skin firmness and regulate lipid synthesis.</li>
+              <li><strong>Copper Tripeptide-1:</strong> Promotes scar-free healing, breaks down large collagen aggregates, and stimulates new capillary growth.</li>
+              <li><strong>Palmitoyl Pentapeptide-4:</strong> Directly targets sub-surface micro-creasing by reinforcing the dermal-epidermal junction (DEJ).</li>
+            </ul>
+            
+            <h3>III. Clinical Post-Care & Recovery Timelines</h3>
+            <p>Our clinical evaluations show that patients who follow a post-treatment peptide regimen after fractional laser or micro-needling experience a 45% reduction in down-time. This highlights the importance of protecting the skin barrier during recovery to ensure optimal results.</p>
+          `
+        },
+        "1": {
+          id: "1",
+          title: "The Evolution of Hyaluronic Acid: Multi-Weight Molecules",
+          category: "Clinical Treatments",
+          categorySlug: "clinical",
+          author: "Dr. Marcus Vance",
+          date: "July 4, 2026",
+          readTime: "6 Mins Read",
+          image: "https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&w=1200&q=80",
+          lead: "Discover how varying molecular weights of hyaluronic acid penetrate distinct dermal layers, providing structured volume and moisture.",
+          quoteText: "Hyaluronic acid is not just a surface humectant. Its efficacy is entirely dependent on its molecular size, which dictates how deeply it can hydrate.",
+          quoteAuthor: "Dr. Marcus Vance",
+          tags: ["Hyaluronic Acid", "Hydration", "Cosmeceuticals"],
+          content: `
+            <h3>I. The Limitations of High Molecular Weight Hyaluronic Acid</h3>
+            <p>Traditionally, hyaluronic acid (HA) in skincare was limited to large molecules (1,500 to 2,000 kDa). While highly effective at drawing atmospheric moisture and forming a protective barrier on the skin's surface, these molecules are too large to penetrate the stratum corneum, leaving deeper hydration levels unaddressed.</p>
+            <p>This film-forming action prevents trans-epidermal water loss (TEWL) but can lead to surface dehydration if applied in dry climates without an occlusive layer.</p>
+            
+            <h3>II. Deconstructing Multi-Weight Hyaluronic Networks</h3>
+            <p>Modern aesthetic formulations utilize a complex network of HA molecules of varying weights to provide deep, multi-layered hydration:</p>
+            <ul class="article-list-luxury">
+              <li><strong>High Molecular Weight (HMW-HA):</strong> Remains on the surface to soothe, hydrate, and maintain barrier integrity.</li>
+              <li><strong>Medium Molecular Weight (MMW-HA):</strong> Penetrates the epidermis to improve cellular cohesion and support natural defense mechanisms.</li>
+              <li><strong>Low Molecular Weight (LMW-HA):</strong> Reaches deeper epidermal layers to stimulate endogenous HA production and support tissue repair.</li>
+            </ul>
+            
+            <h3>III. Clinical Benefits of Deep Hydration</h3>
+            <p>Regular use of multi-weight HA has been shown to improve skin elasticity, reduce the appearance of fine lines, and speed up recovery times, making it an essential component of clinical skincare regimens.</p>
+          `
+        },
+        "2": {
+          id: "2",
+          title: "Morpheus8 vs. Traditional Micro-Needling: The Gold Standard",
+          category: "Dermal Remodeling",
+          categorySlug: "clinical",
+          author: "Dr. Julian Sterling",
+          date: "June 28, 2026",
+          readTime: "7 Mins Read",
+          image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1200&q=80",
+          lead: "An examination of fractional radiofrequency microneedling. Learn how subdermal fat remodeling targets active collagen production.",
+          quoteText: "Morpheus8 bridges the gap between non-invasive treatments and surgical facelifts by targeting subdermal fat and skin tissue simultaneously.",
+          quoteAuthor: "Dr. Julian Sterling",
+          tags: ["Morpheus8", "Radiofrequency", "Microneedling"],
+          content: `
+            <h3>I. The Science of Fractional Radiofrequency</h3>
+            <p>Traditional microneedling creates micro-channels in the skin to trigger a natural healing response, which is highly effective for surface scars and fine lines. However, Morpheus8 elevates this process by introducing fractional radiofrequency (RF) energy through insulated needles.</p>
+            <p>As the needles penetrate the skin, they deliver RF energy directly into the subdermal layers. This generates controlled thermal energy that coagulates fat cells and contracts the tissue for a firmer, more lifted appearance.</p>
+            
+            <h3>II. Dual-Action Subdermal Remodeling</h3>
+            <p>Morpheus8 is unique because it allows providers to customize both the depth of penetration and the intensity of RF energy:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Subdermal Fat Remodeling:</strong> Reaches depths up to 4mm to contour areas like the jawline and neck.</li>
+              <li><strong>Epidermal and Dermal Tightening:</strong> Delivers RF energy to superficial layers to improve skin texture and tone.</li>
+              <li><strong>Neocollagenesis:</strong> Stimulates collagen production over 3-6 months for natural, long-lasting results.</li>
+            </ul>
+            
+            <h3>III. Patient Outcomes & Recovery Protocols</h3>
+            <p>Patients typically experience mild redness and swelling for 2-3 days, followed by significant improvements in skin firmness and texture within 4 weeks. This makes Morpheus8 an ideal option for those seeking substantial rejuvenation with minimal downtime.</p>
+          `
+        },
+        "3": {
+          id: "3",
+          title: "Photothermal Rejuvenation: Deciphering Laser Wavebands",
+          category: "Laser Therapy",
+          categorySlug: "laser",
+          author: "Dr. Evelyn Thorne",
+          date: "June 15, 2026",
+          readTime: "9 Mins Read",
+          image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80",
+          lead: "Uncover the biophysics of targeted light wavebands and stellar lasers for pigment disintegration and thermal surface repair.",
+          quoteText: "Selective photothermolysis allows us to target specific pigments and skin structures while leaving the surrounding tissue completely undamaged.",
+          quoteAuthor: "Dr. Evelyn Thorne",
+          tags: ["Laser Therapy", "Photorejuvenation", "Biophysics"],
+          content: `
+            <h3>I. Understanding Selective Photothermolysis</h3>
+            <p>Laser therapies rely on selective photothermolysis, a principle that allows specific light wavelengths to target specific pigments (chromophores) in the skin, such as melanin, hemoglobin, or water, without damaging surrounding tissue.</p>
+            <p>By matching the laser's wavelength to the target chromophore, we can address specific concerns like hyperpigmentation, vascular lesions, and skin laxity with high precision.</p>
+            
+            <h3>II. Non-Ablative vs. Ablative Technologies</h3>
+            <p>We customize treatments based on the patient's concerns and preferred recovery time:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Ablative Lasers (CO2, Erbium:YAG):</strong> Vaporize surface tissue to stimulate significant collagen production, ideal for deep wrinkles and severe scarring.</li>
+              <li><strong>Non-Ablative Lasers (Nd:YAG, Er:Glass):</strong> Heat deeper tissues without damaging the surface, requiring minimal downtime while still promoting skin firming and cell renewal.</li>
+              <li><strong>Intense Pulsed Light (IPL):</strong> Delivers broad-spectrum light to target red and brown pigments, improving overall skin tone and clarity.</li>
+            </ul>
+            
+            <h3>III. Custom Clinical Protocols</h3>
+            <p>Every laser treatment is tailored to the patient's skin type (using the Fitzpatrick Scale) to ensure safe, effective results and minimize the risk of post-inflammatory hyperpigmentation.</p>
+          `
+        },
+        "4": {
+          id: "4",
+          title: "Circadian Skin Rhythms: Maximizing Nighttime Renewal",
+          category: "Anti-Aging Secrets",
+          categorySlug: "anti-aging",
+          author: "Dr. Beatrice Rose",
+          date: "May 30, 2026",
+          readTime: "5 Mins Read",
+          image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80",
+          lead: "The dermis behaves differently at night. Learn how to align active retinol applications with your skin's cellular circadian cycle.",
+          quoteText: "During sleep, your skin switches from defense to repair mode, making nighttime the most effective window for active treatment application.",
+          quoteAuthor: "Dr. Beatrice Rose",
+          tags: ["Retinol", "Anti-Aging", "Circadian Rhythms"],
+          content: `
+            <h3>I. The Day/Night Skin Cycle</h3>
+            <p>Your skin follows a 24-hour circadian rhythm that dictates its behavior throughout the day. During daylight hours, the skin focuses on protecting itself from environmental stressors like UV rays and pollution.</p>
+            <p>At night, cell division peaks, the skin barrier becomes more permeable, and blood flow increases to facilitate repair and renewal.</p>
+            
+            <h3>II. Maximizing the Power of Retinoids</h3>
+            <p>Applying active treatments like retinoids during this natural renewal phase enhances their efficacy:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Increased Absorption:</strong> Higher skin permeability at night allows deeper penetration of active ingredients.</li>
+              <li><strong>Cellular Turnover Support:</strong> Retinoids work with the skin's natural repair cycle to speed up cell renewal and collagen production.</li>
+              <li><strong>Reduced Irritation:</strong> Applying retinoids at night avoids UV-induced sensitivity, reducing the risk of irritation.</li>
+            </ul>
+            
+            <h3>III. Building a Balanced Nighttime Routine</h3>
+            <p>To maximize results, combine retinoids with nourishing ingredients like ceramides, peptides, and niacinamide to support barrier repair and lock in moisture while you sleep.</p>
+          `
+        },
+        "5": {
+          id: "5",
+          title: "Autologous Platelet-Rich Fibrin: The Next Horizon",
+          category: "Regenerative Care",
+          categorySlug: "regenerative",
+          author: "Dr. Clara Fontaine",
+          date: "May 12, 2026",
+          readTime: "7 Mins Read",
+          image: "https://images.unsplash.com/photo-1579154204601-01588f35116f?auto=format&fit=crop&w=1200&q=80",
+          lead: "Delve into autologous growth factor therapy. Harness native proteins to stimulate dermal elastin and speed up micro-heals.",
+          quoteText: "Platelet-Rich Fibrin represents a significant advance in regenerative medicine, utilizing your body's natural healing factors to rejuvenate the skin.",
+          quoteAuthor: "Dr. Clara Fontaine",
+          tags: ["PRF", "Platelet Fibrin", "Regenerative Medicine"],
+          content: `
+            <h3>I. The Transition from PRP to PRF</h3>
+            <p>Platelet-Rich Plasma (PRP) has long been used in aesthetics to promote healing and collagen production. However, Platelet-Rich Fibrin (PRF) represents the next generation of autologous growth factor therapy.</p>
+            <p>PRF is spun at a lower speed during centrifugation, which preserves white blood cells, stem cells, and a natural fibrin scaffold. This allows for a slower, more sustained release of growth factors over time, leading to enhanced tissue regeneration.</p>
+            
+            <h3>II. How PRF Rejuvenates the Skin</h3>
+            <p>Once injected or applied topically after micro-needling, PRF stimulates key cellular processes:</p>
+            <ul class="article-list-luxury">
+              <li><strong>White Blood Cell Preservation:</strong> Supports the natural healing response and tissue remodeling.</li>
+              <li><strong>Fibrin Scaffold Support:</strong> Serves as a temporary matrix to help rebuild skin structure and support new tissue growth.</li>
+              <li><strong>Sustained Growth Factor Release:</strong> Continuously releases key proteins to promote long-term collagen and elastin production.</li>
+            </ul>
+            
+            <h3>III. Clinical Benefits and Patient Experience</h3>
+            <p>Because PRF is entirely autologous, the treatment is safe, natural, and carries zero risk of allergic reaction. Patients typically notice improvements in skin texture, volume, and overall radiance within a few weeks of treatment.</p>
+          `
+        },
+        "6": {
+          id: "6",
+          title: "Post-Laser Inflammatory Mitigation: Recovery Protocol",
+          category: "Post-Procedural Care",
+          categorySlug: "post-care",
+          author: "Dr. Sophia Mercer",
+          date: "April 25, 2026",
+          readTime: "6 Mins Read",
+          image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80",
+          lead: "Mitigate redness and hyperpigmentation. A detailed clinical regimen utilizing peptides and zinc-oxide skin envelopes.",
+          quoteText: "The success of any aesthetic procedure depends heavily on proper post-treatment care to minimize inflammation and support healing.",
+          quoteAuthor: "Dr. Sophia Mercer",
+          tags: ["Post-Care", "Barrier Repair", "Inflammation"],
+          content: `
+            <h3>I. Managing Post-Procedural Inflammation</h3>
+            <p>Ablative and non-ablative laser treatments create controlled micro-injuries in the skin to trigger a healing response. While necessary for collagen stimulation, managing the resulting inflammation is critical to prevent complications like post-inflammatory hyperpigmentation (PIH).</p>
+            <p>The first 72 hours are vital for soothing the skin, reducing redness, and supporting barrier recovery.</p>
+            
+            <h3>II. Key Ingredients for Skin Healing</h3>
+            <p>Using specific ingredients during your recovery can significantly improve comfort and results:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Zinc Oxide:</strong> Provides a gentle protective barrier, soothes irritation, and protects against UV rays.</li>
+              <li><strong>Ceramides and Fatty Acids:</strong> Essential lipids that rebuild the skin barrier and prevent trans-epidermal water loss.</li>
+              <li><strong>Centella Asiatica (Cica):</strong> Deeply hydrates, reduces redness, and speeds up cellular repair.</li>
+            </ul>
+            
+            <h3>III. Recommended Post-Laser Routine</h3>
+            <p>We recommend a simple, gentle routine focusing on mild cleansing, deep hydration, and physical sun protection to ensure a safe, smooth recovery.</p>
+          `
+        },
+        "7": {
+          id: "7",
+          title: "Sebum Harmonization: Active Treatments for Adult Acne",
+          category: "Acne Therapy",
+          categorySlug: "acne",
+          author: "Dr. Sophia Mercer",
+          date: "April 10, 2026",
+          readTime: "7 Mins Read",
+          image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
+          lead: "Address complex hormone-driven sebum production. How specialized salicylic formulations restore healthy follicle flora.",
+          quoteText: "Adult acne is a complex concern driven by hormones, stress, and barrier imbalance, requiring a gentle yet effective approach.",
+          quoteAuthor: "Dr. Sophia Mercer",
+          tags: ["Acne Therapy", "Salicylic Acid", "Sebum Care"],
+          content: `
+            <h3>I. The Root Causes of Adult Acne</h3>
+            <p>Unlike teenage acne, which is primarily driven by excess oil during puberty, adult acne is often caused by a combination of fluctuating hormone levels, chronic stress, sluggish cell turnover, and an imbalanced skin barrier.</p>
+            <p>This can lead to deep, painful blemishes, particularly along the jawline and neck, requiring a targeted treatment approach.</p>
+            
+            <h3>II. The Power of Beta Hydroxy Acids (BHAs)</h3>
+            <p>Salicylic acid is highly effective for adult acne because of its oil-soluble nature, allowing it to penetrate deep into pores to clear excess sebum and dead skin cells:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Pore Clarification:</strong> Exfoliates inside the follicle to prevent blockages and reduce blackheads.</li>
+              <li><strong>Anti-Inflammatory Action:</strong> Soothes active blemishes and reduces redness.</li>
+              <li><strong>Barrier Support:</strong> Formulated alongside nourishing ingredients to prevent dryness and maintain barrier health.</li>
+            </ul>
+            
+            <h3>III. A Holistic Treatment Strategy</h3>
+            <p>In addition to topical treatments, we recommend managing stress levels, maintaining a balanced diet, and using gentle, non-comedogenic hydration to support clear, healthy skin.</p>
+          `
+        },
+        "8": {
+          id: "8",
+          title: "The Lipid Barrier: Repairing Damaged Skin Envelopes",
+          category: "Organic Skincare",
+          categorySlug: "organic",
+          author: "Dr. Beatrice Rose",
+          date: "March 20, 2026",
+          readTime: "6 Mins Read",
+          image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1200&q=80",
+          lead: "Understand the lipid matrix. Restructure ceramides and fatty acid ratios to retain hydration and prevent environmental stress.",
+          quoteText: "A healthy skin barrier is your best defense against premature aging, environmental damage, and sensitivity.",
+          quoteAuthor: "Dr. Beatrice Rose",
+          tags: ["Lipid Barrier", "Ceramides", "Hydration"],
+          content: `
+            <h3>I. Understanding the Skin's Protective Barrier</h3>
+            <p>The skin barrier, or stratum corneum, is often described as a 'bricks and mortar' structure, where keratinocytes act as the bricks and extracellular lipids serve as the mortar holding everything together.</p>
+            <p>This lipid matrix is composed of ceramides, cholesterol, and free fatty acids. When these lipids are in balance, they prevent water loss and protect the skin from irritants and environmental stressors.</p>
+            
+            <h3>II. Signs of a Compromised Barrier</h3>
+            <p>An imbalanced lipid ratio can lead to a damaged barrier, presenting as:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Dryness and Flaking:</strong> Loss of moisture causes skin cells to shed unevenly.</li>
+              <li><strong>Sensitivity and Redness:</strong> Irritants can easily penetrate the skin, triggering discomfort.</li>
+              <li><strong>Blemish Propensity:</strong> A weakened barrier allows acne-causing bacteria to enter pores more easily.</li>
+            </ul>
+            
+            <h3>III. Restructuring the Lipid Matrix</h3>
+            <p>To repair your barrier, focus on using rich, biomimetic creams containing ceramides, cholesterols, and fatty acids to rebuild the skin's natural protective envelope.</p>
+          `
+        },
+        "9": {
+          id: "9",
+          title: "UV Photoprotection: Deconstructing Mineral SPF Shielding",
+          category: "Phototherapy",
+          categorySlug: "phototherapy",
+          author: "Dr. Adrian Sterling",
+          date: "March 5, 2026",
+          readTime: "8 Mins Read",
+          image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1200&q=80",
+          lead: "A deep dive into physical mineral UV blocks. How zinc oxide and titanium dioxide refract harmful high-energy light rays.",
+          quoteText: "Broad-spectrum photoprotection is the most important step in any anti-aging routine, shielding skin from both burning UVB and aging UVA rays.",
+          quoteAuthor: "Dr. Adrian Sterling",
+          tags: ["Mineral SPF", "Sun Protection", "Zinc Oxide"],
+          content: `
+            <h3>I. Mineral vs. Chemical UV Filters</h3>
+            <p>Chemical sunscreens work by absorbing UV rays and converting them into heat, whereas physical (mineral) sunscreens utilize active minerals to protect the skin.</p>
+            <p>Physical mineral filters sit on top of the skin's surface, acting like tiny mirrors to reflect and refract harmful UV rays away from the skin envelope.</p>
+            
+            <h3>II. The Benefits of Zinc Oxide and Titanium Dioxide</h3>
+            <p>Mineral filters offer several distinct advantages for post-care and sensitive skin:</p>
+            <ul class="article-list-luxury">
+              <li><strong>Broad-Spectrum Protection:</strong> Zinc oxide protects against both aging UVA rays and burning UVB rays.</li>
+              <li><strong>Gentle Formulations:</strong> Non-irritating and soothing, making them ideal for sensitive, acne-prone, or post-procedure skin.</li>
+              <li><strong>Immediate Efficacy:</strong> Provides instant protection upon application, without requiring waiting time.</li>
+            </ul>
+            
+            <h3>III. Tips for Seamless Application</h3>
+            <p>Modern mineral sunscreens use micronized or tinted formulations to blend seamlessly into all skin tones, offering comfortable, everyday protection.</p>
+          `
+        }
+      };
+      
+      // 2. PARSE CURRENT ARTICLE ID FROM URL PARAMS
+      const getQueryParam = (name) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      };
+      
+      let currentArticleId = getQueryParam('id') || '1';
+      
+      // Fallback if ID doesn't exist
+      if (!articlesDatabase[currentArticleId]) {
+        currentArticleId = '1';
+      }
+      
+      const activeArticle = articlesDatabase[currentArticleId];
+      
+      // 3. POPULATE ACTIVE ARTICLE LAYOUT
+      const activeArticleContainer = document.getElementById('activeArticleContainer');
+      
+      if (activeArticle && activeArticleContainer) {
+        
+        // Build tag list
+        const tagsHTML = activeArticle.tags.map(tag => `
+          <a href="blog.html" class="tag-pill-luxury">${tag}</a>
+        `).join('');
+        
+        activeArticleContainer.innerHTML = `
+          <!-- Meta Header -->
+          <span class="subtitle-accent">${activeArticle.category}</span>
+          <h1 class="font-serif text-uppercase mb-3" style="line-height: 1.25; font-size: 2.3rem; letter-spacing: 0.5px;">
+            ${activeArticle.title}
+          </h1>
+          <ul class="article-header-meta">
+            <li><i data-lucide="user"></i> <span>${activeArticle.author}</span></li>
+            <li><i data-lucide="calendar"></i> <span>${activeArticle.date}</span></li>
+            <li><i data-lucide="clock"></i> <span>${activeArticle.readTime}</span></li>
+            <li><i data-lucide="message-square"></i> <span id="articleMetaCommentCount">2 Comments</span></li>
+          </ul>
+          
+          <!-- Featured Image Box -->
+          <div class="article-featured-img-box">
+            <img src="${activeArticle.image}" alt="${activeArticle.title}" loading="lazy">
+          </div>
+          
+          <!-- Detailed Body -->
+          <div class="article-body-luxury">
+            <p class="lead-paragraph-luxury">
+              ${activeArticle.lead}
+            </p>
+            
+            ${activeArticle.content}
+            
+            <!-- Doctor Citation Blockquote -->
+            <div class="blockquote-luxury">
+              <p class="blockquote-text">
+                "${activeArticle.quoteText}"
+              </p>
+              <span class="blockquote-author">
+                <i data-lucide="award" style="width: 14px; height: 14px;"></i> ${activeArticle.quoteAuthor}
+              </span>
+            </div>
+            
+            <p>
+              All publications compiled in the Aura Care Journal undergo rigorous validation against clinical trials and board-certified skin analysis. If you have any questions or would like to schedule a personalized dermis mapping, please contact our concierge team.
+            </p>
+          </div>
+          
+          <!-- Tag Clouds -->
+          <div class="tags-container-luxury">
+            <span class="tag-title-label">Classifications:</span>
+            ${tagsHTML}
+          </div>
+          
+          <!-- Social Share panel -->
+          <div class="share-panel-luxury">
+            <span class="font-sans text-uppercase tracking-wider" style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">
+              Share Study
+            </span>
+            <div class="share-icons">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="share-icon-btn" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            </div>
+          </div>
+        `;
+        
+        // Refresh icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+      
+      // 4. GENERATE PREVIOUS & NEXT NAVIGATION
+      const articleKeys = Object.keys(articlesDatabase); // ["featured", "1", "2", ...]
+      const currentIndex = articleKeys.indexOf(currentArticleId);
+      
+      const prevIndex = (currentIndex - 1 + articleKeys.length) % articleKeys.length;
+      const nextIndex = (currentIndex + 1) % articleKeys.length;
+      
+      const prevArticle = articlesDatabase[articleKeys[prevIndex]];
+      const nextArticle = articlesDatabase[articleKeys[nextIndex]];
+      
+      const navigationContainer = document.getElementById('articleNavigationContainer');
+      if (navigationContainer && prevArticle && nextArticle) {
+        navigationContainer.innerHTML = `
+          <!-- Prev Card -->
+          <a href="blog-details.html?id=${prevArticle.id}" class="post-nav-card prev-card">
+            <span class="nav-label"><i data-lucide="arrow-left" style="width: 12px; height: 12px;"></i> Previous Study</span>
+            <h5 class="nav-title">${prevArticle.title}</h5>
+          </a>
+          
+          <!-- Next Card -->
+          <a href="blog-details.html?id=${nextArticle.id}" class="post-nav-card next-card text-end">
+            <span class="nav-label justify-content-end">Next Study <i data-lucide="arrow-right" style="width: 12px; height: 12px;"></i></span>
+            <h5 class="nav-title">${nextArticle.title}</h5>
+          </a>
+        `;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
+      
+      // 5. GENERATE RELATED ARTICLES (3 items)
+      const relatedContainer = document.getElementById('relatedArticlesContainer');
+      if (relatedContainer) {
+        // Pick 3 articles distinct from currentArticleId
+        const pool = Object.values(articlesDatabase).filter(art => art.id !== currentArticleId);
+        // Select first 3 for simplicity or relevance
+        const chosenRelated = pool.slice(0, 3);
+        
+        relatedContainer.innerHTML = chosenRelated.map(art => `
+          <div class="col-md-4">
+            <div class="related-card">
+              <div class="related-img-wrap">
+                <img src="${art.image}" alt="${art.title}" loading="lazy">
+              </div>
+              <div class="related-content">
+                <span class="d-block text-gold font-sans mb-1" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;">
+                  ${art.category}
+                </span>
+                <h5 class="related-title">
+                  <a href="blog-details.html?id=${art.id}">${art.title}</a>
+                </h5>
+                <span class="related-date">${art.date}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+      
+      
+      // 6. COMMENT FORM POSTING ENGINE
+      const commentForm = document.getElementById('auraCommentForm');
+      const commentsContainer = document.getElementById('commentsContainer');
+      const commentSectionTitle = document.getElementById('commentSectionTitle');
+      const metaCommentText = document.getElementById('articleMetaCommentCount');
+      
+      let commentCount = 2; // Initial static comments count
+      
+      if (commentForm && commentsContainer) {
+        commentForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const nameVal = document.getElementById('commenterNameInput').value.trim();
+          const emailVal = document.getElementById('commenterEmailInput').value.trim();
+          const textVal = document.getElementById('commentTextInput').value.trim();
+          
+          // Generate user initial avatar or fallback Unsplash avatar
+          const randId = Math.floor(Math.random() * 100);
+          const avatarUrl = `https://images.unsplash.com/photo-${1500000000000 + randId * 10000}?auto=format&fit=crop&w=150&q=80`;
+          
+          // Formatted date string
+          const options = { year: 'numeric', month: 'long', day: 'numeric' };
+          const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          const todayString = new Date().toLocaleDateString('en-US', options) + ' at ' + timeString;
+          
+          // Create Comment List Item
+          const commentItem = document.createElement('li');
+          commentItem.className = 'comment-item-luxury';
+          commentItem.style.opacity = '0';
+          commentItem.style.transform = 'translateY(15px)';
+          commentItem.style.transition = 'var(--transition-smooth)';
+          
+          commentItem.innerHTML = `
+            <div class="comment-avatar">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="${nameVal}" loading="lazy">
+            </div>
+            <div class="flex-grow-1">
+              <div class="comment-meta-info">
+                <h5 class="commenter-name">${nameVal} <span class="badge bg-secondary ms-2" style="font-size: 0.65rem; font-family: var(--font-sans); background-color: var(--color-gold-light) !important; color: var(--color-gold) !important; font-weight: 500;">Verified Guest</span></h5>
+                <span class="comment-date">${todayString}</span>
+              </div>
+              <p class="comment-text-custom">${textVal}</p>
+              <div class="mt-2 text-end">
+                <a href="#commentForm" class="comment-reply-btn" onclick="replyToComment('${nameVal}')">
+                  <i data-lucide="reply" style="width: 12px; height: 12px;"></i> Reply
+                </a>
+              </div>
+            </div>
+          `;
+          
+          // Append and animate
+          commentsContainer.appendChild(commentItem);
+          setTimeout(() => {
+            commentItem.style.opacity = '1';
+            commentItem.style.transform = 'translateY(0)';
+          }, 50);
+          
+          // Increment Counters
+          commentCount++;
+          commentSectionTitle.textContent = `Client Discussion (${commentCount})`;
+          if (metaCommentText) metaCommentText.textContent = `${commentCount} Comments`;
+          
+          // Create luxurious Toast confirmation
+          const toastContainer = document.createElement('div');
+          toastContainer.className = 'custom-toast';
+          toastContainer.innerHTML = `
+            <i class="text-gold" data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
+            <span>Comment submitted. Verified check completed!</span>
+          `;
+          
+          document.body.appendChild(toastContainer);
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+          
+          toastContainer.animate([
+            { transform: 'translate(-50%, 50px)', opacity: 0 },
+            { transform: 'translate(-50%, 0)', opacity: 1 }
+          ], { duration: 350, easing: 'ease-out' });
+          
+          setTimeout(() => {
+            toastContainer.animate([
+              { transform: 'translate(-50%, 0)', opacity: 1 },
+              { transform: 'translate(-50%, 50px)', opacity: 0 }
+            ], { duration: 300, easing: 'ease-in' }).onfinish = () => {
+              toastContainer.remove();
+            };
+          }, 3500);
+          
+          // Reset
+          commentForm.reset();
+        });
+      }
+      
+      // Reply Helper
+      window.replyToComment = (name) => {
+        const textInput = document.getElementById('commentTextInput');
+        if (textInput) {
+          textInput.value = `@${name} `;
+          textInput.focus();
+        }
+      };
+      
+      // 7. REDIRECT SIDEBAR SEARCH TO GRID PAGE
+      window.searchRedirect = (e) => {
+        if (e.key === 'Enter') {
+          const query = e.target.value.trim();
+          if (query) {
+            window.location.href = `blog.html?search=${encodeURIComponent(query)}`;
+          }
+        }
+      };
+    });
+  </script>
+</body>
+</html>

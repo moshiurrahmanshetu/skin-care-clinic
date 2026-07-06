@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bespoke Pricing & Memberships | AuraCare Premium Skin Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+
+  <!-- CUSTOM EMBEDDED STYLES FOR PREMIUM LUXURY PRICING -->
+  <style>
+    /* Section paddings & offsets */
+    .pricing-intro-sec {
+      padding: 100px 0 50px 0;
+    }
+    .pricing-grid-sec {
+      padding: 20px 0 100px 0;
+    }
+    .membership-sec {
+      background-color: var(--surface-clinic);
+      border-top: 1px solid var(--border-clinic);
+      border-bottom: 1px solid var(--border-clinic);
+      padding: 100px 0;
+      transition: background-color 0.5s ease;
+    }
+    .special-offers-sec {
+      padding: 100px 0;
+    }
+    .faq-sec {
+      background-color: var(--surface-clinic);
+      border-top: 1px solid var(--border-clinic);
+      border-bottom: 1px solid var(--border-clinic);
+      padding: 100px 0;
+      transition: background-color 0.5s ease;
+    }
+    .payment-methods-sec {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-clinic);
+    }
+
+    /* Filter Controls Styling */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .filter-btn {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      padding: 10px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .filter-btn.active {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+    }
+
+    /* Pricing Card Styles */
+    .pricing-card-wrapper {
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .pricing-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease-out, box-shadow 0.4s ease, border-color 0.4s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    
+    .pricing-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+
+    /* Spotlight dynamic glow inside cards */
+    .card-glow-spotlight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(197, 168, 128, 0.12), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: var(--border-radius-lg);
+    }
+    .pricing-card:hover .card-glow-spotlight {
+      opacity: 1;
+    }
+
+    .pricing-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .pricing-card-badge {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      background: var(--color-gold-light);
+      padding: 4px 12px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .pricing-card-duration {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pricing-card-duration svg,
+    .pricing-card-duration i {
+      width: 14px;
+      height: 14px;
+      color: var(--color-gold);
+    }
+
+    .pricing-card-body {
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+      flex-grow: 1;
+    }
+    .pricing-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+    .pricing-card:hover .pricing-card-title {
+      color: var(--color-gold);
+    }
+    .pricing-card-text {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .pricing-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      border-top: 1px dashed var(--border-clinic);
+      padding-top: 20px;
+    }
+    .pricing-card-price-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .price-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .price-value {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    .btn-pricing {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+    }
+    .pricing-card:hover .btn-pricing {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+    }
+    .btn-pricing svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+    }
+    .pricing-card:hover .btn-pricing svg {
+      transform: translateX(4px);
+      color: #FFFFFF;
+    }
+
+    /* Active Filtering Class */
+    .pricing-card-wrapper.filtered-out {
+      opacity: 0 !important;
+      transform: scale(0.8) translateY(30px) !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      visibility: hidden !important;
+      margin-bottom: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+
+    /* Membership cards */
+    .membership-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 40px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .membership-card.featured {
+      border-color: var(--color-gold);
+      background: linear-gradient(180deg, var(--surface-clinic) 0%, rgba(197, 168, 128, 0.04) 100%);
+      box-shadow: var(--shadow-lg), 0 10px 30px rgba(197, 168, 128, 0.1);
+      transform: translateY(-8px);
+    }
+    .membership-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+    .membership-card.featured:hover {
+      transform: translateY(-16px);
+      box-shadow: var(--shadow-lg), 0 15px 40px rgba(197, 168, 128, 0.2);
+    }
+
+    .membership-popular-tag {
+      position: absolute;
+      top: 24px;
+      right: -36px;
+      background: var(--color-gold);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 36px;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 10px rgba(197, 168, 128, 0.25);
+    }
+
+    .membership-header {
+      margin-bottom: 30px;
+    }
+    .membership-tier-name {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .membership-tier-subtitle {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .membership-price-box {
+      margin-top: 20px;
+      display: flex;
+      align-items: baseline;
+    }
+    .membership-price {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1;
+    }
+    .membership-price-period {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    .membership-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 35px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .membership-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+    .membership-feature-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Special Offers / Seasonal Cards */
+    .special-offer-card {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .special-offer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-border);
+    }
+    .offer-image-container {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    .offer-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .special-offer-card:hover .offer-image {
+      transform: scale(1.06);
+    }
+    .offer-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--color-gold);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(197, 168, 128, 0.3);
+    }
+    .offer-timer-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(18, 17, 16, 0.85);
+      backdrop-filter: blur(4px);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .offer-body {
+      padding: 30px;
+    }
+    .offer-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .offer-text {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    .offer-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-clinic);
+      padding-top: 20px;
+    }
+    .offer-price-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .offer-price-val {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--color-gold);
+    }
+    .offer-old-price {
+      font-size: 0.85rem;
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* Custom FAQ Accordion */
+    .accordion-custom-item {
+      background: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-md) !important;
+      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .accordion-custom-item:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .accordion-custom-button {
+      background: var(--surface-clinic) !important;
+      color: var(--text-main) !important;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      padding: 24px;
+      border: none;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition-fast);
+    }
+    .accordion-custom-button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    .accordion-custom-button::after {
+      content: '+';
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--color-gold);
+      transition: transform 0.4s ease;
+      line-height: 1;
+    }
+    .accordion-custom-button:not(.collapsed)::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+    .accordion-custom-collapse {
+      border: none;
+    }
+    .accordion-custom-body {
+      padding: 0 24px 24px 24px;
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Payment Logos Wrapper */
+    .payment-marquee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .payment-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--border-clinic);
+      background: var(--surface-clinic);
+      transition: var(--transition-smooth);
+    }
+    .payment-badge:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-2px);
+    }
+    .payment-badge svg,
+    .payment-badge i {
+      width: 18px;
+      height: 18px;
+      color: var(--color-gold);
+    }
+
+    /* Luxury CTA section style */
+    .luxury-cta-sec {
+      background: linear-gradient(135deg, #1A1816 0%, #11100F 100%);
+      border-top: 1px solid rgba(197, 168, 128, 0.15);
+      padding: 100px 0;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .luxury-cta-sec .section-title {
+      color: #FFFFFF !important;
+    }
+    .luxury-cta-sec .btn-gold {
+      box-shadow: 0 4px 20px rgba(197, 168, 128, 0.3);
+    }
+    .luxury-cta-sec .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      background: transparent;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: var(--transition-smooth);
+    }
+    .luxury-cta-sec .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+    .bg-pattern-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.08) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+    .bg-pattern-glow-left {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    /* Utilities */
+    .fs-xs {
+      font-size: 0.75rem;
+    }
+    .text-gold {
+      color: var(--color-gold);
+    }
+    .tracking-wide {
+      letter-spacing: 2px;
+    }
+    .stat-mini-divider {
+      width: 1px;
+      height: 40px;
+      background-color: var(--border-clinic);
+      align-self: center;
+    }
+    @media (max-width: 575px) {
+      .stat-mini-divider {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Pricing & Packages</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Pricing</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SECTION 2: PRICING INTRODUCTION -->
+  <section class="pricing-intro-sec">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Clinical Transparency</span>
+          <h2 class="section-title mt-2 font-serif">Investment in Skin Health</h2>
+          <p class="text-muted mt-3 fs-5 mx-auto" style="max-width: 720px;">
+            AuraCare is committed to absolute transparency. Every pricing structure represents standard medical-grade caliber, certified dermatological practitioners, and high-potency chemical compounding.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick stats -->
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-8 text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="d-flex flex-wrap justify-content-center gap-4 gap-md-5 mt-3">
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">100%</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">FDA Approved Systems</span>
+            </div>
+            <div class="stat-mini-divider"></div>
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">Custom</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">Compounded Serums</span>
+            </div>
+            <div class="stat-mini-divider"></div>
+            <div class="stat-mini">
+              <span class="stat-number d-block text-gold fs-3 font-serif">Zero</span>
+              <span class="stat-label text-uppercase text-muted fs-xs font-sans tracking-wide">Unannounced Fees</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FILTERABLE TREATMENT PRICING CARDS -->
+  <section class="pricing-grid-sec">
+    <div class="container">
+      
+      <!-- Category Filter Buttons -->
+      <div class="filter-container" data-aos="fade-up" id="filter-controls">
+        <button class="filter-btn active" data-filter="all">All Treatments</button>
+        <button class="filter-btn" data-filter="laser-rf">Laser & RF</button>
+        <button class="filter-btn" data-filter="facials">Facials & Peels</button>
+        <button class="filter-btn" data-filter="injectables">Injectables & Sculpting</button>
+        <button class="filter-btn" data-filter="body">Body Contouring</button>
+      </div>
+
+      <!-- Treatments Grid (14 Treatments) -->
+      <div class="row g-4" id="pricing-cards-container">
+        
+        <!-- Treatment 1: Morpheus8 -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="laser-rf" data-aos="fade-up" data-aos-delay="50">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Laser & RF</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 60 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Morpheus8® RF Microneedling</h3>
+              <p class="pricing-card-text">Fractional radiofrequency skin tightening that targets deep subdermal adipose layers to remodel collagen matrices.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$850</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 2: CO2 Fractional Laser -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="laser-rf" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Laser & RF</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 45 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">CO2 Fractional Resurfacing</h3>
+              <p class="pricing-card-text">Precision laser vaporization designed to treat deep acne scarring, age wrinkles, and advanced skin irregularities.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$1,200</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 3: Clear + Brilliant -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="laser-rf" data-aos="fade-up" data-aos-delay="150">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Laser & RF</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 30 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Clear + Brilliant® Laser Glow</h3>
+              <p class="pricing-card-text">Gentle, non-ablative fractional laser treatment to prevent early signs of skin aging and restore a brilliant luster.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$350</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 4: Picosecond Melasma Clear -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="laser-rf" data-aos="fade-up" data-aos-delay="200">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Laser & RF</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 45 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Picosecond Melasma Clear</h3>
+              <p class="pricing-card-text">Ultrashort picosecond acoustic energy pulses targeting melasma, deep pigmentation, and old tattoos safely.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$450</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 5: Signature HydraFacial -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="facials" data-aos="fade-up" data-aos-delay="50">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Facials & Peels</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 45 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Signature HydraFacial® Elite</h3>
+              <p class="pricing-card-text">Luxury multi-step vortex extraction, physical skin exfoliation, and intense deep-hydration with custom booster peptides.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$220</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 6: TCA Deep Peel -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="facials" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Facials & Peels</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 30 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">TCA Medical Deep Peel</h3>
+              <p class="pricing-card-text">High-concentration medical chemical sweep to rapidly exfoliate outer layers, treating stubborn acne blemishes and solar scars.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$290</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 7: Oxygen Peptide Infusion -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="facials" data-aos="fade-up" data-aos-delay="150">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Facials & Peels</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 50 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Oxygen Peptide Infusion</h3>
+              <p class="pricing-card-text">Purified high-pressure hyperbaric oxygen misting that infuses medical hyaluronic acid and concentrated botanical elements.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$180</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 8: Dermaplaning Pro -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="facials" data-aos="fade-up" data-aos-delay="200">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Facials & Peels</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 40 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Dermaplaning Pro Exfoliation</h3>
+              <p class="pricing-card-text">Surgical blade epidermal plane removing peach fuzz, environmental debris, and fine skin buildup, with a cold collagen mask.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$140</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 9: Premium Botox -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="injectables" data-aos="fade-up" data-aos-delay="50">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Injectables</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 15 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Premium Botox® / Dysport®</h3>
+              <p class="pricing-card-text">Precise cosmetic neurotoxin injections targeting expressive forehead lines, glabellar frown lines, and crow's feet.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$15 <span class="fs-xs fw-normal text-muted">/ Unit</span></span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 10: Dermal Fillers -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="injectables" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Injectables</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 45 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Dermal Volumizing Fillers</h3>
+              <p class="pricing-card-text">Premium micro-contouring using hyaluronic gels (Juvéderm® or Restylane®) to restore symmetry to lips, jaw, or temples.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$680 <span class="fs-xs fw-normal text-muted">/ Syringe</span></span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 11: Profhilo Booster -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="injectables" data-aos="fade-up" data-aos-delay="150">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Injectables</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 30 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Profhilo® Hydration Booster</h3>
+              <p class="pricing-card-text">Innovative high-concentration dual-action injectable hyaluronic skin remodeling that promotes heavy elastin synthesis.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$600</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 12: PRP Vampire Therapy -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="injectables" data-aos="fade-up" data-aos-delay="200">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Injectables</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 60 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">PRP Vampire Therapy</h3>
+              <p class="pricing-card-text">Harnessing natural growth factors isolated from your platelet-rich plasma to remodel texture, skin radiance, and dermal tissue.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$550</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 13: Subdermal Cellulite Sculpt -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="body" data-aos="fade-up" data-aos-delay="50">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Body Contouring</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 50 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Subdermal Cellulite Sculpt</h3>
+              <p class="pricing-card-text">Acoustic wave pressure therapy and pneumatic tissue manipulation to smooth dimpled skin layers and remodel curves.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$400</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment 14: Cryo Lymphatic Drainage -->
+        <div class="col-lg-4 col-md-6 pricing-card-wrapper" data-category="body" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-card card-tilt">
+            <div class="card-glow-spotlight"></div>
+            <div class="pricing-card-header">
+              <span class="pricing-card-badge">Body Contouring</span>
+              <span class="pricing-card-duration">
+                <i data-lucide="clock"></i> 40 Mins
+              </span>
+            </div>
+            <div class="pricing-card-body">
+              <h3 class="pricing-card-title">Cryo Lymphatic Drainage</h3>
+              <p class="pricing-card-text">Controlled local cryo thermal-shock sweep to eliminate micro-fluids, reduce swelling, and contract superficial loose tissues.</p>
+            </div>
+            <div class="pricing-card-footer">
+              <div class="pricing-card-price-box">
+                <span class="price-label">Starting at</span>
+                <span class="price-value">$250</span>
+              </div>
+              <a href="appointment.html" class="btn-pricing btn-ripple">
+                <span>Book Now</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: MEMBERSHIP & PACKAGES -->
+  <section class="membership-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-7 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">AuraCare Club</span>
+          <h2 class="section-title mt-2 font-serif">Bespoke Skin Memberships</h2>
+          <p class="text-muted mt-3">Sustain your skin vitality with structured, medical-grade curation. Choose one of our tiered monthly subscriptions for year-round luxury care.</p>
+        </div>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Tier 1: Silver Silk -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="membership-card">
+            <div class="membership-header">
+              <span class="membership-tier-subtitle">DAILY GLOW</span>
+              <h3 class="membership-tier-name">Silver Silk</h3>
+              <p class="text-muted font-sans fs-xs">Designed for ongoing botanical and chemical hydration maintenance.</p>
+              <div class="membership-price-box">
+                <span class="membership-price">$190</span>
+                <span class="membership-price-period">/ month</span>
+              </div>
+            </div>
+            
+            <ul class="membership-features-list">
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>1x Custom Signature Facial monthly (Up to $220 value)</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>10% Off all clinical take-home products</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>10% Off additional laser & injectable services</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>High-resolution microscopic skin analysis</span>
+              </li>
+              <li class="membership-feature-item text-decoration-line-through text-muted" style="opacity: 0.5;">
+                <i data-lucide="x" style="color: var(--text-muted);"></i>
+                <span>Complimentary vitamin injections</span>
+              </li>
+            </ul>
+
+            <div class="membership-action">
+              <a href="appointment.html" class="btn-outline-gold btn-ripple w-100">Reserve Membership</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Gold Aura (Featured) -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="membership-card featured">
+            <div class="membership-popular-tag">Popular</div>
+            <div class="membership-header">
+              <span class="membership-tier-subtitle" style="color: var(--color-gold);">ADVANCED RESTORATIVE</span>
+              <h3 class="membership-tier-name">Gold Aura</h3>
+              <p class="text-muted font-sans fs-xs">Our recommended level for proactive clinical therapies and light laser work.</p>
+              <div class="membership-price-box">
+                <span class="membership-price" style="color: var(--color-gold);">$350</span>
+                <span class="membership-price-period">/ month</span>
+              </div>
+            </div>
+            
+            <ul class="membership-features-list">
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>1x High-End Facial OR Clear + Brilliant Laser monthly</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>15% Off all clinical take-home products</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>15% Off additional laser & injectables</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>1x Complimentary B12 Vitamin booster shot monthly</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>Access to members-only priority scheduling desk</span>
+              </li>
+            </ul>
+
+            <div class="membership-action">
+              <a href="appointment.html" class="btn-gold btn-ripple w-100">Reserve Membership</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Platinum Elite -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="membership-card">
+            <div class="membership-header">
+              <span class="membership-tier-subtitle">PREMIUM CELLULAR</span>
+              <h3 class="membership-tier-name">Platinum Elite</h3>
+              <p class="text-muted font-sans fs-xs">The ultimate tier of skin optimization including advanced RF microneedling.</p>
+              <div class="membership-price-box">
+                <span class="membership-price">$590</span>
+                <span class="membership-price-period">/ month</span>
+              </div>
+            </div>
+            
+            <ul class="membership-features-list">
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>Any 2 Treatments monthly (Including Morpheus8 & Body)</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>20% Off all clinical take-home products</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>20% Off additional laser & injectables</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>Unlimited LED thermal healing light sweeps</span>
+              </li>
+              <li class="membership-feature-item">
+                <i data-lucide="check"></i>
+                <span>Same-day priority scheduling & private VIP lounge</span>
+              </li>
+            </ul>
+
+            <div class="membership-action">
+              <a href="appointment.html" class="btn-outline-gold btn-ripple w-100">Reserve Membership</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: SPECIAL OFFERS / SEASONAL DISCOUNTS -->
+  <section class="special-offers-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Curated Specials</span>
+          <h2 class="section-title mt-2 font-serif">Seasonal Skin Programs</h2>
+          <p class="text-muted mt-3">Exquisite medical-grade bundles combined into structured multi-week regimens at restricted, limited-time investment rates.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Special 1 -->
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="special-offer-card h-100">
+            <div class="offer-image-container">
+              <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800" alt="Bridal prep skin" class="offer-image">
+              <span class="offer-badge">Best Seller</span>
+              <span class="offer-timer-badge">
+                <i data-lucide="clock"></i> Limited Booking
+              </span>
+            </div>
+            <div class="offer-body">
+              <h3 class="offer-title font-serif">The Bridal Couture Prep (6-Week Program)</h3>
+              <p class="offer-text">Our most prestigious skin-preparation series. Includes 2 Signature HydraFacials, 1 Clear + Brilliant laser sweep, 2 LED photo-healing sessions, and a customized compounded home aftercare kit to guarantee wedding day cell radiance.</p>
+              <div class="offer-footer">
+                <div class="offer-price-box">
+                  <span class="offer-old-price">Regular $1,980</span>
+                  <span class="offer-price-val">$1,450</span>
+                </div>
+                <a href="appointment.html" class="btn-gold btn-ripple text-uppercase fs-xs font-sans fw-semibold">Book Program</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special 2 -->
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="special-offer-card h-100">
+            <div class="offer-image-container">
+              <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" alt="Laser resurfacing skin" class="offer-image" loading="lazy">
+              <span class="offer-badge">Summer Special</span>
+              <span class="offer-timer-badge" id="seasonal-timer">
+                <i data-lucide="calendar"></i> Until Aug 31
+              </span>
+            </div>
+            <div class="offer-body">
+              <h3 class="offer-title font-serif">Summer Post-Sun Resurfacing Sweep</h3>
+              <p class="offer-text">Specially engineered to eliminate cellular hyperpigmentation and sun damage induced by intense UV-season exposure. Contains 1 fractional Morpheus8® remodeling session paired with 1 cooling hyperbaric Oxygen peptide infusion.</p>
+              <div class="offer-footer">
+                <div class="offer-price-box">
+                  <span class="offer-old-price">Regular $1,030</span>
+                  <span class="offer-price-val">$790</span>
+                </div>
+                <a href="appointment.html" class="btn-gold btn-ripple text-uppercase fs-xs font-sans fw-semibold">Book Program</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: PRICING FAQ -->
+  <section class="faq-sec">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center" data-aos="fade-up">
+          <span class="section-subtitle text-uppercase tracking-wider">Help Desk</span>
+          <h2 class="section-title mt-2 font-serif">Investment Clarifications</h2>
+          <p class="text-muted mt-3">Answers to frequently asked questions regarding our consultation deposits, membership contracts, and clinical financing programs.</p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10" data-aos="fade-up">
+          <div class="accordion" id="pricingAccordion">
+            
+            <!-- Question 1 -->
+            <div class="accordion-custom-item">
+              <h3 class="accordion-header">
+                <button class="accordion-custom-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Is a clinical consultation fee required prior to scheduling treatments?
+                </button>
+              </h3>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#pricingAccordion">
+                <div class="accordion-custom-body">
+                  Yes. All first-time clients undergo a 30-minute microscopic lipid analysis and digital depth scan ($50 deposit). This diagnostic map is vital to calibrate medical lasers and compound exact serum baselines. The $50 consult fee is credited directly toward your first treatment if completed within 30 days.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="accordion-custom-item">
+              <h3 class="accordion-header">
+                <button class="accordion-custom-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Do you provide flexible clinical financing programs?
+                </button>
+              </h3>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                <div class="accordion-custom-body">
+                  Absolutely. AuraCare partners directly with CareCredit® and Cherry Financing to deliver 0% APR options for qualified therapeutic programs. This allows you to split payment investments over 3, 6, or 12 monthly cycles with no compound interest. Our reception team can assist you with instant approval during your consult.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="accordion-custom-item">
+              <h3 class="accordion-header">
+                <button class="accordion-custom-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  What is the cancellation, late arrival, and rescheduling policy?
+                </button>
+              </h3>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                <div class="accordion-custom-body">
+                  We maintain a strict 24-hour rescheduling policy to respect our board-certified surgeons' timetables. Any cancellation or reschedule requested within 24 hours of your active slot incurs a 50% reservation deposit fee. Late arrivals exceeding 15 minutes may result in a shortened session or slot forfeiture.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="accordion-custom-item">
+              <h3 class="accordion-header">
+                <button class="accordion-custom-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Can I purchase treatment bundles or recurring packages?
+                </button>
+              </h3>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                <div class="accordion-custom-body">
+                  Yes, purchasing any treatment protocol in a series is highly recommended for physiological cell turnover. Buying a series of 3 saves 15% on the overall cost, whereas a pre-paid package of 6 saves 20%. These series packages never expire and are transferrable to family members.
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="accordion-custom-item">
+              <h3 class="accordion-header">
+                <button class="accordion-custom-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Are monthly memberships locked into long-term yearly contracts?
+                </button>
+              </h3>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                <div class="accordion-custom-body">
+                  No, our memberships are designed around flexibility. There is a simple 3-month minimum commitment to enable early-stage skin cell correction. Following this initial 90-day phase, you are free to pause, upgrade, or terminate your monthly billing cycle at any time with a 15-day notice to our concierge desk.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: CONCIERGE PAYMENT METHODS -->
+  <section class="payment-methods-sec">
+    <div class="container text-center">
+      <span class="section-subtitle text-uppercase tracking-wider fs-xs mb-3 d-block">Authorized Options</span>
+      <h3 class="font-serif fs-5 text-muted mb-4">Supported Clinical Payment & Financing Systems</h3>
+      <div class="payment-marquee" data-aos="fade-up">
+        <div class="payment-badge">
+          <i data-lucide="credit-card"></i>
+          <span>Visa & Mastercard</span>
+        </div>
+        <div class="payment-badge">
+          <i data-lucide="shield-check"></i>
+          <span>American Express</span>
+        </div>
+        <div class="payment-badge">
+          <i data-lucide="wallet"></i>
+          <span>Apple Pay & G-Pay</span>
+        </div>
+        <div class="payment-badge">
+          <i data-lucide="sparkles"></i>
+          <span>CareCredit® Financing</span>
+        </div>
+        <div class="payment-badge">
+          <i data-lucide="heart-pulse"></i>
+          <span>Cherry financing</span>
+        </div>
+        <div class="payment-badge">
+          <i data-lucide="check-square"></i>
+          <span>HSA / FSA Accounts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: BOOK APPOINTMENT CTA -->
+  <section class="luxury-cta-sec">
+    <div class="bg-pattern-glow"></div>
+    <div class="bg-pattern-glow-left"></div>
+    <div class="container relative">
+      <div class="row align-items-center justify-content-between g-5">
+        <div class="col-lg-7" data-aos="fade-right">
+          <span class="section-subtitle text-uppercase tracking-wider text-gold">Elite Clinical Standards</span>
+          <h2 class="section-title mt-2 font-serif" style="color: #FFFFFF;">Experience the AuraCare Standard</h2>
+          <p class="mt-4" style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; max-width: 620px;">
+            Every skin assessment is a custom synthesis of aesthetic artistry and clinical medical-grade precision. Let our board-certified dermatologists elevate your skin biology to its natural, pristine state.
+          </p>
+          <div class="d-flex flex-wrap gap-4 mt-5">
+            <a href="appointment.html" class="btn-gold btn-ripple text-uppercase font-sans" style="padding: 15px 32px; font-weight: 600; letter-spacing: 1px;">Book Bespoke Consult</a>
+            <a href="services.html" class="btn-outline text-uppercase font-sans">Explore Treatments</a>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-left">
+          <div style="border: 1px solid rgba(197, 168, 128, 0.25); border-radius: var(--border-radius-lg); padding: 40px; background: rgba(30, 28, 26, 0.4); backdrop-filter: blur(10px);">
+            <h3 class="font-serif text-white mb-4 fs-4">Concierge Hours</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">
+              <li class="d-flex justify-content-between border-bottom pb-2" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+                <span>Monday - Friday</span>
+                <span class="text-white font-serif">9:00 AM - 7:00 PM</span>
+              </li>
+              <li class="d-flex justify-content-between border-bottom pb-2" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+                <span>Saturday</span>
+                <span class="text-white font-serif">9:00 AM - 6:00 PM</span>
+              </li>
+              <li class="d-flex justify-content-between pb-2">
+                <span>Sunday</span>
+                <span class="text-gold font-serif">By Appointment Only</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-3 border-top d-flex align-items-center gap-3" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+              <i data-lucide="phone" style="color: var(--color-gold); width: 20px; height: 20px;"></i>
+              <div>
+                <span class="d-block text-muted" style="font-size: 0.75rem;">CONCIERGE DESK</span>
+                <a href="tel:+13105550198" class="text-white font-serif fs-5 hover:text-gold">+1 (310) 555-0198</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="contact.html" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="contact.html" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- CUSTOM INTERACTIVE PRICING SCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mouse Spotlight Glow Event Listeners
+      const cards = document.querySelectorAll('.pricing-card, .membership-card, .special-offer-card');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // 2. Filter Controls for Treatments List
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const pricingCards = document.querySelectorAll('.pricing-card-wrapper');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+          
+          const filterValue = button.getAttribute('data-filter');
+          
+          pricingCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            if (filterValue === 'all' || cardCategory === filterValue) {
+              card.classList.remove('filtered-out');
+              
+              // Trigger a high-quality GSAP stagger entrance for newly active cards
+              if (typeof gsap !== 'undefined') {
+                gsap.fromTo(card, 
+                  { opacity: 0, scale: 0.94, y: 15 },
+                  { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'power2.out', clearProps: 'transform' }
+                );
+              }
+            } else {
+              card.classList.add('filtered-out');
+            }
+          });
+        });
+      });
+
+      // 3. Simple countdown timer simulator for Summer Resurfacing Offer to add luxury urgency
+      const seasonalTimer = document.getElementById('seasonal-timer');
+      if (seasonalTimer) {
+        // Calculate days left until August 31, 2026
+        const endDate = new Date('2026-08-31T23:59:59');
+        const updateTimer = () => {
+          const now = new Date();
+          const diff = endDate - now;
+          if (diff <= 0) {
+            seasonalTimer.innerHTML = `<i data-lucide="calendar"></i> Program Closed`;
+            return;
+          }
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          seasonalTimer.innerHTML = `<i data-lucide="calendar"></i> ${days} Days Left`;
+        };
+        updateTimer();
+        setInterval(updateTimer, 60000); // update every minute
+      }
+    });
+  </script>
+</body>
+</html>

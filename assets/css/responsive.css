@@ -1,0 +1,161 @@
+/* 
+   AuraCare Premium Skin Clinic Responsive Stylesheet
+   Adapts fonts, spacing, navigation, and custom layouts
+*/
+
+/* --- Large Desktops (1400px and up) --- */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+/* --- Laptops and Medium Desktops (1200px and down) --- */
+@media (max-width: 1200px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+  .banner-title {
+    font-size: 3rem;
+  }
+}
+
+/* --- Small Laptops and Large Tablets (992px and down) --- */
+@media (max-width: 991.98px) {
+  .navbar-sticky {
+    padding: 15px 0;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+  }
+  
+  .navbar-collapse {
+    background-color: var(--surface-clinic);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid var(--border-clinic);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .navbar-nav .nav-link {
+    margin: 8px 0;
+    padding: 6px 0 !important;
+  }
+  
+  .navbar-nav .nav-link::after {
+    display: none; /* Hide hover line on mobile/tablet */
+  }
+  
+  .dropdown-menu {
+    box-shadow: none;
+    border-color: transparent;
+    padding-left: 15px;
+    margin-top: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: none;
+    background-color: transparent;
+  }
+  
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: none; /* Disable hover dropdowns on touch */
+  }
+  
+  .nav-item.dropdown.show .dropdown-menu {
+    display: block;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .banner-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-banner {
+    padding: 140px 0 80px;
+  }
+  
+  footer {
+    padding: 60px 0 20px;
+  }
+  
+  .footer-bottom {
+    margin-top: 40px;
+  }
+}
+
+/* --- Small Tablets and Large Mobiles (768px and down) --- */
+@media (max-width: 767.98px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-title-wrap {
+    margin-bottom: 40px;
+  }
+  
+  .clinic-card {
+    padding: 24px;
+  }
+  
+  .page-banner {
+    padding: 120px 0 60px;
+  }
+  
+  .banner-title {
+    font-size: 2.25rem;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.85rem;
+  }
+  
+  .btn-gold, .btn-outline-gold {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- Small Mobiles (576px and down) --- */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+  }
+  
+  .banner-title {
+    font-size: 2rem;
+  }
+  
+  .newsletter-form .form-control {
+    border-radius: var(--border-radius-md);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .newsletter-form .btn-gold {
+    width: 100%;
+  }
+  
+  #scroll-to-top {
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+  }
+  #scroll-to-top.show {
+    right: 20px;
+  }
+  
+  .section-placeholder {
+    padding: 24px;
+    margin: 20px 0;
+  }
+}

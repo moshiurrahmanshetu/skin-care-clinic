@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | AuraCare Premium Skin Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+  
+  <!-- CUSTOM ABOUT PAGE STYLE -->
+  <style>
+    /* Our Story Section Styling */
+    .story-img-frame {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .story-img-frame::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--color-gold);
+      border-radius: var(--border-radius-lg);
+      z-index: 1;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+    .story-img-frame:hover::before {
+      transform: translate(-8px, -8px);
+    }
+    .story-img-frame img {
+      position: relative;
+      z-index: 2;
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .story-img-frame:hover img {
+      transform: scale(1.03);
+    }
+    
+    .founder-quote-box {
+      border-left: 3px solid var(--color-gold);
+      padding-left: 24px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    
+    /* Mission & Vision Styling */
+    .mission-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      padding: 40px;
+      height: 100%;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-gold), var(--color-gold-hover));
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+    .mission-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-border);
+    }
+    .mission-card:hover::after {
+      opacity: 1;
+    }
+    .mission-icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 1px solid var(--color-gold-border);
+      transition: var(--transition-smooth);
+    }
+    .mission-card:hover .mission-icon-wrap {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      border-color: var(--color-gold);
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    /* Journey Timeline */
+    .timeline-container {
+      position: relative;
+      padding: 40px 0;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 50%, var(--color-gold-light) 100%);
+      transform: translateX(-50%);
+    }
+    @media (max-width: 767.98px) {
+      .timeline-container::before {
+        left: 20px;
+      }
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 60px;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-badge {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--surface-clinic);
+      border: 4px solid var(--color-gold);
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .timeline-item:hover .timeline-badge {
+      background-color: var(--color-gold);
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 15px var(--color-gold);
+    }
+    @media (max-width: 767.98px) {
+      .timeline-badge {
+        left: 20px;
+      }
+    }
+    .timeline-content-wrap {
+      width: 45%;
+    }
+    .timeline-item:nth-child(even) .timeline-content-wrap {
+      margin-left: auto;
+    }
+    @media (max-width: 767.98px) {
+      .timeline-content-wrap {
+        width: calc(100% - 45px);
+        margin-left: 45px !important;
+      }
+    }
+    .timeline-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .timeline-card:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    .timeline-year {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+
+    /* Trust Highlights */
+    .trust-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .trust-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .trust-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--color-gold-light);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid var(--color-gold-border);
+      transition: var(--transition-smooth);
+    }
+    .trust-card:hover .trust-icon-box {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      transform: scale(1.05);
+    }
+
+    /* Core Values */
+    .value-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .value-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-md);
+    }
+    .value-index {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    /* Facilities Tabbed Component */
+    .facilities-carousel-img {
+      height: 480px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: var(--border-radius-xl);
+      border: 1px solid var(--color-gold-border);
+      box-shadow: var(--shadow-lg);
+      transition: opacity 0.4s ease-in-out;
+    }
+    .facilities-tab-item {
+      padding: 20px;
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--border-clinic);
+      background-color: var(--surface-clinic);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .facilities-tab-item:last-child {
+      margin-bottom: 0;
+    }
+    .facilities-tab-item.active {
+      background-color: var(--color-gold-light);
+      border-color: var(--color-gold-border);
+      transform: translateX(10px);
+    }
+    .facilities-tab-item-icon {
+      color: var(--color-gold);
+      flex-shrink: 0;
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+    .facilities-tab-item.active .facilities-tab-item-icon {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      border-color: var(--color-gold);
+    }
+
+    /* Certifications & Awards */
+    .award-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 30px;
+      text-align: center;
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .award-card:hover {
+      border-color: var(--color-gold-border);
+      box-shadow: var(--shadow-sm);
+      transform: scale(1.03);
+    }
+    .award-icon-wrap {
+      color: var(--color-gold);
+      margin-bottom: 20px;
+      display: inline-flex;
+      background-color: var(--color-gold-light);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-gold-border);
+    }
+
+    /* FAQ Accordion Styling */
+    .faq-accordion .accordion-item {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic) !important;
+      border-radius: var(--border-radius-md) !important;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+    }
+    .faq-accordion .accordion-item:hover {
+      border-color: var(--color-gold-border) !important;
+    }
+    .faq-accordion .accordion-button {
+      background-color: var(--surface-clinic);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      padding: 20px 24px;
+      box-shadow: none !important;
+      border: none;
+    }
+    .faq-accordion .accordion-button:not(.collapsed) {
+      color: var(--color-gold);
+      background-color: var(--color-gold-light);
+    }
+    .faq-accordion .accordion-button::after {
+      background-image: none !important;
+      content: '+';
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--color-gold);
+      transform: none;
+      transition: var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+    .faq-accordion .accordion-button:not(.collapsed)::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+    .faq-accordion .accordion-body {
+      background-color: var(--surface-clinic);
+      color: var(--text-muted);
+      padding: 20px 24px;
+      border-top: 1px solid var(--border-clinic);
+    }
+
+    /* Expert Card Additions */
+    .expert-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+      height: 100%;
+    }
+    .expert-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-border);
+    }
+    .expert-img-container {
+      height: 360px;
+      overflow: hidden;
+      position: relative;
+    }
+    .expert-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .expert-card:hover .expert-img-container img {
+      transform: scale(1.05);
+    }
+    .expert-socials {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px 0;
+      background: linear-gradient(0deg, rgba(18,17,16,0.85) 0%, rgba(18,17,16,0) 100%);
+      transition: var(--transition-smooth);
+      z-index: 3;
+    }
+    .expert-card:hover .expert-socials {
+      bottom: 0;
+    }
+    .expert-social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--surface-clinic);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+    .expert-social-btn:hover {
+      background-color: var(--color-gold);
+      color: #FFFFFF;
+      transform: translateY(-3px);
+    }
+
+    /* CTA Banner Component */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(18, 17, 16, 0.95) 0%, rgba(30, 28, 26, 0.9) 100%), url('https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+      color: #F7F5F0;
+      border-radius: var(--border-radius-xl);
+      padding: 80px 40px;
+      border: 1px solid var(--color-gold-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 20%, rgba(197, 168, 128, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section 1: Page Banner with breadcrumb -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase" data-aos="fade-down">About Our Sanctuary</h1>
+      <ul class="breadcrumb-container hero-fade-reveal" data-aos="fade-up" data-aos-delay="100">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">About Us</li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Section 2: Our Story -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="subtitle-accent">The Sanctuary Genesis</span>
+            <h2 class="font-serif text-uppercase mb-4" style="font-size: 2.2rem; line-height: 1.2;">The Delicate Fusion of <br><span class="brand-accent italic">Science & Luxury</span></h2>
+            <p class="text-muted mb-3">
+              Founded in 2012 by world-renowned clinical dermatologist Dr. Evelyn Sterling, AuraCare was envisioned as a tranquil space where evidence-based medical sciences fuse seamlessly with premium European therapeutic sensory wellness pathways.
+            </p>
+            <p class="text-muted mb-4">
+              We recognized that traditional clinical dermatology, while highly effective, often felt sterile and rushed. Conversely, luxury spa treatments provided deep relaxation but lacked clinical results. Our sanctuary bridges this divide. Every formula we apply is dermatologically verified, and every session is custom-tailored to your unique 3D skin profile.
+            </p>
+            <div class="founder-quote-box">
+              <p class="font-serif italic text-main mb-2">
+                "Dermal health is not merely a superficial treatment; it is a profound preservation of your timeless identity and silent confidence."
+              </p>
+              <cite class="small text-gold font-sans fw-semibold text-uppercase tracking-wider">— Dr. Evelyn Sterling, MD</cite>
+            </div>
+          </div>
+          
+          <div class="col-lg-6 text-center" data-aos="fade-left">
+            <div class="story-img-frame">
+              <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" alt="Clinical luxury skincare ritual" referrerPolicy="no-referrer" id="story-move-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Mission & Vision -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="row g-4">
+          <!-- Mission -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="mission-card">
+              <div class="mission-icon-wrap">
+                <i data-lucide="sparkles" style="width: 28px; height: 28px;"></i>
+              </div>
+              <h3 class="h4 font-serif text-uppercase mb-3">Our Scientific Mission</h3>
+              <p class="text-muted mb-0">
+                To design highly personalized dermal pathways that celebrate your organic form. We employ advanced FDA-approved technologies and premium bio-active ingredients to achieve real, clinical results in environments of uncompromised aesthetic luxury.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Vision -->
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="mission-card">
+              <div class="mission-icon-wrap">
+                <i data-lucide="eye" style="width: 28px; height: 28px;"></i>
+              </div>
+              <h3 class="h4 font-serif text-uppercase mb-3">Our Aesthetic Vision</h3>
+              <p class="text-muted mb-0">
+                To set the global standard for high-end aesthetic medicine, where diagnostic transparency, medical expertise, and bespoke pampering converge. We aim to inspire a lifestyle of graceful preservation and age-reversing confidence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Clinic Journey Timeline -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">Our Legacy</span>
+          <h2 class="section-title text-uppercase">The Journey of AuraCare</h2>
+          <div class="title-line"></div>
+        </div>
+        
+        <div class="timeline-container">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item row" data-aos="fade-up">
+            <div class="timeline-badge"></div>
+            <div class="timeline-content-wrap col-md-6 col-12">
+              <div class="timeline-card">
+                <div class="timeline-year">2012</div>
+                <h4 class="h5 font-serif text-uppercase mb-2">The Genesis Suite</h4>
+                <p class="small text-muted mb-0">
+                  Dr. Evelyn Sterling opens our first private clinic suite in Beverly Hills, offering custom organic dermal infusions and initiating the concept of personalized skin profiles.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item row" data-aos="fade-up">
+            <div class="timeline-badge"></div>
+            <div class="timeline-content-wrap col-md-6 col-12">
+              <div class="timeline-card">
+                <div class="timeline-year">2016</div>
+                <h4 class="h5 font-serif text-uppercase mb-2">Laser Integration Era</h4>
+                <p class="small text-muted mb-0">
+                  We introduce state-of-the-art FDA-approved non-ablative laser platforms, combining intense cell-renewal science with cooling botanical thermal shielding.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item row" data-aos="fade-up">
+            <div class="timeline-badge"></div>
+            <div class="timeline-content-wrap col-md-6 col-12">
+              <div class="timeline-card">
+                <div class="timeline-year">2021</div>
+                <h4 class="h5 font-serif text-uppercase mb-2">Sanctuary Expansion</h4>
+                <p class="small text-muted mb-0">
+                  AuraCare relocates to our current flagship luxury boulevard estate. We expanded to six sterile clinical suites, a diagnostics lab, and hired Dr. Marcus Vance to direct structural injectables.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 4 -->
+          <div class="timeline-item row" data-aos="fade-up">
+            <div class="timeline-badge"></div>
+            <div class="timeline-content-wrap col-md-6 col-12">
+              <div class="timeline-card">
+                <div class="timeline-year">2026</div>
+                <h4 class="h5 font-serif text-uppercase mb-2">The Golden Accolade</h4>
+                <p class="small text-muted mb-0">
+                  Recognized as the "Best Aesthetic Dermatology Sanctuary in California" and launched our online Boutique Shop, providing luxury clinically-validated elixirs to clients nationwide.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Why Patients Trust Us -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">Uncompromised Quality</span>
+          <h2 class="section-title text-uppercase">Why Patients Trust AuraCare</h2>
+          <div class="title-line"></div>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Reason 1 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="trust-card text-center">
+              <div class="trust-icon-box mx-auto">
+                <i data-lucide="award" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Certified Expertise</h4>
+              <p class="small text-muted mb-0">
+                All treatment pathways are directed and administered by board-certified physicians with clinical credentials from Stanford and Johns Hopkins.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Reason 2 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="trust-card text-center">
+              <div class="trust-icon-box mx-auto">
+                <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h4 class="h5 font-serif text-uppercase mb-2">FDA Approved Tech</h4>
+              <p class="small text-muted mb-0">
+                We utilize premium, medical-grade machinery with documented cellular regenerative outcomes and minimal downtimes.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Reason 3 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="trust-card text-center">
+              <div class="trust-icon-box mx-auto">
+                <i data-lucide="eye-off" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Absolute Discretion</h4>
+              <p class="small text-muted mb-0">
+                Private waiting lobbies, secluded clinical exits, and strict medical non-disclosure protocols protect our high-profile guests.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Reason 4 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="trust-card text-center">
+              <div class="trust-icon-box mx-auto">
+                <i data-lucide="scan" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h4 class="h5 font-serif text-uppercase mb-2">3D Skin Analysis</h4>
+              <p class="small text-muted mb-0">
+                No guessing. We map melanin density, vascular elasticity, and UV damage layers before proposing any customized treatment pathway.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Our Facilities (interactive image + content tabs) -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <!-- Left Content Tabs -->
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="subtitle-accent">The Sanctuary Space</span>
+            <h2 class="font-serif text-uppercase mb-4" style="font-size: 2.2rem;">World-Class Aesthetic Suites</h2>
+            <p class="text-muted mb-4">
+              Step inside our Beverly Hills sanctuary, designed with soft acoustic paneling, eye-safe low-frequency illumination, and certified surgical-grade air purifications. Explore our dedicated state-of-the-art zones below:
+            </p>
+            
+            <div class="facilities-tabs">
+              <!-- Tab 1 -->
+              <div class="facilities-tab-item active" data-img="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800">
+                <div class="facilities-tab-item-icon">
+                  <i data-lucide="activity" style="width: 20px; height: 20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h6 font-sans text-uppercase fw-semibold mb-1">The 3D Diagnostic Lab</h4>
+                  <p class="small text-muted mb-0">
+                    Equipped with deep spectral imaging cameras mapping pigment layers, vascular pools, and sub-dermal hydration scores.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Tab 2 -->
+              <div class="facilities-tab-item" data-img="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800">
+                <div class="facilities-tab-item-icon">
+                  <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h6 font-sans text-uppercase fw-semibold mb-1">Advanced Laser Chambers</h4>
+                  <p class="small text-muted mb-0">
+                    Ultra-sterile medical vaults housing custom Pico, CO2, and non-ablative Erbium-YAG laser architectural modules.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Tab 3 -->
+              <div class="facilities-tab-item" data-img="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800">
+                <div class="facilities-tab-item-icon">
+                  <i data-lucide="coffee" style="width: 20px; height: 20px;"></i>
+                </div>
+                <div>
+                  <h4 class="h6 font-sans text-uppercase fw-semibold mb-1">The Champagne Lounge</h4>
+                  <p class="small text-muted mb-0">
+                    A soundproof recovery suite offering organic oxygen-infusions, custom botanical herbal tea elixirs, and cold towels.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right Live Image Display -->
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="text-center">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800" alt="Flagship AuraCare Facilities Room" class="facilities-carousel-img" id="facilities-display" referrerPolicy="no-referrer" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Certifications & Awards -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">Prestigious Standards</span>
+          <h2 class="section-title text-uppercase">Accreditations & Awards</h2>
+          <div class="title-line"></div>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Award 1 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="award-card">
+              <div class="award-icon-wrap">
+                <i data-lucide="trophy" style="width: 26px; height: 26px;"></i>
+              </div>
+              <h4 class="h6 font-sans text-uppercase fw-semibold mb-2">Best Aesthetic Sanctuary</h4>
+              <p class="small text-muted mb-0">Awarded by the American Clinical Wellness League in 2024 for architectural luxury and protocol safety.</p>
+            </div>
+          </div>
+          
+          <!-- Award 2 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="award-card">
+              <div class="award-icon-wrap">
+                <i data-lucide="shield-check" style="width: 26px; height: 26px;"></i>
+              </div>
+              <h4 class="h6 font-sans text-uppercase fw-semibold mb-2">FDA Safety Elite Center</h4>
+              <p class="small text-muted mb-0">Direct clinical certification verifying 100% FDA-approved equipment usage and non-ablative safety.</p>
+            </div>
+          </div>
+          
+          <!-- Award 3 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="award-card">
+              <div class="award-icon-wrap">
+                <i data-lucide="book-open" style="width: 26px; height: 26px;"></i>
+              </div>
+              <h4 class="h6 font-sans text-uppercase fw-semibold mb-2">Stanford Dermal Partner</h4>
+              <p class="small text-muted mb-0">Proud research affiliate of global cosmetic skin rejuvenation forums and botanical peptide testing.</p>
+            </div>
+          </div>
+          
+          <!-- Award 4 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="award-card">
+              <div class="award-icon-wrap">
+                <i data-lucide="leaf" style="width: 26px; height: 26px;"></i>
+              </div>
+              <h4 class="h6 font-sans text-uppercase fw-semibold mb-2">Carbon Neutral Clinic</h4>
+              <p class="small text-muted mb-0">Certified eco-sanctuary supporting sustainable botanical harvesting and zero-waste clinic operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Our Core Values -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">The Aura Creed</span>
+          <h2 class="section-title text-uppercase">Our Core Pillars</h2>
+          <div class="title-line"></div>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Value 1 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="value-card">
+              <div class="value-index">01</div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Dermal Purity</h4>
+              <p class="small text-muted mb-0">
+                We formulate with raw, medical-grade active ingredients entirely free of heavy synthetics, petrochemicals, parabens, or artificial filler volume.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Value 2 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="value-card">
+              <div class="value-index">02</div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Clinical Precision</h4>
+              <p class="small text-muted mb-0">
+                Treatments are calibrated down to the exact nanosecond and micrometer depth based on quantitative 3D diagnostic skin spectral maps.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Value 3 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="value-card">
+              <div class="value-index">03</div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Total Discretion</h4>
+              <p class="small text-muted mb-0">
+                Absolute confidentiality. We coordinate secure entries, staggered bookings, and secluded parking options for our high-luxury guests.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Value 4 -->
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="value-card">
+              <div class="value-index">04</div>
+              <h4 class="h5 font-serif text-uppercase mb-2">Active Empathy</h4>
+              <p class="small text-muted mb-0">
+                We listen intently to your aesthetic goals. Our doctors never rush a consultation; your comfort and long-term vitality are our masterpieces.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Meet Our Experts Preview (3 doctors) -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic); border-bottom: 1px solid var(--border-clinic);">
+      <div class="container py-5">
+        <div class="section-title-wrap text-center" data-aos="fade-up">
+          <span class="subtitle-accent">The Clinical Board</span>
+          <h2 class="section-title text-uppercase">Our Master Practitioners</h2>
+          <div class="title-line"></div>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Specialist 1 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="expert-card">
+              <div class="expert-img-container">
+                <img src="https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=500" alt="Dr. Evelyn Sterling, MD" referrerPolicy="no-referrer" loading="lazy">
+                <div class="expert-socials">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width: 16px; height: 16px;"></i></a>
+                </div>
+              </div>
+              <div class="p-4 text-center">
+                <h4 class="h5 mb-1 font-serif">Dr. Evelyn Sterling, MD</h4>
+                <p class="small text-gold text-uppercase tracking-wider fw-medium mb-3">Clinical Director / Stanford Alumna</p>
+                <p class="small text-muted mb-0">Board-certified dermatologist specializing in non-ablative fractional laser styling, cellular skin regeneration, and custom formulas.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Specialist 2 -->
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="expert-card">
+              <div class="expert-img-container">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=500" alt="Dr. Marcus Vance, PhD" referrerPolicy="no-referrer" loading="lazy">
+                <div class="expert-socials">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width: 16px; height: 16px;"></i></a>
+                </div>
+              </div>
+              <div class="p-4 text-center">
+                <h4 class="h5 mb-1 font-serif">Dr. Marcus Vance, PhD</h4>
+                <p class="small text-gold text-uppercase tracking-wider fw-medium mb-3">Micro-Reconstruction Lead</p>
+                <p class="small text-muted mb-0">Distinguished Johns Hopkins alumnus leading our delicate micro-needle scaffolding, facial contours, and high-precision injectables.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Specialist 3 -->
+          <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+            <div class="expert-card">
+              <div class="expert-img-container">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=500" alt="Dr. Clara Fontaine" referrerPolicy="no-referrer" loading="lazy">
+                <div class="expert-socials">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="Instagram"><i data-lucide="instagram" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="expert-social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" style="width: 16px; height: 16px;"></i></a>
+                </div>
+              </div>
+              <div class="p-4 text-center">
+                <h4 class="h5 mb-1 font-serif">Dr. Clara Fontaine</h4>
+                <p class="small text-gold text-uppercase tracking-wider fw-medium mb-3">Cosmetic Chemist Specialist</p>
+                <p class="small text-muted mb-0">Sorbonne graduate designing our chemical peel formulations, organic lipid barriers, and antioxidant cellular serums.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+          <a href="doctors.html" class="btn-gold btn-ripple py-3 px-5">Meet All Specialists</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 10: FAQ Preview (3 questions) -->
+    <section class="py-5" style="background-color: var(--surface-clinic);">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="subtitle-accent">Answers From Experts</span>
+            <h2 class="font-serif text-uppercase mb-4" style="font-size: 2.2rem; line-height: 1.2;">Private Clarifications</h2>
+            <p class="text-muted mb-4">
+              Explore our core clinical practices. For complete, in-depth breakdowns regarding downtime, pricing systems, and skin-type reactions, feel free to visit our complete knowledge database.
+            </p>
+            <a href="faq.html" class="btn-outline-gold py-3 px-4 text-uppercase font-sans fw-semibold small tracking-wider">
+              <span>View Full FAQ Database</span>
+            </a>
+          </div>
+          
+          <div class="col-lg-7" data-aos="fade-left">
+            <div class="accordion faq-accordion" id="aboutFaqAccordion">
+              <!-- Item 1 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeadingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                    What should I expect during my first 3D Skin Diagnostics scan?
+                  </button>
+                </h3>
+                <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#aboutFaqAccordion">
+                  <div class="accordion-body">
+                    Our high-performance spectral camera scans your dermis in ten seconds using multi-polar wavelengths. This completely painless diagnostic exposes sub-dermal melanin blocks, UV damage, vascular density, and moisture balance. The resulting digital map guides your clinical doctor to formulate your exact, targeted skin prescription.
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Item 2 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeadingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                    Are the clinic's laser protocols safe for highly sensitive skin types?
+                  </button>
+                </h3>
+                <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#aboutFaqAccordion">
+                  <div class="accordion-body">
+                    Yes, absolutely. Traditional lasers often cause skin-peeling and severe irritation. We utilize state-of-the-art non-ablative Erbium-YAG and Picosecond laser platforms. These specifically target deeper dermal layers while leaving your outer skin completely intact. Paired with Dr. Fontaine's cooling active botanical lipid shields, there is minimal redness and zero skin damage.
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Item 3 -->
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeadingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                    How do I initiate my custom AuraCare skincare pathway?
+                  </button>
+                </h3>
+                <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#aboutFaqAccordion">
+                  <div class="accordion-body">
+                    Every client journey starts with an private face-to-face consultation and spectral diagnostic. Our medical board maps out your six-week therapy timetable, which includes bespoke clinical peeling, structural laser treatments, or nutrient-rich micro-needling. Simply use our appointment booking engine to select your preferred date.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 11: Book Appointment CTA -->
+    <section class="py-5" style="background-color: var(--bg-clinic); border-top: 1px solid var(--border-clinic);">
+      <div class="container py-4">
+        <div class="cta-banner text-center" data-aos="zoom-in">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <span class="subtitle-accent text-gold">Begin Your Dermal Awakening</span>
+              <h2 class="display-5 font-serif text-white mb-3 text-uppercase">Ready for a Lifetime of Radiant Confidence?</h2>
+              <p class="lead text-muted mb-5" style="color: #A8A29E !important;">
+                Schedule your exclusive 3D diagnostics skin scan and custom formulation course with our Stanford-led medical team today. Experience clinical medicine wrapped in pure luxury.
+              </p>
+              <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="appointment.html" class="btn-gold btn-ripple px-5 py-3 text-uppercase font-sans fw-semibold small tracking-wider">
+                  Book Clinical Session
+                </a>
+                <a href="contact.html" class="btn-outline-gold px-5 py-3 text-uppercase font-sans fw-semibold small tracking-wider" style="color: #FFFFFF !important; border-color: #FFFFFF !important; background-color: transparent;">
+                  <span>Speak with Coordinator</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- INTERACTIVE SCRIPTS SPECIFIC TO ABOUT PAGE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Interactive Facilities Image Updating & Tab Highlighting
+      const tabItems = document.querySelectorAll('.facilities-tab-item');
+      const displayImg = document.getElementById('facilities-display');
+      
+      if (tabItems.length > 0 && displayImg) {
+        tabItems.forEach(item => {
+          item.addEventListener('click', () => {
+            // Remove active class from all tabs
+            tabItems.forEach(tab => tab.classList.remove('active'));
+            // Add active class to clicked tab
+            item.classList.add('active');
+            
+            // Get custom image url from tab data attribute
+            const newImgUrl = item.getAttribute('data-img');
+            
+            // Fade out, change source, and fade back in using CSS and basic JS timer
+            displayImg.style.opacity = '0';
+            setTimeout(() => {
+              displayImg.src = newImgUrl;
+              displayImg.style.opacity = '1';
+            }, 300);
+          });
+        });
+      }
+
+      // 2. Mousemove Parallax/Tilt Effect for the Story Image Frame (GSAP)
+      const storySection = document.querySelector('.story-img-frame');
+      const movingImg = document.getElementById('story-move-img');
+      
+      if (storySection && movingImg && window.innerWidth > 991) {
+        storySection.addEventListener('mousemove', (e) => {
+          const rect = storySection.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          gsap.to(movingImg, {
+            x: x * 0.08,
+            y: y * 0.08,
+            rotateX: -y * 0.05,
+            rotateY: x * 0.05,
+            duration: 0.6,
+            ease: 'power2.out',
+            transformPerspective: 1000
+          });
+        });
+
+        storySection.addEventListener('mouseleave', () => {
+          gsap.to(movingImg, {
+            x: 0,
+            y: 0,
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

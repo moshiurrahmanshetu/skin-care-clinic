@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aesthetic Blog | AuraCare Premium Skin Care Clinic</title>
+  
+  <!-- BOOTSTRAP 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <script src="assets/js/theme.js"></script>
+  
+  <!-- PREMIUM LUXURY BLOG CUSTOM STYLES -->
+  <style>
+    /* Subtitle & Accents */
+    .subtitle-accent {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--color-gold);
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .title-line {
+      height: 1px;
+      background-color: var(--color-gold);
+      width: 60px;
+      margin: 15px auto;
+    }
+    
+    /* Featured Blog Card */
+    .blog-featured-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+      margin-bottom: 50px;
+    }
+    .blog-featured-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold-border);
+      transform: translateY(-4px);
+    }
+    .featured-img-wrap {
+      overflow: hidden;
+      height: 100%;
+      min-height: 380px;
+      position: relative;
+    }
+    .featured-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .blog-featured-card:hover .featured-img-wrap img {
+      transform: scale(1.03);
+    }
+    .featured-category {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      background: rgba(28, 25, 23, 0.85);
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid var(--color-gold-border);
+      z-index: 2;
+    }
+    .featured-content {
+      padding: 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    /* Meta Details */
+    .blog-meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+      margin-bottom: 15px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .blog-meta-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .blog-meta-list li i {
+      color: var(--color-gold);
+      width: 14px;
+      height: 14px;
+    }
+    
+    /* Grid Article Cards */
+    .blog-grid-card {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .blog-grid-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-gold-border);
+      transform: translateY(-6px);
+    }
+    .grid-img-wrap {
+      overflow: hidden;
+      height: 240px;
+      position: relative;
+    }
+    .grid-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-smooth);
+    }
+    .blog-grid-card:hover .grid-img-wrap img {
+      transform: scale(1.05);
+    }
+    .grid-category {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--surface-clinic);
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      border: 1px solid var(--border-clinic);
+      box-shadow: var(--shadow-sm);
+    }
+    .grid-content {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .blog-title-link {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .blog-title-link:hover {
+      color: var(--color-gold);
+    }
+    
+    /* Read More Button Link */
+    .blog-link-btn {
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 15px;
+      transition: var(--transition-fast);
+    }
+    .blog-link-btn:hover {
+      color: var(--color-gold-hover);
+    }
+    .blog-link-btn i {
+      transition: transform 0.2s ease;
+    }
+    .blog-link-btn:hover i {
+      transform: translateX(4px);
+    }
+    
+    /* Sidebar Luxury Widgets */
+    .sidebar-widget-luxury {
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--border-clinic);
+      border-radius: var(--border-radius-lg);
+      padding: 35px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+    .sidebar-widget-luxury:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .widget-title-luxury {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      color: var(--text-main);
+    }
+    .widget-title-luxury::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 1px;
+      background-color: var(--color-gold);
+    }
+    
+    /* Search Box Widget styling */
+    .search-input-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input-group i {
+      position: absolute;
+      left: 18px;
+      color: var(--color-gold);
+      pointer-events: none;
+      width: 16px;
+      height: 16px;
+    }
+    .search-control-custom {
+      background-color: var(--bg-clinic) !important;
+      border: 1px solid var(--border-clinic) !important;
+      border-radius: var(--border-radius-md) !important;
+      color: var(--text-main) !important;
+      padding: 13px 18px 13px 48px !important;
+      font-size: 0.95rem !important;
+      width: 100%;
+      transition: var(--transition-fast) !important;
+    }
+    .search-control-custom:focus {
+      border-color: var(--color-gold) !important;
+      box-shadow: 0 0 0 4px var(--color-gold-light) !important;
+      outline: none;
+    }
+    
+    /* Category Widget styling */
+    .category-list-custom {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .category-list-custom li {
+      margin-bottom: 12px;
+    }
+    .category-list-custom li:last-child {
+      margin-bottom: 0;
+    }
+    .category-link-custom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: var(--transition-fast);
+    }
+    .category-link-custom:hover {
+      background-color: var(--bg-clinic);
+      color: var(--color-gold);
+      padding-left: 16px;
+    }
+    .category-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--color-gold-light);
+      color: var(--color-gold);
+      padding: 3px 9px;
+      border-radius: 50px;
+    }
+    
+    /* Popular Posts styling */
+    .popular-post-item {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+    .popular-post-item:last-child {
+      margin-bottom: 0;
+    }
+    .popular-post-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border-clinic);
+    }
+    .popular-post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+    .popular-post-item:hover .popular-post-thumb img {
+      transform: scale(1.08);
+    }
+    .popular-post-info h5 {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--text-main);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: var(--transition-fast);
+    }
+    .popular-post-item:hover .popular-post-info h5 {
+      color: var(--color-gold);
+    }
+    .popular-post-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    
+    /* Newsletter Form Widget */
+    .newsletter-widget-card {
+      background: linear-gradient(135deg, var(--surface-clinic) 0%, var(--bg-clinic) 100%);
+      border: 1px dashed var(--color-gold);
+    }
+    
+    /* Clinical Statistics / Counter Bar */
+    .stats-luxury-section {
+      background-color: var(--surface-clinic);
+      border-top: 1px solid var(--border-clinic);
+      border-bottom: 1px solid var(--border-clinic);
+      padding: 60px 0;
+      margin-top: 50px;
+    }
+    .stat-box-luxury {
+      text-align: center;
+      padding: 15px;
+    }
+    .stat-number-luxury {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--color-gold);
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .stat-label-luxury {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+    
+    /* Pagination Styling */
+    .pagination-luxury {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+    .page-btn-luxury {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-clinic);
+      border-radius: 50%;
+      background-color: var(--surface-clinic);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .page-btn-luxury:hover,
+    .page-btn-luxury.active {
+      background-color: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF !important;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    /* Toast alerts */
+    .custom-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--surface-clinic);
+      border: 1px solid var(--color-gold);
+      color: var(--text-main);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    @media (max-width: 991px) {
+      .featured-img-wrap {
+        min-height: 280px;
+      }
+      .featured-content {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="scroll-progress-container"><div id="scroll-progress"></div></div>
+  <div id="page-loader"><div class="loader-logo">AURACARE</div><div class="loader-spinner"></div></div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">AURA<span class="brand-accent">CARE</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon-custom"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Pages</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="pricing.html">Pricing Plans</a></li>
+              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
+              <li><a class="dropdown-item" href="404.html">404 Error Page</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">Blog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme">
+            <i data-lucide="sun" class="theme-icon-sun d-none"></i>
+            <i data-lucide="moon" class="theme-icon-moon"></i>
+          </button>
+          <a href="appointment.html" class="btn-gold btn-ripple d-none d-sm-inline-block">Book Session</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE BREADCRUMB BANNER -->
+  <header class="page-banner">
+    <div class="container">
+      <h1 class="banner-title hero-title-reveal text-uppercase">Aesthetic Blog</h1>
+      <ul class="breadcrumb-container hero-fade-reveal">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Blog</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- PREMIUM LUXURY CLINICAL JOURNAL SECTION -->
+  <main class="py-5" style="background-color: var(--bg-clinic);">
+    <div class="container py-4">
+      
+      <!-- FEATURED BLOG ARTICLE -->
+      <section class="mb-5" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <span class="subtitle-accent">Specialist Insights</span>
+            <h2 class="section-title text-uppercase font-serif mt-2 mb-3">The Aura Care Journal</h2>
+            <div class="title-line"></div>
+            <p class="text-muted mx-auto" style="max-width: 700px; font-size: 1.05rem;">
+              Synthesizing cutting-edge clinical research with absolute physical restoration. Explore expert columns curated by our board-certified dermatologists.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Horizontal Featured Card -->
+        <div class="blog-featured-card">
+          <div class="row g-0">
+            <div class="col-lg-7">
+              <div class="featured-img-wrap">
+                <span class="featured-category">Research & Innovations</span>
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=80" alt="Dermal Diagnostics">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="featured-content">
+                <ul class="blog-meta-list">
+                  <li><i data-lucide="user"></i> <span>Dr. Marcus Vance</span></li>
+                  <li><i data-lucide="calendar"></i> <span>July 5, 2026</span></li>
+                  <li><i data-lucide="clock"></i> <span>8 Mins Read</span></li>
+                </ul>
+                <h3 class="font-serif text-uppercase mb-3" style="line-height: 1.3; font-size: 1.8rem; letter-spacing: 0.5px;">
+                  <a href="blog-details.html?id=featured" class="blog-title-link">The Science of Deep Dermal Regeneration: Cellular Turnover Ratios</a>
+                </h3>
+                <p class="text-muted mb-4" style="font-size: 0.95rem; line-height: 1.7;">
+                  Our chief medical director evaluates the latest breakthroughs in extracellular matrix remodeling, peptide sequencing, and physical barrier recovery timelines for clinical treatment post-care.
+                </p>
+                <a href="blog-details.html?id=featured" class="blog-link-btn">
+                  Read Curated Column <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- MAIN TWO-COLUMN LAYOUT -->
+      <div class="row g-5">
+        
+        <!-- LEFT: LATEST ARTICLES GRID (9 posts) -->
+        <div class="col-lg-8">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h4 class="font-serif text-uppercase mb-3" style="letter-spacing: 0.5px; font-size: 1.35rem;">Latest Clinical Publications</h4>
+            </div>
+          </div>
+          
+          <div class="row g-4" id="blogGridContainer">
+            
+            <!-- Post 1 -->
+            <div class="col-md-6 blog-item" data-category="clinical" data-aos="fade-up">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Clinical Treatments</span>
+                  <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&w=600&q=80" alt="Hyaluronic Acid Molecules" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Marcus Vance</span></li>
+                    <li><i data-lucide="calendar"></i> <span>July 4, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=1" class="blog-title-link">The Evolution of Hyaluronic Acid: Multi-Weight Molecules</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Discover how varying molecular weights of hyaluronic acid penetrate distinct dermal layers, providing structured volume and moisture.
+                  </p>
+                  <a href="blog-details.html?id=1" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 2 -->
+            <div class="col-md-6 blog-item" data-category="clinical" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Dermal Remodeling</span>
+                  <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Morpheus8 Treatment" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Julian Sterling</span></li>
+                    <li><i data-lucide="calendar"></i> <span>June 28, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=2" class="blog-title-link">Morpheus8 vs. Traditional Micro-Needling: The Gold Standard</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    An examination of fractional radiofrequency microneedling. Learn how subdermal fat remodeling targets active collagen production.
+                  </p>
+                  <a href="blog-details.html?id=2" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 3 -->
+            <div class="col-md-6 blog-item" data-category="laser" data-aos="fade-up">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Laser Therapy</span>
+                  <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Laser Rejuvenation" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Evelyn Thorne</span></li>
+                    <li><i data-lucide="calendar"></i> <span>June 15, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=3" class="blog-title-link">Photothermal Rejuvenation: Deciphering Laser Wavebands</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Uncover the biophysics of targeted light wavebands and stellar lasers for pigment disintegration and thermal surface repair.
+                  </p>
+                  <a href="blog-details.html?id=3" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 4 -->
+            <div class="col-md-6 blog-item" data-category="anti-aging" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Anti-Aging Secrets</span>
+                  <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" alt="Night Skincare Bottle" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Beatrice Rose</span></li>
+                    <li><i data-lucide="calendar"></i> <span>May 30, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=4" class="blog-title-link">Circadian Skin Rhythms: Maximizing Nighttime Renewal</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    The dermis behaves differently at night. Learn how to align active retinol applications with your skin\'s cellular circadian cycle.
+                  </p>
+                  <a href="blog-details.html?id=4" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 5 -->
+            <div class="col-md-6 blog-item" data-category="regenerative" data-aos="fade-up">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Regenerative Care</span>
+                  <img src="https://images.unsplash.com/photo-1579154204601-01588f35116f?auto=format&fit=crop&w=600&q=80" alt="Autologous PRP" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Clara Fontaine</span></li>
+                    <li><i data-lucide="calendar"></i> <span>May 12, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=5" class="blog-title-link">Autologous Platelet-Rich Fibrin: The Next Horizon</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Delve into autologous growth factor therapy. Harness native proteins to stimulate dermal elastin and speed up micro-heals.
+                  </p>
+                  <a href="blog-details.html?id=5" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 6 -->
+            <div class="col-md-6 blog-item" data-category="post-care" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Post-Procedural Care</span>
+                  <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Post-Laser Recovery" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Sophia Mercer</span></li>
+                    <li><i data-lucide="calendar"></i> <span>April 25, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=6" class="blog-title-link">Post-Laser Inflammatory Mitigation: Recovery Protocol</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Mitigate redness and hyperpigmentation. A detailed clinical regimen utilizing peptides and zinc-oxide skin envelopes.
+                  </p>
+                  <a href="blog-details.html?id=6" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 7 -->
+            <div class="col-md-6 blog-item" data-category="acne" data-aos="fade-up">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Acne Therapy</span>
+                  <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="Sebum Treatment" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Sophia Mercer</span></li>
+                    <li><i data-lucide="calendar"></i> <span>April 10, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=7" class="blog-title-link">Sebum Harmonization: Active Treatments for Adult Acne</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Address complex hormone-driven sebum production. How specialized salicylic formulations restore healthy follicle flora.
+                  </p>
+                  <a href="blog-details.html?id=7" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 8 -->
+            <div class="col-md-6 blog-item" data-category="organic" data-aos="fade-up" data-aos-delay="100">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Organic Skincare</span>
+                  <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=600&q=80" alt="Lipid Barrier Cream" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Beatrice Rose</span></li>
+                    <li><i data-lucide="calendar"></i> <span>March 20, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=8" class="blog-title-link">The Lipid Barrier: Repairing Damaged Skin Envelopes</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    Understand the lipid matrix. Restructure ceramides and fatty acid ratios to retain hydration and prevent environmental stress.
+                  </p>
+                  <a href="blog-details.html?id=8" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Post 9 -->
+            <div class="col-md-6 blog-item" data-category="phototherapy" data-aos="fade-up">
+              <div class="blog-grid-card">
+                <div class="grid-img-wrap">
+                  <span class="grid-category">Phototherapy</span>
+                  <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" alt="Mineral SPF Shielding" loading="lazy">
+                </div>
+                <div class="grid-content">
+                  <ul class="blog-meta-list">
+                    <li><i data-lucide="user"></i> <span>Dr. Adrian Sterling</span></li>
+                    <li><i data-lucide="calendar"></i> <span>March 5, 2026</span></li>
+                  </ul>
+                  <h4 class="font-serif mb-3" style="font-size: 1.25rem; line-height: 1.4;">
+                    <a href="blog-details.html?id=9" class="blog-title-link">UV Photoprotection: Deconstructing Mineral SPF Shielding</a>
+                  </h4>
+                  <p class="text-muted small mb-4" style="line-height: 1.6;">
+                    A deep dive into physical mineral UV blocks. How zinc oxide and titanium dioxide refract harmful high-energy light rays.
+                  </p>
+                  <a href="blog-details.html?id=9" class="blog-link-btn mt-auto">
+                    Analyze Study <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <!-- No Results Fallback -->
+          <div id="noResultsBlock" class="text-center py-5 d-none" data-aos="fade-up">
+            <i data-lucide="search-x" class="text-gold mb-3" style="width: 48px; height: 48px;"></i>
+            <h4 class="font-serif">No Journals Found</h4>
+            <p class="text-muted small">No articles match your current search query or filter. Try a different category.</p>
+            <button class="btn btn-outline-gold rounded-pill px-4 mt-2" onclick="clearFilters()">Reset Filters</button>
+          </div>
+          
+          <!-- PAGINATION -->
+          <div class="pagination-luxury mt-5" id="blogPagination">
+            <a href="javascript:void(0)" class="page-btn-luxury active">1</a>
+            <a href="javascript:void(0)" class="page-btn-luxury" onclick="simulateNextPage(event)">2</a>
+            <a href="javascript:void(0)" class="page-btn-luxury" onclick="simulateNextPage(event)"><i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></a>
+          </div>
+        </div>
+        
+        <!-- RIGHT: SIDEBAR STICKY CONTROLS -->
+        <div class="col-lg-4">
+          <div class="sticky-lg-top" style="top: 100px; z-index: 5;">
+            
+            <!-- WIDGET 1: SEARCH BOX -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left">
+              <h4 class="widget-title-luxury">Search Journals</h4>
+              <div class="search-input-group">
+                <i data-lucide="search"></i>
+                <input type="text" id="blogSearchInput" class="search-control-custom" placeholder="Type clinical keyword...">
+              </div>
+            </div>
+            
+            <!-- WIDGET 2: CATEGORIES -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left" data-aos-delay="100">
+              <h4 class="widget-title-luxury">Aura Categories</h4>
+              <ul class="category-list-custom">
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom active" data-filter="all" onclick="filterByCategory(event, 'all')">
+                    <span>All Articles</span>
+                    <span class="category-count">9</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="clinical" onclick="filterByCategory(event, 'clinical')">
+                    <span>Clinical Treatments</span>
+                    <span class="category-count">3</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="laser" onclick="filterByCategory(event, 'laser')">
+                    <span>Laser & Phototherapy</span>
+                    <span class="category-count">2</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="anti-aging" onclick="filterByCategory(event, 'anti-aging')">
+                    <span>Anti-Aging Secrets</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="regenerative" onclick="filterByCategory(event, 'regenerative')">
+                    <span>Regenerative Care</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="organic" onclick="filterByCategory(event, 'organic')">
+                    <span>Organic Skincare</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" class="category-link-custom" data-filter="post-care" onclick="filterByCategory(event, 'post-care')">
+                    <span>Post-Procedural Care</span>
+                    <span class="category-count">1</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- WIDGET 3: POPULAR POSTS -->
+            <div class="sidebar-widget-luxury" data-aos="fade-left" data-aos-delay="200">
+              <h4 class="widget-title-luxury">Popular Readings</h4>
+              
+              <a href="blog-details.html?id=1" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&w=150&q=80" alt="Hyaluronic Acid" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>The Evolution of Hyaluronic Acid: Multi-Weight Molecules</h5>
+                  <span class="popular-post-date">July 4, 2026</span>
+                </div>
+              </a>
+              
+              <a href="blog-details.html?id=2" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=150&q=80" alt="Morpheus8" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>Morpheus8 vs. Traditional Micro-Needling: The Gold Standard</h5>
+                  <span class="popular-post-date">June 28, 2026</span>
+                </div>
+              </a>
+              
+              <a href="blog-details.html?id=3" class="popular-post-item">
+                <div class="popular-post-thumb">
+                  <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=150&q=80" alt="Laser Rejuvenation" loading="lazy">
+                </div>
+                <div class="popular-post-info">
+                  <h5>Photothermal Rejuvenation: Deciphering Laser Wavebands</h5>
+                  <span class="popular-post-date">June 15, 2026</span>
+                </div>
+              </a>
+            </div>
+            
+            <!-- WIDGET 4: NEWSLETTER SUBSCRIPTION -->
+            <div class="sidebar-widget-luxury newsletter-widget-card" data-aos="fade-left" data-aos-delay="300">
+              <div class="text-center">
+                <div class="p-3 d-inline-block rounded-circle mb-3" style="background-color: var(--color-gold-light);">
+                  <i data-lucide="mail" class="text-gold" style="width: 24px; height: 24px;"></i>
+                </div>
+                <h4 class="font-serif text-uppercase mb-2" style="font-size: 1.15rem; letter-spacing: 0.5px;">Aura Dispatch</h4>
+                <p class="text-muted small mb-4">Subscribe to receive board-approved cosmetic insights and private reservation openings directly in your inbox.</p>
+                <form id="auraNewsletterForm">
+                  <div class="mb-3">
+                    <input type="email" id="newsletterEmailInput" class="search-control-custom text-center" style="padding-left: 18px !important;" placeholder="E.g., charlotte@sterling.com" required>
+                  </div>
+                  <button type="submit" class="btn-gold btn-ripple w-100 py-2.5 font-sans text-uppercase tracking-wider" style="font-size: 0.85rem;">
+                    Request Digital Dispatch
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- STATS LUXURY SECTION - FEATURING ANIMATED OBSERVER COUNTERS -->
+    <section class="stats-luxury-section mt-5" data-aos="fade-up">
+      <div class="container">
+        <div class="row g-4 justify-content-center">
+          
+          <div class="col-lg-3 col-6">
+            <div class="stat-box-luxury">
+              <div class="stat-number-luxury stat-counter" data-target="15+">0</div>
+              <div class="stat-label-luxury">Years of Clinical Research</div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-6">
+            <div class="stat-box-luxury">
+              <div class="stat-number-luxury stat-counter" data-target="12K+">0</div>
+              <div class="stat-label-luxury">Successful Rejuvenations</div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-6">
+            <div class="stat-box-luxury">
+              <div class="stat-number-luxury stat-counter" data-target="25K+">0</div>
+              <div class="stat-label-luxury">Dermal Profiles Mapped</div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-6">
+            <div class="stat-box-luxury">
+              <div class="stat-number-luxury stat-counter" data-target="99.8%">0</div>
+              <div class="stat-label-luxury">Client Satisfaction Rate</div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="mb-4"><span class="footer-logo">AURA<span class="brand-accent">CARE</span></span></div>
+          <p class="text-muted mb-4">Synthesizing clinical skin perfection with curated luxury wellness. Our tailored skincare solutions rejuvenate your physical form and inner peace.</p>
+          <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Clinic</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            <li><a href="doctors.html">Specialists</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4 class="footer-title">Our Resources</h4>
+          <ul class="footer-links">
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="faq.html">Client FAQs</a></li>
+            <li><a href="shop.html">Aura Shop</a></li>
+            <li><a href="blog.html">Aesthetic Blog</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4 class="footer-title">Contact Us</h4>
+          <ul class="footer-contact-info">
+            <li><i data-lucide="map-pin"></i><span>742 Atelier Luxury Blvd, Suite 100, Beverly Hills, CA 90210</span></li>
+            <li><i data-lucide="phone"></i><span>+1 (310) 555-0198</span></li>
+            <li><i data-lucide="mail"></i><span>concierge@auracareclinic.com</span></li>
+            <li><i data-lucide="clock"></i><span>Mon - Sat: 9:00 AM - 7:00 PM<br>Sunday: By Appointment Only</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="mb-0">&copy; 2026 AuraCare Premium Skin Clinic. All rights reserved.</p>
+        <div class="d-flex gap-4">
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Privacy Policy</a>
+          <a href="javascript:void(0)" class="text-muted hover:text-gold">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scroll-to-top" aria-label="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <!-- INTERACTIVE BLOG ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. STATS COUNTER ANIMATION SYSTEM handled globally by animations.js
+      
+      
+      // 2. LIVE SEARCH & CATEGORY FILTER ENGINE
+      const searchInput = document.getElementById('blogSearchInput');
+      const categoryLinks = document.querySelectorAll('.category-link-custom');
+      const blogItems = document.querySelectorAll('.blog-item');
+      const noResultsBlock = document.getElementById('noResultsBlock');
+      const paginationBlock = document.getElementById('blogPagination');
+      
+      let activeCategory = 'all';
+      let searchQuery = '';
+      
+      const applyFilters = () => {
+        let visibleCount = 0;
+        
+        blogItems.forEach(item => {
+          const title = item.querySelector('h4').textContent.toLowerCase();
+          const excerpt = item.querySelector('.text-muted').textContent.toLowerCase();
+          const category = item.getAttribute('data-category');
+          
+          const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+          const matchesSearch = (title.includes(searchQuery) || excerpt.includes(searchQuery));
+          
+          if (matchesCategory && matchesSearch) {
+            // Smoothly reveal
+            item.style.display = 'block';
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'translateY(0)';
+            }, 50);
+            visibleCount++;
+          } else {
+            // Smoothly hide
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(15px)';
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 300);
+          }
+        });
+        
+        // Toggle empty fallback state
+        if (visibleCount === 0) {
+          noResultsBlock.classList.remove('d-none');
+          paginationBlock.style.display = 'none';
+        } else {
+          noResultsBlock.classList.add('d-none');
+          paginationBlock.style.display = 'flex';
+        }
+      };
+      
+      // Hook search input listener
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value.trim().toLowerCase();
+          applyFilters();
+        });
+      }
+      
+      // Hook category link clicks
+      window.filterByCategory = (event, filterVal) => {
+        event.preventDefault();
+        
+        categoryLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-filter') === filterVal) {
+            link.classList.add('active');
+          }
+        });
+        
+        activeCategory = filterVal;
+        applyFilters();
+      };
+      
+      window.clearFilters = () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        activeCategory = 'all';
+        
+        categoryLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-filter') === 'all') {
+            link.classList.add('active');
+          }
+        });
+        
+        applyFilters();
+      };
+      
+      
+      // 3. PREMIUM NEWSLETTER SUBSCRIPTION (Elegant Toast Dialog)
+      const newsletterForm = document.getElementById('auraNewsletterForm');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailVal = document.getElementById('newsletterEmailInput').value.trim();
+          
+          // Toast Feedback Container
+          const toastContainer = document.createElement('div');
+          toastContainer.className = 'custom-toast';
+          toastContainer.innerHTML = `
+            <i class="text-gold" data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+            <span>Welcome to the Inner Circle! Clinical dispatch registered.</span>
+          `;
+          
+          document.body.appendChild(toastContainer);
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+          
+          // Animation trigger
+          toastContainer.animate([
+            { transform: 'translate(-50%, 50px)', opacity: 0 },
+            { transform: 'translate(-50%, 0)', opacity: 1 }
+          ], { duration: 350, easing: 'ease-out' });
+          
+          // Auto dismissal
+          setTimeout(() => {
+            toastContainer.animate([
+              { transform: 'translate(-50%, 0)', opacity: 1 },
+              { transform: 'translate(-50%, 50px)', opacity: 0 }
+            ], { duration: 300, easing: 'ease-in' }).onfinish = () => {
+              toastContainer.remove();
+            };
+          }, 4000);
+          
+          newsletterForm.reset();
+        });
+      }
+    });
+
+    // Simulated Pagination Warning Toast
+    function simulateNextPage(e) {
+      e.preventDefault();
+      
+      const toastContainer = document.createElement('div');
+      toastContainer.className = 'custom-toast';
+      toastContainer.innerHTML = `
+        <i class="text-gold" data-lucide="info" style="width: 18px; height: 18px;"></i>
+        <span>Presenting archived columns. Content matches premium active set.</span>
+      `;
+      
+      document.body.appendChild(toastContainer);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      
+      toastContainer.animate([
+        { transform: 'translate(-50%, 50px)', opacity: 0 },
+        { transform: 'translate(-50%, 0)', opacity: 1 }
+      ], { duration: 350, easing: 'ease-out' });
+      
+      setTimeout(() => {
+        toastContainer.animate([
+          { transform: 'translate(-50%, 0)', opacity: 1 },
+          { transform: 'translate(-50%, 50px)', opacity: 0 }
+        ], { duration: 300, easing: 'ease-in' }).onfinish = () => {
+          toastContainer.remove();
+        };
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
