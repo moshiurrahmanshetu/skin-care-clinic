@@ -4,6 +4,12 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Remove data-aos attributes from hero elements to prevent double animation conflicts and initial CSS-level hiding
+  document.querySelectorAll('.hero-title-reveal, .hero-fade-reveal').forEach(el => {
+    el.removeAttribute('data-aos');
+    el.removeAttribute('data-aos-delay');
+  });
+
   // 1. Initialize AOS (Animate on Scroll)
   if (typeof AOS !== 'undefined') {
     AOS.init({
@@ -17,25 +23,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. GSAP Entrance Animations (For luxury displays and text staggers)
   if (typeof gsap !== 'undefined') {
-    // Reveal main page headings and content elegantly
-    gsap.from('.hero-title-reveal', {
-      y: 40,
-      opacity: 0,
-      duration: 1.4,
-      ease: 'power3.out',
-      stagger: 0.15,
-      delay: 0.5
-    });
+    // Reveal main page headings and content elegantly (only if elements exist in DOM)
+    if (document.querySelector('.hero-title-reveal')) {
+      gsap.fromTo('.hero-title-reveal', 
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          ease: 'power3.out',
+          stagger: 0.15,
+          delay: 0.5,
+          clearProps: 'opacity,transform'
+        }
+      );
+    }
 
-    // Elegant fade-in for subtexts and action buttons
-    gsap.from('.hero-fade-reveal', {
-      opacity: 0,
-      y: 20,
-      duration: 1.2,
-      ease: 'power2.out',
-      delay: 0.9
-    });
+    // Elegant fade-in for subtexts and action buttons (only if elements exist in DOM)
+    if (document.querySelector('.hero-fade-reveal')) {
+      gsap.fromTo('.hero-fade-reveal', 
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power2.out',
+          delay: 0.9,
+          clearProps: 'opacity,transform'
+        }
+      );
+    }
   }
+
+  // Safety fallback: ensure any stuck header/banner elements become visible after page load
+  setTimeout(() => {
+    document.querySelectorAll('.hero-title-reveal, .hero-fade-reveal').forEach(el => {
+      const computedOpacity = window.getComputedStyle(el).opacity;
+      if (computedOpacity === '0' || el.style.opacity === '0') {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+  }, 2500);
 
   // 3. Button Ripple Effect (Standard for .btn-ripple buttons)
   const rippleButtons = document.querySelectorAll('.btn-ripple');
