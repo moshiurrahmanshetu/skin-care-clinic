@@ -482,6 +482,15 @@ footer {
   transform: translateY(-3px);
 }
 
+/* Font Awesome brand icon sizing helper */
+.social-link i.fa-brands,
+.expert-social-btn i.fa-brands,
+.share-icon-btn i.fa-brands {
+  font-size: 16px;
+  line-height: 1;
+  display: inline-block;
+}
+
 /* Footer Bottom */
 .footer-bottom {
   margin-top: 60px;
